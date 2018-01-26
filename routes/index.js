@@ -3,8 +3,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    console.log('Hey!');
-    res.render('hello!')
+    res.render('test')
 });
 router.get('/testing', (req, res) => res.send('Testing Success'))
 

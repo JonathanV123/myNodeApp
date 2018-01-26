@@ -15,8 +15,9 @@ module.exports = {
             loader: 'babel-loader',
             query: {
                 presets: ['env']
-            }
+            },
+            test: /\.css$/,
+            loader: "style-loader!css-loader"
         }]
     }
 }
-
