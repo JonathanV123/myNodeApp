@@ -9,6 +9,8 @@ mongoose.Promise = global.Promise; // Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`${err.message}`);
 });
+// import all models
+require('./models/PlaceToVisit');
 
 const app = require('./app');
 app.set('port', 3000)

@@ -1,11 +1,11 @@
 doctype html
 html
   head
+    title= `${helpers.siteName} | ${helpers.siteName}`
     link(rel='stylesheet', href='./css/style.css' type='text/css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
-  body
-    p fart
-    .testing
-      block testing
+  body 
+    block header
+    block content
     block scripts
     script(src="/javascript/locals-app.js")

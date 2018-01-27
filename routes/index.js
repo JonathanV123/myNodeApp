@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const itineraryController = require('../controllers/itineraryController');
+const { catchErrors } = require('../errorHandler/errorHandling');
 
+router.get('/', itineraryController.landingPage);
+router.get('/addGathering', itineraryController.addGathering);
+router.post('/addGathering', catchErrors(itineraryController.createGathering));
 
-router.get('/', (req, res) => {
-    res.render('test')
-});
-router.get('/testing', (req, res) => res.send('Testing Success'))
 
 
 
