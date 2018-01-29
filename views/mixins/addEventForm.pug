@@ -1,9 +1,0 @@
-mixin eventForm(event = {})
-    form(action="/addGathering" method="POST" class="eventForm")
-        label(for="name") Name
-        input(type="text" name="name")
-        label(for="description") Description
-        textarea(name="description")
-        label(for="date") Date
-        input(type="text" name="date")
-        input(type="submit" value="Save" class="button")
