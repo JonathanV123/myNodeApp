@@ -1,0 +1,7 @@
+mixin gatheringCard(gathering = {})
+    .gathering
+        h2.title
+            a(href=`/gathering/${gathering.slug}`) #{gathering.name}
+        .gatheringDescription
+            p= gathering.description.split(' ').slice(0, 25).join(' ')
+            p= gathering.date

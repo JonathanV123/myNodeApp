@@ -14,9 +14,13 @@ exports.addGathering = (req, res) => {
 exports.createGathering = async (req, res) => {
     const gathering = new PlaceToVisit(req.body);
     await gathering.save();
-    res.redirect('/');
+    res.redirect(`/gathering/${gathering.slug}`);
 };
-
+exports.getGatherings = async (req, res) => {
+    // query database for gatherings
+    const gatherings = await PlaceToVisit.find();
+    res.render('gatherings', { title: 'Gatherings', gatherings: gatherings});
+}
 exports.landingPage = (req, res) => {
     res.render('landing', {
         title: 'Add Store'

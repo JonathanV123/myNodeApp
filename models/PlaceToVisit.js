@@ -22,7 +22,7 @@ const placeToVisitSchema = new mongoose.Schema({
     tags: [String]
 });
 
-// Before saving auto generate slug field
+// Before saving auto generate slug field (Only runs when name is changed)
 placeToVisitSchema.pre('save', function (next) {
     // If name is not modified
     if (!this.isModified('name')) {

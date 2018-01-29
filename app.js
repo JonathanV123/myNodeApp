@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const helpers = require('./helpers');
+const flash = require('connect-flash');
 const routes = require('./routes/index');
 
 
@@ -14,6 +15,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Takes form information from req and turns it into usable properties on body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+
+// The flash middleware let's us use req.flash
+app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.helpers = helpers;
