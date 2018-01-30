@@ -1,5 +1,23 @@
 const mongoose = require('mongoose');
 const PlaceToVisit = mongoose.model('PlaceToVisit');
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
+
+// Where file will be stored when uploaded and what type of files are allowed
+const multerOptions = {
+    // read image to memory for resizing.
+    storage: multer.memoryStorage(),
+    fileFilter: function (req, file, next) {
+        const isPhoto = file.mimetype.startsWith('image/');
+        if(isPhoto){
+            // if it starts with image, it's fine. continue with file upload
+            next(null, true);
+        } else {
+            next({ message: 'That filetype isn\'t allowed!'}, false);
+        }
+    }
+};
 
 exports.homePage = (req, res) => {
     res.render('layout')
@@ -10,6 +28,24 @@ exports.addGathering = (req, res) => {
         title: 'Add Gathering'
     })
 };
+// stores to memory of server (temporary)
+exports.upload = multer(multerOptions).single('photo');
+
+exports.resize = async (req, res, next) => {
+    // check if there is a new file to resize
+    if( !req.file ){
+        next(); // skip to next middleware
+    }
+    const fileExtension = req.file.mimetype.split('/')[1];
+    // pass info to req.body gathering saved to req.body
+    req.body.photo = `${uuid.v4()}.${fileExtension}`; 
+    // resize
+    const photo = await jimp.read(req.file.buffer);
+    await photo.resize(800, jimp.AUTO);
+    await photo.write(`./public/uploads${req.body.photo}`);
+    // once saved to filesystem, continue.
+    next();
+}
 
 exports.createGathering = async (req, res) => {
     const gathering = new PlaceToVisit(req.body);
@@ -32,6 +68,8 @@ exports.editGathering = async (req, res) => {
 }
 
 exports.updateGathering = async (req, res) => {
+    // set the location data to be a point 
+    req.body.location.type = 'Point';
     const gathering = await PlaceToVisit.findOneAndUpdate({ _id: req.params.id}, req.body,
         {
         new: true, //return the new gathering instead of old one

@@ -1,5 +1,5 @@
 mixin gatheringForm(gathering = {})
-    form(action=`/createGathering/${gathering._id || ''}` method="POST" class="gatheringForm")
+    form(action=`/createGathering/${gathering._id || ''}` method="POST" class="gatheringForm" enctype="multipart/form-data")
         label(for="name") Name
         input(type="text" name="name" value=gathering.name)
         label(for="description") Description
@@ -13,7 +13,11 @@ mixin gatheringForm(gathering = {})
         input(type="text" id="lng" name="location[coordinates][0]" value= (gathering.location && gathering.location.coordinates[0]) required)
         label(for="lat") Address Lat
         input(type="text" id="lat" name="location[coordinates][1]" value= (gathering.location && gathering.location.coordinates[1]) required)
-        pre= helpers.dump(gathering)
+        //- Image upload
+        label(for="photo") Photo
+            input(type="file" id="photo" name="photo" accept="image/gif, image/png, image/jpeg")
+            if gathering.photo
+                img(src=`/uploads/${gathering.photo}`, alt=gathering.name width=300)
         label(for="date") Date
         input(type="text" name="date" value=gathering.date)
         input(type="submit" value="Save" class="button")

@@ -6,7 +6,11 @@ const { catchErrors } = require('../errorHandler/errorHandling');
 router.get('/', itineraryController.landingPage);
 router.get('/createGathering', itineraryController.addGathering);
 router.get('/gatherings', itineraryController.getGatherings);
-router.post('/createGathering', catchErrors(itineraryController.createGathering));
+router.post('/createGathering', 
+    itineraryController.upload,
+    catchErrors(itineraryController.resize),
+    catchErrors(itineraryController.createGathering),
+);
 router.post('/createGathering:id', catchErrors(itineraryController.updateGathering));
 router.get('/gatherings/:id/edit', catchErrors(itineraryController.editGathering));
 

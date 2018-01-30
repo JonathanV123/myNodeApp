@@ -34,6 +34,7 @@ const placeToVisitSchema = new mongoose.Schema({
             required: 'You must supply an address!'
         }
     },
+    photo: String
 });
 
 // Before saving auto generate slug field (Only runs when name is changed)
