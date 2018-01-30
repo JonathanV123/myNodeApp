@@ -4,6 +4,10 @@ mixin gatheringForm(gathering = {})
         input(type="text" name="name" value=gathering.name)
         label(for="description") Description
         textarea(name="description")= gathering.description
+        //- Location
+        label(for="address") Address
+        //- body parser url encoded allows for sending nested data
+        input(type="text" id="address" name="location[address]" value=(gathering.location && gathering.location.address)) 
         label(for="date") Date
         input(type="text" name="date" value=gathering.date)
         input(type="submit" value="Save" class="button")

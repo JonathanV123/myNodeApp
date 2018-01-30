@@ -9,7 +9,6 @@ exports.addGathering = (req, res) => {
     res.render('editPlace', {
         title: 'Add Gathering'
     })
-    res.redirect(`/gatherings`);
 };
 
 exports.createGathering = async (req, res) => {

@@ -49,9 +49,7 @@ body {
     font-size: 2em;
 }
 
-.eventForm{
-    width:100%;
-    height: 100%;
+.gatheringForm{
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
