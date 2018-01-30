@@ -20,4 +20,11 @@ mixin gatheringForm(gathering = {})
                 img(src=`/uploads/${gathering.photo}`, alt=gathering.name width=300)
         label(for="date") Date
         input(type="text" name="date" value=gathering.date)
+        - const gatheringOptions = ['Alcohol Ok','Alcohol Free', 'Outdoors', 'Family Friendly', 'Indoors',]
+        - const tags = gathering.tags || []
+        ul.tags
+            each option in gatheringOptions 
+                .tagChoices
+                    input(type="checkbox" id=choice value=option name="tags" checked=(tags.includes(option)))
+                    label(for=option) #{option}
         input(type="submit" value="Save" class="button")
