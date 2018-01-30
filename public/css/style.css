@@ -67,3 +67,13 @@ body {
     height: 300px;
     border: 2px solid black;
 }
+
+.staticMap{
+    width: 900px;
+    height: 300px;
+}
+
+.mapImg{
+    width:850px;
+    height: 150px;
+}

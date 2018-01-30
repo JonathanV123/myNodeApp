@@ -20,6 +20,7 @@ const placeToVisitSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    date: String,
     location: {
         type: {
             type: String,

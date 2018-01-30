@@ -11,9 +11,12 @@ router.post('/createGathering',
     catchErrors(itineraryController.resize),
     catchErrors(itineraryController.createGathering),
 );
-router.post('/createGathering:id', catchErrors(itineraryController.updateGathering));
+router.post('/createGathering:id', 
+    itineraryController.upload,
+    catchErrors(itineraryController.resize),
+    catchErrors(itineraryController.updateGathering));
 router.get('/gatherings/:id/edit', catchErrors(itineraryController.editGathering));
-
+router.get('/gathering/:slug', catchErrors(itineraryController.getGatheringBySlug));
 
 
 

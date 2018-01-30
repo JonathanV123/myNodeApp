@@ -82,3 +82,18 @@ exports.landingPage = (req, res) => {
         title: 'Add Store'
     })
 };
+
+exports.getGatheringBySlug = async (req, res, next) => {
+    // check params
+    // res.json(req.params);
+    const gathering = await PlaceToVisit.findOne({ slug: req.params.slug });
+    // all data of gathering (check if query is working)
+    // res.json(gathering);
+    // --------------------
+    // if a query in mongoDB doesn't find anything, not an errow will just return null
+    // if no gathering add 404 TODO
+    if( !gathering ){
+        return next();
+    }
+    res.render('gathering', {gathering, title: gathering.name});
+};
