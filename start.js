@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-//important environemtnal variables from .env file
+//important environmental variables from .env file
 require('dotenv').config({path: 'variables.env'});
 
 // Connect to our Database and handle any bad connections

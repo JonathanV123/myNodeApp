@@ -18,4 +18,5 @@ html
               a.navLink.navLink    
     block content
     block scripts
-    script(src="/javascript/locals-app.js")
+    script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+    script(type="module" src="/dist/locals-app.bundle.js")

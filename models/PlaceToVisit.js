@@ -8,14 +8,10 @@ const placeToVisitSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        required: 'Please enter a place to visit!'
+        required: 'Please enter a gathering name!'
     },
     slug: String,
     description: {
-        type: String,
-        trim: true
-    },
-    date: {
         type: String,
         trim: true
     },
@@ -25,11 +21,11 @@ const placeToVisitSchema = new mongoose.Schema({
         default: Date.now
     },
     location: {
-    type:{ 
-        type: String,
-        default: 'Point',
+        type: {
+            type: String,
+            default: 'Point'
         },
-        coordinates:[{
+        coordinates: [{
             type: Number,
             required: 'You must supply coordinates!'
         }],
@@ -37,7 +33,7 @@ const placeToVisitSchema = new mongoose.Schema({
             type: String,
             required: 'You must supply an address!'
         }
-    }
+    },
 });
 
 // Before saving auto generate slug field (Only runs when name is changed)

@@ -5,9 +5,15 @@ mixin gatheringForm(gathering = {})
         label(for="description") Description
         textarea(name="description")= gathering.description
         //- Location
-        label(for="address") Address
         //- body parser url encoded allows for sending nested data
-        input(type="text" id="address" name="location[address]" value=(gathering.location && gathering.location.address)) 
+        //- check if gathering.location exists, if not value will be empty
+        label(for="address") Address
+        input(type="text" id="address" name="location[address]" value=(gathering.location && gathering.location.address))
+        label(for="lng") Address Lng
+        input(type="text" id="lng" name="location[coordinates][0]" value= (gathering.location && gathering.location.coordinates[0]) required)
+        label(for="lat") Address Lat
+        input(type="text" id="lat" name="location[coordinates][1]" value= (gathering.location && gathering.location.coordinates[1]) required)
+        pre= helpers.dump(gathering)
         label(for="date") Date
         input(type="text" name="date" value=gathering.date)
         input(type="submit" value="Save" class="button")

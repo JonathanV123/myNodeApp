@@ -65,15 +65,41 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_autocomplete__ = __webpack_require__(1);
 
 
-var test = function test() {
-  return console.log(123);
+const lat = document.querySelector("#lat");
+const lng = document.querySelector("#lng");
+const address = document.querySelector("#address");
+
+Object(__WEBPACK_IMPORTED_MODULE_0__modules_autocomplete__["a" /* default */])(address, lat, lng);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function autocomplete(input, latInput, lngInput){
+    if(!input) return // skip from running if no input on page
+    const dropdown = new google.maps.places.Autocomplete(input);
+
+    dropdown.addListener('place_changed', () => {
+        const place = dropdown.getPlace();
+        // get lat and long from place geometry
+        latInput.value = place.geometry.location.lat();
+        lngInput.value = place.geometry.location.lng();
+    }) 
+    // if someone hits enter on address field, don't submit form
+    input.on('keydown', (e) => {
+        if(e.keyCode === 13) e.preventDefault();
+    });
 };
-test();
+
+/* harmony default export */ __webpack_exports__["a"] = (autocomplete);
 
 /***/ })
 /******/ ]);
