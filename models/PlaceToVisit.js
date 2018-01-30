@@ -39,13 +39,25 @@ const placeToVisitSchema = new mongoose.Schema({
 });
 
 // Before saving auto generate slug field (Only runs when name is changed)
-placeToVisitSchema.pre('save', function (next) {
+placeToVisitSchema.pre('save', async function (next) {
     // If name is not modified
     if (!this.isModified('name')) {
         next(); //skip
         return; //stop
     }
     this.slug = slug(this.name);
+    // find other gatherings with same slug
+    // Whew regex can be a pain... (For Future Reference)
+    // 1. ^(${this.slug}) search for URLs with this.slug
+    // 2. (--[0-9]*$)?)$ $ sign is ends with one of two things
+    // 3. a dash - or 0-9 so gathering-1 gathering-2 q mark ? means optional
+    const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
+    // Can't access model inside model function because it has not saved
+    // In this case this.constructor will be equal to PlaceToVisit by the time it runs
+    const gatheringsWithSlug = await this.constructor.find({ slug: slugRegEx });
+    if(gatheringsWithSlug.length){
+        this.slug = `${this.slug}-${gatheringsWithSlug.length + 1}`;
+    }
     next();
 });
 
