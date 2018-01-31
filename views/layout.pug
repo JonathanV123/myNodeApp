@@ -10,12 +10,12 @@ html
         nav.nav
           .navContainer
               a(class="navLinkButton" href="/") Home
-          .navContainer
+          .navContainers
               a(class="navLinkButton" href="/createGathering") Add
           .navContainer
               a(class="navLinkButton" href="/gatherings") Gatherings
           .navContainer
-              a.navLink.navLink    
+              a(class="navLinkButton" href="/tags") Tags   
     block content
     block scripts
     script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)

@@ -18,6 +18,8 @@ router.post('/createGathering:id',
 router.get('/gatherings/:id/edit', catchErrors(itineraryController.editGathering));
 router.get('/gathering/:slug', catchErrors(itineraryController.getGatheringBySlug));
 
+router.get('/tags', catchErrors(itineraryController.getGatheringsByTag));
+router.get('/tags/:tag', catchErrors(itineraryController.getGatheringsByTag));
 
 
 module.exports = router;

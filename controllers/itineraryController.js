@@ -42,7 +42,7 @@ exports.resize = async (req, res, next) => {
     // resize
     const photo = await jimp.read(req.file.buffer);
     await photo.resize(800, jimp.AUTO);
-    await photo.write(`./public/uploads${req.body.photo}`);
+    await photo.write(`./public/uploads/${req.body.photo}`);
     // once saved to filesystem, continue.
     next();
 }
@@ -96,4 +96,10 @@ exports.getGatheringBySlug = async (req, res, next) => {
         return next();
     }
     res.render('gathering', {gathering, title: gathering.name});
+};
+
+exports.getGatheringsByTag = async (req, res) => {
+    const tags = await PlaceToVisit.getTags();
+    const tag = req.params.tag;
+    res.render('tags', { tags, title: 'Tags', tag });
 };
