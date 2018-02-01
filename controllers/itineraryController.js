@@ -99,7 +99,10 @@ exports.getGatheringBySlug = async (req, res, next) => {
 };
 
 exports.getGatheringsByTag = async (req, res) => {
-    const tags = await PlaceToVisit.getTags();
     const tag = req.params.tag;
-    res.render('tags', { tags, title: 'Tags', tag });
+    const gatheringQuery = tag || { $exists: true}
+    const tagsPromise = PlaceToVisit.getTags();
+    const gatheringPromise = PlaceToVisit.find({ tags: gatheringQuery });
+    const [tags, gatherings] = await Promise.all([tagsPromise, gatheringPromise]);
+    res.render('tags', { tags, title: 'Tags', tag, gatherings });
 };

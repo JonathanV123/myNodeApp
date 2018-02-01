@@ -1,4 +1,5 @@
 extends layout
+include mixins/gatheringCard
 
 block content
     h2 #{tag || 'Tags'}
@@ -8,3 +9,6 @@ block content
             a.tagLink(href=`/tags/${tagOption._id}` class=(tagOption._id === tag ? 'linkActive' : ''))
                 span.tagDescription= tagOption._id
                 span.tagCount= tagOption.count
+    .gatherings
+        each gathering in gatherings
+            +gatheringCard(gathering)
