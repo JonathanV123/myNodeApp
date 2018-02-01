@@ -64,7 +64,6 @@ exports.editGathering = async (req, res) => {
     // TODO 
     // 3. Render edit form 
     res.render('editPlace', {title: `Edit ${gathering.name}`, gathering: gathering})
-
 }
 
 exports.updateGathering = async (req, res) => {
@@ -90,7 +89,7 @@ exports.getGatheringBySlug = async (req, res, next) => {
     // all data of gathering (check if query is working)
     // res.json(gathering);
     // --------------------
-    // if a query in mongoDB doesn't find anything, not an errow will just return null
+    // if a query in mongoDB doesn't find anything, not an error will just return null
     // if no gathering add 404 TODO
     if( !gathering ){
         return next();

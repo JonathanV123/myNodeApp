@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const helpers = require('./helpers');
 const flash = require('connect-flash');
+const passport = require('passport');
+const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 
 
@@ -16,6 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Exposes a bunch of methods for validating data (body params or query)
+app.use(expressValidator());
 
 // The flash middleware let's us use req.flash
 app.use(flash());
