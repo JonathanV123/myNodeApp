@@ -11,6 +11,7 @@ mongoose.connection.on('error', (err) => {
 });
 // import all models
 require('./models/PlaceToVisit');
+require('./models/user');
 
 const app = require('./app');
 app.set('port', 3000)

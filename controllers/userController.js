@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const promisify = require('es6-promisify');
+promisify.Promise = require("bluebird");
+
 
 exports.loginForm = (req, res) => {
     res.render('login')
@@ -19,7 +23,21 @@ exports.validateRegistration = (req, res, next) => {
     });
     // possible to remove client side required check, so checking server-side as well
     req.checkBody('password', 'Password Cannot be Blank!').notEmpty();
-    req.checkBody('password-confirm', 'Passwords do not match').equals(req.body.password);
+    req.checkBody('passwordConfirm', 'Please enter confirmed password').notEmpty();
+    req.checkBody('passwordConfirm', 'Passwords do not match').equals(req.body.password);
     // TO DO add client side error notifications
+    next();
+};
+
+exports.register = async (req, res, next) => {
+    const user = new User({ 
+        email: req.body.email ,
+        name: req.body.name
+    });
+    //  Convenience method from pass-local-mongoose to register a new user instance with a given password. Checks if username is unique
+    // If method lives on an object (in this case User) must pass entire object so it knows where to bind it to 
+    const registerWithPromise = promisify(User.register, User);
+    // Takes email, name and stores password as hash
+    await registerWithPromise(user, req.body.password);
     next();
 };

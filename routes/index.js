@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const itineraryController = require('../controllers/itineraryController');
 const userController = require('../controllers/userController');
+const authenticationController = require('../controllers/authenticationController');
 const { catchErrors } = require('../errorHandler/errorHandling');
 
 router.get('/', itineraryController.landingPage);
@@ -24,10 +25,14 @@ router.get('/tags/:tag', catchErrors(itineraryController.getGatheringsByTag));
 
 router.get('/login', userController.loginForm);
 router.get('/register', userController.registerForm);
-// 1. Validate registration data
-// 2. register the user
-// 3. we need to log them in
-router.get('/register', userController.registerForm);
 
+router.post('/register', 
+    // 1. Validate registration data
+    userController.validateRegistration,
+    // 2. Register the user
+    userController.register,
+    // 3. Log user in
+    authenticationController.login
+);
 
 module.exports = router;

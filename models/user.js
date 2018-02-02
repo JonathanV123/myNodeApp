@@ -26,4 +26,4 @@ userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 // Change errors from ugly to nice (for users!)
 userSchema.plugin(mongodbErrorHandler);
 
-mondule.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

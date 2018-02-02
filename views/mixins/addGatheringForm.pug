@@ -27,4 +27,4 @@ mixin gatheringForm(gathering = {})
                 .tagChoices
                     input(type="checkbox" id=choice value=option name="tags" checked=(tags.includes(option)))
                     label(for=option) #{option}
-        input(type="submit" value="Save" class="button")
+        input(type="submit" id="formSubmit" value="Save" class="button")

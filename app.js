@@ -5,8 +5,9 @@ const helpers = require('./helpers');
 const flash = require('connect-flash');
 const passport = require('passport');
 const expressValidator = require('express-validator');
+const promisify = require('es6-promisify');
 const routes = require('./routes/index');
-
+require('./passport');
 
 const app = express();
 // Where we keep our pug files
@@ -26,7 +27,6 @@ app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.helpers = helpers;
-    res.locals.env = process.env;
     next();
 });
 

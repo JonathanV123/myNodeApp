@@ -9,8 +9,11 @@ function autocomplete(input, latInput, lngInput){
         lngInput.value = place.geometry.location.lng();
     }) 
     // if someone hits enter on address field, don't submit form
-    input.on('keydown', (e) => {
-        if(e.keyCode === 13) e.preventDefault();
+    const node = document.getElementById('formSubmit');
+    node.addEventListener('keydown', function onEvent(event) {
+        if (event.key === "Enter") {
+            return false;
+        }
     });
 };
 
