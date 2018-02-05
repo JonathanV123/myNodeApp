@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h2 #{gathering.name}
+    .description
+        p= gathering.description
+    .date
+        p= gathering.date
+    .staticMap
+        img.mapImg(src=helpers.staticMap(gathering.location.coordinates))
+        p.locationAddress= gathering.location.address

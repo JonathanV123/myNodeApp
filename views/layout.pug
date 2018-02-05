@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        title= `${helpers.siteName} | ${helpers.siteName}`
+        link(href='/css/style.css' rel='stylesheet', type='text/css')
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+    body 
+        block header
+            header.top
+            pre=helpers.dump(user)
+                nav.nav
+                    .navContainer
+                        a(class="navLinkButton" href="/") Home
+                    .navContainer
+                        a(class="navLinkButton" href="/createGathering") Add
+                    .navContainer
+                        a(class="navLinkButton" href="/gatherings") Gatherings
+                    .navContainer
+                        a(class="navLinkButton" href="/tags") Tags   
+                    .navContainerUser
+                        if user
+                            .navContainer
+                                a(class="navLinkButton" href="/logout") Log Out    
+                            .navContainer    
+                                a(class="navLinkButton" href="/account") Account 
+                        else
+                            .navContainer
+                                a(class="navLinkButton" href="/register") Register
+                            .navContainer
+                                a(class="navLinkButton" href="/login") Log In 
+
+        block content
+        block scripts
+        script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+        script(type="module" src="/dist/locals-app.bundle.js")

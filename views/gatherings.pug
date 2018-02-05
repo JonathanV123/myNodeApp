@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/gatheringCard
+
+block content
+    .inner  
+        h2= title
+        .gatherings
+            each gathering in gatherings
+                h2= gathering.name
+                +gatheringCard(gathering)
+            
