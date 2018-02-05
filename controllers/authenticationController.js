@@ -13,3 +13,13 @@ exports.logout = (req, res) => {
     res.redirect('/');
 };
 
+exports.checkIfLoggedIn = (req, res, next) => {
+    // check if user is authenticated
+    if(req.isAuthenticated()){
+        next();
+        return
+    }
+    // TO DO notification of login in or register
+    res.redirect('/');
+};
+

@@ -6,7 +6,10 @@ const authenticationController = require('../controllers/authenticationControlle
 const { catchErrors } = require('../errorHandler/errorHandling');
 
 router.get('/', itineraryController.landingPage);
-router.get('/createGathering', itineraryController.addGathering);
+router.get('/createGathering',
+     authenticationController.checkIfLoggedIn,
+     itineraryController.addGathering
+);
 router.get('/gatherings', itineraryController.getGatherings);
 router.post('/createGathering', 
     itineraryController.upload,
