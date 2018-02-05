@@ -27,12 +27,22 @@ app.use(expressValidator());
 // The flash middleware let's us use req.flash
 // app.use(flash());
 
+// promisify some callback based APIs
+app.use((req, res, next) => {
+    req.login = promisify(req.login, req);
+    next();
+  });
+
 app.use(cookieParser()) // required before session.
 app.use(session({
-     secret: 'anything',
+     secret: 'dogsRule',
+     // Only save session after each request when something changes
      resave: false,
+     // If true
      saveUninitialized: false
 }));
+// Client will only store session id
+// The session itself is stored on the server or db
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -43,11 +53,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// promisify some callback based APIs
-app.use((req, res, next) => {
-    req.login = promisify(req.login, req);
-    next();
-  });
 
 app.use('/', routes);
 
