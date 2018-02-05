@@ -48,6 +48,7 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
     res.locals.helpers = helpers;
+    // req.user available because of passport
     res.locals.user = req.user || null;
     console.log(req.user);
     next();

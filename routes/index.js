@@ -19,7 +19,8 @@ router.post('/createGathering',
 router.post('/createGathering:id', 
     itineraryController.upload,
     catchErrors(itineraryController.resize),
-    catchErrors(itineraryController.updateGathering));
+    catchErrors(itineraryController.updateGathering)
+);
 router.get('/gatherings/:id/edit', catchErrors(itineraryController.editGathering));
 router.get('/gathering/:slug', catchErrors(itineraryController.getGatheringBySlug));
 
@@ -38,6 +39,13 @@ router.post('/register',
     // 3. Log user in
     authenticationController.login
 );
+
+router.get('/account', 
+    authenticationController.checkIfLoggedIn, 
+    userController.account
+);
+
+router.post('/account', catchErrors(userController.updateAccount));
 
 router.get('/logout', authenticationController.logout);
 

@@ -41,3 +41,23 @@ exports.register = async (req, res, next) => {
     await registerWithPromise(user, req.body.password);
     next();
 };
+
+exports.account = (req, res) => {
+    res.render('account', {title: 'Edit Account'});
+}
+
+exports.updateAccount = async (req, res) => {
+    const updated = {
+        name: req.body.name,
+        email: req.body.email
+    };
+    const user = await User.findOneAndUpdate(
+        // query
+        { _id: req.user.id},
+        // Take updated and set it on top of what already exists
+        { $set: updated},
+        // Return new user, run validation steps, query is required to do it properly 
+        { new: true, runValidators: true, context: 'query'}
+    );
+    res.redirect('back');
+};
