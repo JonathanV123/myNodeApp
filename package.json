@@ -21,10 +21,12 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.9",
     "dotenv": "^4.0.0",
     "es6-promisify": "^5.0.0",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
     "jimp": "^0.2.28",
     "md5": "^2.2.1",

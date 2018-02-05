@@ -24,8 +24,9 @@ router.get('/tags', catchErrors(itineraryController.getGatheringsByTag));
 router.get('/tags/:tag', catchErrors(itineraryController.getGatheringsByTag));
 
 router.get('/login', userController.loginForm);
-router.get('/register', userController.registerForm);
+router.post('/login', authenticationController.login);
 
+router.get('/register', userController.registerForm);
 router.post('/register', 
     // 1. Validate registration data
     userController.validateRegistration,
@@ -34,5 +35,7 @@ router.post('/register',
     // 3. Log user in
     authenticationController.login
 );
+
+router.get('/logout', authenticationController.logout);
 
 module.exports = router;
