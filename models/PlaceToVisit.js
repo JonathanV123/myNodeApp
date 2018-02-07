@@ -35,7 +35,12 @@ const placeToVisitSchema = new mongoose.Schema({
             required: 'You must supply an address!'
         }
     },
-    photo: String
+    photo: String,
+    author: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: 'You must supply an author',
+    }
 });
 
 // Before saving auto generate slug field (Only runs when name is changed)

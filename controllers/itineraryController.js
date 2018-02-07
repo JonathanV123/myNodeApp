@@ -48,6 +48,7 @@ exports.resize = async (req, res, next) => {
 }
 
 exports.createGathering = async (req, res) => {
+    req.body.author = req.user._id;
     const gathering = new PlaceToVisit(req.body);
     await gathering.save();
     res.redirect(`/gathering/${gathering.slug}`);
@@ -57,11 +58,20 @@ exports.getGatherings = async (req, res) => {
     const gatherings = await PlaceToVisit.find();
     res.render('gatherings', { title: 'Gatherings', gatherings: gatherings});
 }
+
+const confirmOwner = (gathering, user) => {
+    console.log(user);
+    // Must use MongoDb .equals to compare unique ._id to string id
+    if(!gathering.author.equals(user._id)){
+        throw Error('You must be the owner of a gathering to edit it');
+    }
+};
+
 exports.editGathering = async (req, res) => {
     // 1. Find the gathering given the ID
     const gathering = await PlaceToVisit.findOne({ _id: req.params.id});
     // 2. Confirm they are gathering owner
-    // TODO 
+    confirmOwner(gathering, req.user); 
     // 3. Render edit form 
     res.render('editPlace', {title: `Edit ${gathering.name}`, gathering: gathering})
 }
@@ -85,7 +95,8 @@ exports.landingPage = (req, res) => {
 exports.getGatheringBySlug = async (req, res, next) => {
     // check params
     // res.json(req.params);
-    const gathering = await PlaceToVisit.findOne({ slug: req.params.slug });
+    const gathering = await PlaceToVisit.findOne({ slug: req.params.slug })
+    .populate('author');
     // all data of gathering (check if query is working)
     // res.json(gathering);
     // --------------------

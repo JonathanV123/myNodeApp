@@ -39,7 +39,7 @@ app.use(session({
      // Only save session after each request when something changes
      resave: false,
      // If true
-     saveUninitialized: false
+     saveUninitialized: false,
 }));
 // Client will only store session id
 // The session itself is stored on the server or db
@@ -50,6 +50,7 @@ app.use((req, res, next) => {
     res.locals.helpers = helpers;
     // req.user available because of passport
     res.locals.user = req.user || null;
+    res.locals.currentPath = req.path;
     console.log(req.user);
     next();
 });

@@ -59,7 +59,7 @@ exports.reset = async (req, res) => {
     });
     console.log(user);
     if (!user){
-        console.log('Password has expired');
+        console.log('Password has expired or No user found');
         return res.redirect('/login');
     }
     // if there is a user, show the reset password form
