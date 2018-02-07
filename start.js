@@ -16,4 +16,3 @@ require('./models/user');
 const app = require('./app');
 app.set('port', 3000)
 app.listen(3000, () => console.log('Doggie App listening on port 3000!'))
-

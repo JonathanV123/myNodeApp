@@ -19,7 +19,9 @@ const userSchema = new Schema({
         type: String,
         required: 'Please supply a name',
         trim: true,
-    }
+    },
+   resetPasswordToken: String,
+   resetPasswordTokenExpires: Date
 });
 // Adds all methods and fields for authentication to schema
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
