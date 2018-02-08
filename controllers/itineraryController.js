@@ -116,3 +116,20 @@ exports.getGatheringsByTag = async (req, res) => {
     const [tags, gatherings] = await Promise.all([tagsPromise, gatheringPromise]);
     res.render('tags', { tags, title: 'Tags', tag, gatherings });
 };
+
+exports.searchGatherings = async (req, res) => {
+    // 1. Find gathering
+    const gatherings = await PlaceToVisit.find({
+        $text: {
+            $search: req.query.q
+        }
+    }, {
+        // Project Score 
+        score: { $meta: 'textScore' }
+    })
+    // Sort it
+    .sort({
+        score: { $meta: 'textScore'}
+    }).limit(5);
+    res.json(gatherings);
+};

@@ -13,7 +13,7 @@ require('./passport');
 
 const app = express();
 // Where we keep our pug files
-app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -51,7 +51,6 @@ app.use((req, res, next) => {
     // req.user available because of passport
     res.locals.user = req.user || null;
     res.locals.currentPath = req.path;
-    console.log(req.user);
     next();
 });
 

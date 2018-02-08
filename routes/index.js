@@ -58,4 +58,10 @@ router.post('/account/reset/:token',
     catchErrors(authenticationController.update)
 );
 
+
+
+// API
+router.get('/api/search', catchErrors(itineraryController.searchGatherings));
+
+
 module.exports = router;

@@ -43,6 +43,13 @@ const placeToVisitSchema = new mongoose.Schema({
     }
 });
 
+// Indexes (Indexed as text so you can perform a search on anything that is text)
+placeToVisitSchema.index({
+    name: 'text',
+    description: 'text'
+});
+
+
 // Before saving auto generate slug field (Only runs when name is changed)
 placeToVisitSchema.pre('save', async function (next) {
     // If name is not modified
