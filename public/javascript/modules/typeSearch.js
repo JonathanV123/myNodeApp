@@ -25,7 +25,7 @@ function typeSearch(search) {
         searchResultsToHTML(res.data);
         // Check if there is data to show
         if(res.data.length){
-            searchResults.innerHTML = dompurify.santaize(
+            searchResults.innerHTML = dompurify.sanitize(
                 searchResultsToHTML(res.data));
         }
         // Notify nothing came back

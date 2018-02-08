@@ -86,6 +86,7 @@ exports.updateGathering = async (req, res) => {
     }).exec();
     res.redirect(`/gatherings/${gathering._id}/edit`);
 };
+
 exports.landingPage = (req, res) => {
     res.render('landing', {
         title: 'Add Store'
@@ -132,4 +133,29 @@ exports.searchGatherings = async (req, res) => {
         score: { $meta: 'textScore'}
     }).limit(5);
     res.json(gatherings);
+};
+
+exports.mapGatherings = async (req, res) => {
+    // Turn into actual numbers (Mongo wants them in an array)
+    const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+    const query = {
+        location: {
+            $near: {
+                $geometry: {
+                    type: 'Point',
+                    coordinates
+                },
+                $maxDistance: 100000
+            }
+        }    
+    }
+    const gatherings = await PlaceToVisit.find(query)
+    .select('slug photo name description location')
+    .limit(8);
+    res.json(gatherings);
+};
+
+exports.mapPage = (req, res) => {
+    res.render('map', { title: 'Map'} );
+
 };

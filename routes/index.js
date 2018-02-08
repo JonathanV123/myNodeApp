@@ -58,10 +58,12 @@ router.post('/account/reset/:token',
     catchErrors(authenticationController.update)
 );
 
+router.get('/map', itineraryController.mapPage);
 
 
 // API
 router.get('/api/search', catchErrors(itineraryController.searchGatherings));
+router.get('/api/gatherings/near', catchErrors(itineraryController.mapGatherings));
 
 
 module.exports = router;

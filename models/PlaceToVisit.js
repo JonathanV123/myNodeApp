@@ -49,6 +49,7 @@ placeToVisitSchema.index({
     description: 'text'
 });
 
+placeToVisitSchema.index({ location: '2dsphere' });
 
 // Before saving auto generate slug field (Only runs when name is changed)
 placeToVisitSchema.pre('save', async function (next) {
