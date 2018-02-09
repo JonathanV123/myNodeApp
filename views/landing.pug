@@ -3,6 +3,9 @@ block content
   .landing_container
     .landing_content_container
       .name
-        h1 Locals App
+        h1 What To Watch
       .welcome
-        p Welcome Jonathan
+        if (!user)
+          p Welcome
+        else 
+          p= user.name

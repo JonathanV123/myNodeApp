@@ -39,17 +39,17 @@ body {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .navContainer{
     border: 1px solid white;
-    width: 25%;
-    height: 50px;
     color: white;
     font-size: 2em;
 }
 
-.gatheringForm{
+.recommendationForm{
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -62,23 +62,8 @@ body {
     background-color: gray;
 }
 
-#map{
-    width: 400px;
-    height: 350px;
-}
-
-.gathering{
+.recommendation{
     width: 300px;
     height: 300px;
     border: 2px solid black;
-}
-
-.staticMap{
-    width: 900px;
-    height: 300px;
-}
-
-.mapImg{
-    width:850px;
-    height: 150px;
 }

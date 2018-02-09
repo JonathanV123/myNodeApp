@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/recommendationCard
+
+block content
+    .inner  
+        h2= title
+        .recommendations
+            each recommendation in recommendations
+                h2= recommendation.name
+                +recommendationCard(recommendation)
+            

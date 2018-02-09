@@ -41,6 +41,7 @@ app.use(session({
      // If true
      saveUninitialized: false,
 }));
+
 // Client will only store session id
 // The session itself is stored on the server or db
 app.use(passport.initialize());

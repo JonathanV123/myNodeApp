@@ -1,0 +1,28 @@
+mixin recommendationForm(recommendation = {})
+    form(action=`/createRecommendation/${recommendation._id || ''}` method="POST" class="recommendationForm" type="text")
+        label(for="name") Name
+        input(type="text" name="name" value=recommendation.name)
+        label(for="description") Description
+        textarea(name="description")= recommendation.description
+        //- Location
+        //- body parser url encoded allows for sending nested data
+        //- check if recommendation.location exists, if not value will be empty
+        //- label(for="lng") Address Lng
+        //- input(type="text" id="lng" name="location[coordinates][0]" value= (recommendation.location && recommendation.location.coordinates[0]) required)
+        //- label(for="lat") Address Lat
+        //- input(type="text" id="lat" name="location[coordinates][1]" value= (recommendation.location && recommendation.location.coordinates[1]) required)
+        //- Image upload
+        //- label(for="photo") Photo
+        //-     input(type="file" id="photo" name="photo" accept="image/gif, image/png, image/jpeg")
+        //-     if recommendation.photo
+        //-         img(src=`/uploads/${recommendation.photo}`, alt=recommendation.name width=300)
+        label(for="date") Date
+        input(type="text" name="date" value=recommendation.date)
+        - const recommendationOptions = ['Must Watch','Great', 'Good', 'Meh']
+        - const tags = recommendation.tags || []
+        ul.tags
+            each option in recommendationOptions 
+                .tagChoices
+                    input(type="checkbox" id=choice value=option name="tags" checked=(tags.includes(option)))
+                    label(for=option) #{option}
+        input(type="submit" id="formSubmit" value="Save" class="button")

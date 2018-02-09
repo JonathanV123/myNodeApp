@@ -4,11 +4,11 @@ mongoose.Promise = global.Promise;
 // Allows URL friendly names for slugs
 const slug = require('slugs');
 
-const placeToVisitSchema = new mongoose.Schema({
+const recommendations = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        required: 'Please enter a gathering name!'
+        required: 'Please enter a Show name!'
     },
     slug: String,
     description: {
@@ -21,21 +21,6 @@ const placeToVisitSchema = new mongoose.Schema({
         default: Date.now
     },
     date: String,
-    location: {
-        type: {
-            type: String,
-            default: 'Point'
-        },
-        coordinates: [{
-            type: Number,
-            required: 'You must supply coordinates!'
-        }],
-        address: {
-            type: String,
-            required: 'You must supply an address!'
-        }
-    },
-    photo: String,
     author: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
@@ -44,15 +29,13 @@ const placeToVisitSchema = new mongoose.Schema({
 });
 
 // Indexes (Indexed as text so you can perform a search on anything that is text)
-placeToVisitSchema.index({
+recommendations.index({
     name: 'text',
     description: 'text'
 });
 
-placeToVisitSchema.index({ location: '2dsphere' });
-
 // Before saving auto generate slug field (Only runs when name is changed)
-placeToVisitSchema.pre('save', async function (next) {
+recommendations.pre('save', async function (next) {
     // If name is not modified
     if (!this.isModified('name')) {
         next(); //skip
@@ -66,7 +49,7 @@ placeToVisitSchema.pre('save', async function (next) {
     // 3. a dash - or 0-9 so gathering-1 gathering-2 q mark ? means optional
     const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
     // Can't access model inside model function because it has not saved
-    // In this case this.constructor will be equal to PlaceToVisit by the time it runs
+    // In this case this.constructor will be equal to Recommendations by the time it runs
     const gatheringsWithSlug = await this.constructor.find({ slug: slugRegEx });
     if(gatheringsWithSlug.length){
         this.slug = `${this.slug}-${gatheringsWithSlug.length + 1}`;
@@ -74,7 +57,7 @@ placeToVisitSchema.pre('save', async function (next) {
     next();
 });
 
-placeToVisitSchema.statics.getTags = function(){
+recommendations.statics.getTags = function(){
     // return array of possible items we are looking for
     // Essentially piping through each one. Unwind then group with count then sort
     return this.aggregate([
@@ -87,4 +70,4 @@ placeToVisitSchema.statics.getTags = function(){
     ]);
 };
 
-module.exports = mongoose.model('PlaceToVisit', placeToVisitSchema);
+module.exports = mongoose.model('Recommendations', recommendations);

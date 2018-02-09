@@ -7,18 +7,15 @@ html
     body 
         block header
             header.top
-            pre=helpers.dump(user)
                 nav.nav
                     .navContainer
                         a(class="navLinkButton" href="/") Home
                     .navContainer
-                        a(class="navLinkButton" href="/createGathering") Add
+                        a(class="navLinkButton" href="/createShowRecommendation") Add a rec
                     .navContainer
-                        a(class="navLinkButton" href="/gatherings") Gatherings
+                        a(class="navLinkButton" href="/recommendations") Recs
                     .navContainer
                         a(class="navLinkButton" href="/tags") Tags
-                    .navContainer
-                        a(class="navLinkButton" href="/map") Map         
                     .navContainerUser
                         if user
                             .navContainer
@@ -30,9 +27,7 @@ html
                                 a(class="navLinkButton" href="/register") Register
                             .navContainer
                                 a(class="navLinkButton" href="/login") Log In 
-                .search
-                    input.searchInput(type="text" placeholder="Los Angeles, San Fran..." name="search")
-                    .searchResults    
+              
         block content
         block scripts
         script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)

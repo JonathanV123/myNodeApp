@@ -1,31 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const itineraryController = require('../controllers/itineraryController');
+const recController = require('../controllers/recController');
 const userController = require('../controllers/userController');
 const authenticationController = require('../controllers/authenticationController');
 const { catchErrors } = require('../errorHandler/errorHandling');
 
-router.get('/', itineraryController.landingPage);
-router.get('/createGathering',
+router.get('/', recController.landingPage);
+router.get('/createShowRecommendation',
      authenticationController.checkIfLoggedIn,
-     itineraryController.addGathering
+     recController.addRec
 );
-router.get('/gatherings', itineraryController.getGatherings);
-router.post('/createGathering', 
-    itineraryController.upload,
-    catchErrors(itineraryController.resize),
-    catchErrors(itineraryController.createGathering),
-);
-router.post('/createGathering:id', 
-    itineraryController.upload,
-    catchErrors(itineraryController.resize),
-    catchErrors(itineraryController.updateGathering)
-);
-router.get('/gatherings/:id/edit', catchErrors(itineraryController.editGathering));
-router.get('/gathering/:slug', catchErrors(itineraryController.getGatheringBySlug));
+router.get('/recommendations', recController.getRecommendations);
 
-router.get('/tags', catchErrors(itineraryController.getGatheringsByTag));
-router.get('/tags/:tag', catchErrors(itineraryController.getGatheringsByTag));
+router.post('/createRecommendation', 
+//     recController.upload,
+//     catchErrors(recController.resize),
+    catchErrors(recController.createRecommendation),
+);
+router.post('/createRecommendation/:id', 
+    // recController.upload,
+    // catchErrors(recController.resize),
+    catchErrors(recController.updateRecommendation)
+);
+router.get('/recommendation/:id/edit', catchErrors(recController.editRecommendation));
+router.get('/recommendation/:slug', catchErrors(recController.getRecommendationBySlug));
+
+router.get('/tags', catchErrors(recController.getRecommendationsByTag));
+router.get('/tags/:tag', catchErrors(recController.getRecommendationsByTag));
 
 router.get('/login', userController.loginForm);
 router.post('/login', authenticationController.login);
@@ -58,12 +59,8 @@ router.post('/account/reset/:token',
     catchErrors(authenticationController.update)
 );
 
-router.get('/map', itineraryController.mapPage);
-
-
-// API
-router.get('/api/search', catchErrors(itineraryController.searchGatherings));
-router.get('/api/gatherings/near', catchErrors(itineraryController.mapGatherings));
+// // API
+router.get('/api/search', catchErrors(recController.searchRecommendations));
 
 
 module.exports = router;
