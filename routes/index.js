@@ -10,6 +10,27 @@ router.get('/createShowRecommendation',
      authenticationController.checkIfLoggedIn,
      recController.addRec
 );
+
+// Recommendation Routes  
+router.get('/userHome', 
+    authenticationController.checkIfLoggedIn,
+    recController.userHome 
+);
+
+// router.get('/manageShows',
+//     authenticationController.checkIfLoggedIn,
+//     recController.manageShows
+// );
+
+router.get('/watchingNow', 
+    authenticationController.checkIfLoggedIn,
+    recController.watchingNow
+);
+
+router.post('/addWatchingNow',
+    userController.addWatchingNow,
+);
+
 router.get('/recommendations', recController.getRecommendations);
 
 router.post('/createRecommendation', 
@@ -35,7 +56,6 @@ router.get('/register', userController.registerForm);
 router.post('/register', 
     // 1. Validate registration data
     userController.validateRegistration,
-    // 2. Register the user
     userController.register,
     // 3. Log user in
     authenticationController.login

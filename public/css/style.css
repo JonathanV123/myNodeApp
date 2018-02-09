@@ -26,7 +26,7 @@ body {
 .top{
     width: 100%;
     height: 250px;
-    background-color: black;
+    border: 1px solid black;
 }
 
 .nav{
@@ -44,9 +44,33 @@ body {
 }
 
 .navContainer{
-    border: 1px solid white;
+    border: 1px solid black;
     color: white;
     font-size: 2em;
+}
+
+.recOptions{
+    width:100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border: 1px solid brown;
+}
+
+.recOptionsLinks{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
 
 .recommendationForm{

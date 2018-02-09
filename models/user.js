@@ -15,6 +15,9 @@ const userSchema = new Schema({
         validate:[validator.isEmail, 'Invalid Email Address'],
         required: 'Please Provide an email address'
     },
+    shows: {
+        watchingNow: [{ name: String} ],
+    },
     name: {
         type: String,
         required: 'Please supply a name',

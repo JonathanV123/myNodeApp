@@ -6,9 +6,21 @@ exports.landingPage = (req, res) => {
     res.render('layout')
 };
 
-exports.addRec = (req, res) => {
+// ∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨ Recommendation Routes ∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨
+exports.userHome = (req, res) => {
+    res.render(`userHome`, {user: req.user});
+}
+
+exports.watchingNow = (req, res) => {
+    res.render('watchingNow');
+};
+
+
+// ^^^^^^^^^^^^^^^^^^^^ Recommendation Routes ^^^^^^^^^^^^^^^^^^^^
+
+exports.addRec = (req, res) => { 
     res.render('editRecommendation', {
-        title: 'Add Recommendations'
+        title: 'Add A Show'
     })
 };
 
@@ -26,19 +38,19 @@ exports.getRecommendations = async (req, res) => {
     res.render('recommendations', { title: 'Recommendations', recommendations: recommendations});
 }
 
-const confirmOwner = (recommendation, user) => {
-    console.log(user);
-    // Must use MongoDb .equals to compare unique ._id to string id
-    if(!recommendation.author.equals(user._id)){
-        throw Error('You must be the owner of a gathering to edit it');
-    }
-};
+// const confirmOwner = (recommendation, user) => {
+//     console.log(user);
+//     // Must use MongoDb .equals to compare unique ._id to string id
+//     if(!recommendation.author.equals(user._id)){
+//         throw Error('You must be the owner of a gathering to edit it');
+//     }
+// };
 
 exports.editRecommendation = async (req, res) => {
     // 1. Find the recommendation given the ID
     const recommendation = await Recommendations.findOne({ _id: req.params.id});
     // 2. Confirm they are recommendation owner
-    confirmOwner(recommendation, req.user); 
+    // confirmOwner(recommendation, req.user); 
     // 3. Render edit form 
     res.render('editRecommendation', {title: `Edit ${recommendation.name}`, recommendation: recommendation})
 }

@@ -11,16 +11,11 @@ const recommendations = new mongoose.Schema({
         required: 'Please enter a Show name!'
     },
     slug: String,
-    description: {
-        type: String,
-        trim: true
-    },
     tags: [String],
-    created: {
-        type: Date,
-        default: Date.now
+    date: {
+         type: Date,
+         default: Date.now()
     },
-    date: String,
     author: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
@@ -57,17 +52,17 @@ recommendations.pre('save', async function (next) {
     next();
 });
 
-recommendations.statics.getTags = function(){
-    // return array of possible items we are looking for
-    // Essentially piping through each one. Unwind then group with count then sort
-    return this.aggregate([
-        // gets single tag for each gathering (duplicates each gathering with a single tag)
-        { $unwind: '$tags' },
-        // gives us an array filled with objects with _id: being tag name and count being how many instances 
-        { $group: { _id: '$tags', count: { $sum: 1 }}},
-        // sort the list of tags based on count (high to low)
-        { $sort: {count: -1} }       
-    ]);
-};
+// recommendations.statics.getTags = function(){
+//     // return array of possible items we are looking for
+//     // Essentially piping through each one. Unwind then group with count then sort
+//     return this.aggregate([
+//         // gets single tag for each gathering (duplicates each gathering with a single tag)
+//         { $unwind: '$tags' },
+//         // gives us an array filled with objects with _id: being tag name and count being how many instances 
+//         { $group: { _id: '$tags', count: { $sum: 1 }}},
+//         // sort the list of tags based on count (high to low)
+//         { $sort: {count: -1} }       
+//     ]);
+// };
 
 module.exports = mongoose.model('Recommendations', recommendations);
