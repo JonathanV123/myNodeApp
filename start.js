@@ -10,7 +10,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`${err.message}`);
 });
 // import all models
-require('./models/Recommendations');
+require('./models/Media');
 require('./models/User');
 
 const app = require('./app');

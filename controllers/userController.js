@@ -65,15 +65,15 @@ exports.updateAccount = async (req, res) => {
     res.redirect('back');
 };
 
-exports.addWatchingNow = async (req, res) => {
-    const show = req.body.name 
-    await User.findOneAndUpdate( 
-        {_id: req.user.id},
+// exports.addWatchingNow = async (req, res) => {
+//     const show = req.body.name 
+//     await User.findOneAndUpdate( 
+//         {_id: req.user.id},
 
-        { $push: { "shows.watchingNow" : { name: show } }} 
-    )
-    res.redirect('/watchingNow');
-};
+//         { $push: { "shows.watchingNow" : { name: show } }} 
+//     )
+//     res.redirect('/watchingNow');
+// };
 
 // Where file will be stored when uploaded and what type of files are allowed
 const multerOptions = {

@@ -1,8 +1,7 @@
 extends layout
-include mixins/addRecForm
+include mixins/createShowForm
 block content
-    .recForm
-        +recommendationForm(recommendation)
+    .showForm
+        +createShowForm(show)
     .watchingNow
         .whatYouAreWatchingNow
-    

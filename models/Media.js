@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 // Allows URL friendly names for slugs
 const slug = require('slugs');
 
-const shows = new mongoose.Schema({
+const media = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
@@ -24,11 +24,11 @@ const shows = new mongoose.Schema({
 });
 
 // Indexes (Indexed as text so you can perform a search on anything that is text)
-shows.index({
+media.index({
     name: 'text',
 });
 
-// shows.statics.getTags = function(){
+// mediaSchema.statics.getTags = function(){
 //     // return array of possible items we are looking for
 //     // Essentially piping through each one. Unwind then group with count then sort
 //     return this.aggregate([
@@ -41,4 +41,6 @@ shows.index({
 //     ]);
 // };
 
-module.exports = mongoose.model('Shows', shows);
+
+
+module.exports = mongoose.model('Media', media);

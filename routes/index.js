@@ -1,58 +1,64 @@
 const express = require('express');
 const router = express.Router();
-const recController = require('../controllers/recController');
+const showController = require('../controllers/showController');
 const userController = require('../controllers/userController');
 const authenticationController = require('../controllers/authenticationController');
 const { catchErrors } = require('../errorHandler/errorHandling');
 
-router.get('/', recController.landingPage);
-router.get('/createShowRecommendation',
-     authenticationController.checkIfLoggedIn,
-     recController.addRec
-);
-
-// Recommendation Routes  
+router.get('/', showController.landingPage);
 router.get('/userHome', 
     authenticationController.checkIfLoggedIn,
-    recController.userHome 
+    showController.userHome 
 );
 
-// router.get('/manageShows',
-//     authenticationController.checkIfLoggedIn,
-//     recController.manageShows
-// );
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+router.get('/createShow',
+     authenticationController.checkIfLoggedIn,
+     showController.addShow
+);
+router.post('/createShow', 
+//     showController.upload,
+//     catchErrors(showController.resize),
+    catchErrors(showController.createShow),
+);
+router.post('/createShow/:id', 
+    // showController.upload,
+    // catchErrors(showController.resize),
+    catchErrors(showController.updateShow)
+);
 
-router.get('/watchingNow', 
+router.get('/manageShows',
     authenticationController.checkIfLoggedIn,
-    recController.watchingNow
+    showController.manageShows
 );
 
-router.post('/addWatchingNow',
-    userController.addWatchingNow,
+router.get('/watchingNow',
+    authenticationController.checkIfLoggedIn,
+    showController.watchingNow
 );
 
-router.get('/recommendations', recController.getRecommendations);
-
-router.post('/createRecommendation', 
-//     recController.upload,
-//     catchErrors(recController.resize),
-    catchErrors(recController.createRecommendation),
+router.post('/watchingNow',
+    showController.addWatchingNow,
 );
-router.post('/createRecommendation/:id', 
-    // recController.upload,
-    // catchErrors(recController.resize),
-    catchErrors(recController.updateRecommendation)
-);
-router.get('/recommendation/:id/edit', catchErrors(recController.editRecommendation));
-router.get('/recommendation/:slug', catchErrors(recController.getRecommendationBySlug));
 
-router.get('/tags', catchErrors(recController.getRecommendationsByTag));
-router.get('/tags/:tag', catchErrors(recController.getRecommendationsByTag));
+router.get('/shows', showController.getShows);
 
+
+router.get('/show/:id/edit', catchErrors(showController.editShow));
+router.get('/show/:slug', catchErrors(showController.getShowBySlug));
+
+router.get('/tags', catchErrors(showController.getShowByTag));
+router.get('/tags/:tag', catchErrors(showController.getShowByTag));
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Show Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Account and Login Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/login', userController.loginForm);
+
 router.post('/login', authenticationController.login);
 
 router.get('/register', userController.registerForm);
+
 router.post('/register', 
     // 1. Validate registration data
     userController.validateRegistration,
@@ -78,9 +84,11 @@ router.post('/account/reset/:token',
     authenticationController.confirmedPasswords, 
     catchErrors(authenticationController.update)
 );
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Account and Login Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
 
 // // API
-router.get('/api/search', catchErrors(recController.searchRecommendations));
+// router.get('/api/search', catchErrors(showController.searchShows));
 
 
 module.exports = router;

@@ -1,5 +1,14 @@
 extend layout  
+include mixins/showCard
 block content
+    h2 Watching Now
+    .watchingNow
+        each show in watchingNowArr
+            +showCard(show)
+    h2 Your Recommendations
+    .yourRecommendations
+        each show in recommendations
+            +showCard(show)
     .recOptions
     h2= user.name
         .recOptionsLinks
@@ -7,6 +16,6 @@ block content
         .recOptionsLinks
             a(href=`/friendsTopPicks`) Friends Top Picks
         .recOptionsLinks
-            a(href=`/showsFinished`) Shows You Have Finishes
+        
 
 
