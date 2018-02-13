@@ -1,11 +1,12 @@
 mixin showCard(show = {})
-    .show
-        //- h2.title
-        //-     a(href=`/show/${show.slug}`) #{show.name}
-        //- .editButton
-        //-     if user && show.author.equals(user._id)
-        //-         .edit
-        //-             a(href=`/show/${show._id}/edit`) Edit
+    div(class=`show.${show.id}`)
+        h2.title
+        .removeForm
+            form.remove(method="POST" action=`/api/watchingNow/${show._id}/`)
+                button(type= "submit" name="removeWatchingNow") Delete
+                //- if user && show.author.equals(user._id)
+                //-     .edit
+                //-         a(href=`/show/${show._id}/edit`) Edit
         h2= show.name
         .showDescription
             pre= helpers.dump(show)

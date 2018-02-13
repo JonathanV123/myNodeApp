@@ -1,6 +1,7 @@
 extend layout  
 include mixins/showCard
 block content
+    pre= helpers.dump(user)
     h2 Watching Now
     .watchingNow
         each show in watchingNowArr

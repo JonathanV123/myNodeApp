@@ -41,6 +41,17 @@ router.post('/watchingNow',
     showController.addWatchingNow,
 );
 
+// router.get('/api/watchingNow/:id',   
+//     authenticationController.checkIfLoggedIn, 
+//     showController.getWatchingNowById
+// );
+
+router.post('/api/watchingNow/:id', 
+    authenticationController.checkIfLoggedIn,    
+    showController.removeWatchingNow,
+);
+
+
 router.get('/shows', showController.getShows);
 
 
@@ -89,6 +100,5 @@ router.post('/account/reset/:token',
 
 // // API
 // router.get('/api/search', catchErrors(showController.searchShows));
-
 
 module.exports = router;
