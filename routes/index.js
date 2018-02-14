@@ -48,9 +48,9 @@ router.post('/watchingNow',
 //     showController.getWatchingNowById
 // );
 
-router.post('/api/watchingNow/:id', 
+router.post('/api/removeShow/:id', 
     authenticationController.checkIfLoggedIn,    
-    showController.removeWatchingNow,
+    showController.removeShow,
 );
 
 

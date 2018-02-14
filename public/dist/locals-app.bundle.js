@@ -938,18 +938,18 @@ module.exports = Cancel;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__ = __webpack_require__(9);
 
 // typeSearch(searchBar);
 
 const removeForms = document.querySelectorAll('form.remove');
 
 Array.prototype.forEach.call( removeForms, function(element) {
-     element.addEventListener('submit' , __WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__["a" /* default */]) 
+     element.addEventListener('submit' , __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]) 
 });
 
 
-/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 
 /***/ }),
 /* 9 */
@@ -959,16 +959,16 @@ Array.prototype.forEach.call( removeForms, function(element) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
-function removeFromWatchingNow(e) {
+function removeShow(e) {
     e.preventDefault();
     const showId = this.id;
-    var showBeingRemoved = document.getElementsByClassName(showId);
-    console.log(showBeingRemoved.parentElement.nodeName);
+    const showBeingRemoved = document.getElementsByClassName(showId);
+    const name = showBeingRemoved[0].parentElement.className;
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action)
+        .post(this.action, {category: name})
         .then(res => { 
             // Remove from DOM
-            // showBeingRemoved[0].remove();
+            showBeingRemoved[0].remove();
         }).catch(err =>{
             console.log(error);
         });
@@ -976,7 +976,7 @@ function removeFromWatchingNow(e) {
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (removeFromWatchingNow);
+/* harmony default export */ __webpack_exports__["a"] = (removeShow);
 
 /***/ }),
 /* 10 */

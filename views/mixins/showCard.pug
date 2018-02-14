@@ -1,16 +1,14 @@
 mixin showCard(show = {})
     div(class= `show ${show.id}`)
-    pre= helpers.dump(show)
         h2.title
         .removeForm
-            form.remove(id=`${show.id}` method="POST" action=`/api/watchingNow/${show._id}/`)
-                button(type= "submit" name="removeWatchingNow") Delete
+            form.remove(id=`${show.id}` method="POST" action=`/api/removeShow/${show._id}/`)
+                button(type= "submit" name="removeShow") Delete
                 //- if user && show.author.equals(user._id)
                 //-     .edit
                 //-         a(href=`/show/${show._id}/edit`) Edit
         h2= show.name
         .showDescription
-            pre= helpers.dump(show)
             //- p= show.description.split(' ').slice(0, 25).join(' ')
             p= show.date
                

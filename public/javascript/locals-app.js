@@ -1,11 +1,11 @@
-import removeWatchingNow from './modules/removeWatchingNow';
+import removeShow from './modules/removeShow';
 // typeSearch(searchBar);
 
 const removeForms = document.querySelectorAll('form.remove');
 
 Array.prototype.forEach.call( removeForms, function(element) {
-     element.addEventListener('submit' , removeWatchingNow) 
+     element.addEventListener('submit' , removeShow) 
 });
 
 
-export default removeWatchingNow;
+export default removeShow;
