@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
-const multer = require('multer');
-const jimp = require('jimp');
-const uuid = require('uuid');
+// const multer = require('multer');
+// const jimp = require('jimp');
+// const uuid = require('uuid');
 promisify.Promise = require("bluebird");
 
 
@@ -65,47 +65,49 @@ exports.updateAccount = async (req, res) => {
     res.redirect('back');
 };
 
-// exports.addWatchingNow = async (req, res) => {
-//     const show = req.body.name 
-//     await User.findOneAndUpdate( 
-//         {_id: req.user.id},
-
-//         { $push: { "shows.watchingNow" : { name: show } }} 
-//     )
-//     res.redirect('/watchingNow');
-// };
-
-// Where file will be stored when uploaded and what type of files are allowed
-const multerOptions = {
-    // read image to memory for resizing.
-    storage: multer.memoryStorage(),
-    fileFilter: function (req, file, next) {
-        const isPhoto = file.mimetype.startsWith('image/');
-        if(isPhoto){
-            // if it starts with image, it's fine. continue with file upload
-            next(null, true);
-        } else {
-            next({ message: 'That filetype isn\'t allowed!'}, false);
-        }
-    }
+exports.friends = (req, res) => {
+    res.render('friends');
 };
 
-exports.upload = multer(multerOptions).single('photo');
-// stores to memory of server (temporary)
+exports.addFriend = async (req, res) => {
+    const nameToSearch = req.body.name;
+    const friend = await User.find(
+        {name: nameToSearch},
+    );
+    res.json(friend);
+};
 
-exports.resize = async (req, res, next) => {
-    // check if there is a new file to resize
-    if( !req.file ){
-        next(); // skip to next middleware
-    }
-    const fileExtension = req.file.mimetype.split('/')[1];
-    // pass info to req.body gathering saved to req.body
-    req.body.photo = `${uuid.v4()}.${fileExtension}`; 
-    // resize
-    const photo = await jimp.read(req.file.buffer);
-    await photo.resize(800, jimp.AUTO);
-    await photo.write(`./public/uploads/${req.body.photo}`);
-    // once saved to filesystem, continue.
-    next();
-}
+// Keeping these as an option for this project. I might still incorporate this
+
+// Where file will be stored when uploaded and what type of files are allowed
+// const multerOptions = {
+//     // read image to memory for resizing.
+//     storage: multer.memoryStorage(),
+//     fileFilter: function (req, file, next) {
+//         const isPhoto = file.mimetype.startsWith('image/');
+//         if(isPhoto){
+//             // if it starts with image, it's fine. continue with file upload
+//             next(null, true);
+//         } else {
+//             next({ message: 'That filetype isn\'t allowed!'}, false);
+//         }
+//     }
+// };
+// exports.upload = multer(multerOptions).single('photo');
+// stores to memory of server (temporary)
+// exports.resize = async (req, res, next) => {
+//     // check if there is a new file to resize
+//     if( !req.file ){
+//         next(); // skip to next middleware
+//     }
+//     const fileExtension = req.file.mimetype.split('/')[1];
+//     // pass info to req.body gathering saved to req.body
+//     req.body.photo = `${uuid.v4()}.${fileExtension}`; 
+//     // resize
+//     const photo = await jimp.read(req.file.buffer);
+//     await photo.resize(400, jimp.AUTO);
+//     await photo.write(`./public/uploads/${req.body.photo}`);
+//     // once saved to filesystem, continue.
+//     next();
+// }
 

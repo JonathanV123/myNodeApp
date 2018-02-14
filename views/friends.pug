@@ -1,0 +1,8 @@
+extends layout
+block content
+    if user
+        .friendContainer
+               form.friends(method="POST" action=`/api/addFriend`)
+                    label(for="name") Name
+                    input(type="name" name="name")  
+                    button(type="submit" name="addFriend") Search

@@ -34,7 +34,11 @@ const userSchema = new Schema({
             tags: [String],
         }],
     },
-   photo: String,
+    friends:[{
+        name: String,
+        acceptRequest: Boolean
+    }],
+//    photo: String,
    resetPasswordToken: String,
    resetPasswordTokenExpires: Date
 });

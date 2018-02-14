@@ -1,5 +1,6 @@
 mixin showCard(show = {})
     div(class= `show ${show.id}`)
+        pre= helpers.dump(show)
         h2.title
         .removeForm
             form.remove(id=`${show.id}` method="POST" action=`/api/removeShow/${show._id}/`)
@@ -10,5 +11,6 @@ mixin showCard(show = {})
         h2= show.name
         .showDescription
             //- p= show.description.split(' ').slice(0, 25).join(' ')
-            p= show.date
+            h3 User #{user.name} Review is:
+            p= show.tags
                

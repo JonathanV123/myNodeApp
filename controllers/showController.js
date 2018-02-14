@@ -64,24 +64,24 @@ exports.removeShow = async (req, res) => {
     // This is an ugly if else statement. Why isn't it possible to
     // change queryName directly in a single findByIdAndUpdate?
     // ask on stackoverflow
-    const queryName = req.body.category.toString();
+    let queryName = req.body.category.toString();
     if(queryName === "watchingNow"){
         const user = await User.findByIdAndUpdate(req.user._id,
-            { $pull: { watchingNow : {_id: req.params.id}}},
+            { $pull: { "myShows.watchingNow" : {_id: req.params.id}}},
             { new: true }
         )
             res.json(user);
     } else if (queryName === "recommendations")
     {
         const user = await User.findByIdAndUpdate(req.user._id,
-            { $pull: { recommendations : {_id: req.params.id}}},
+            { $pull: { "myShows.recommendations" : {_id: req.params.id}}},
             { new: true }
         )
             res.json(user);    
     }
     else if (queryName = 'topPicks') {
         const user = await User.findByIdAndUpdate(req.user._id,
-            { $pull: { topPicks : {_id: req.params.id}}},
+            { $pull: { "myShows.topPicks" : {_id: req.params.id}}},
             { new: true }
         )
             res.json(user); 
