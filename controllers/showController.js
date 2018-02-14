@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Shows = mongoose.model('Media');
+// const Shows = mongoose.model('Media');
 const User = mongoose.model('User');
 var ObjectID = require('mongodb').ObjectID;
 
@@ -10,14 +10,19 @@ exports.landingPage = (req, res) => {
 
 exports.userHome = async (req, res) => {
     // Get user recommendations
-    const recommendations = await Shows.find({ author: req.user._id });
+    // const recommendations = await Shows.find({ author: req.user._id });
     const watchingNow = await User.find( 
         {_id: req.user._id},
         { watchingNow : 1 }
     )
+    const recommendations = await User.find( 
+        {_id: req.user._id},
+        { recommendations : 1 }
+    )
     const watchingNowArr = watchingNow[0].watchingNow
+    const recommendationsArr = recommendations[0].recommendations
     // res.json(watchingNow);
-    res.render(`userHome`, {user: req.user , recommendations, watchingNowArr});
+    res.render(`userHome`, {user: req.user , recommendationsArr, watchingNowArr});
 }
 
 exports.watchingNow = (req, res) => {
@@ -27,12 +32,23 @@ exports.watchingNow = (req, res) => {
 
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+exports.createRecommendation = async (req, res) => {
+    const show = req.body.name
+    const tags = req.body.tags;
+    const createRecommendationPromise = await User.findOneAndUpdate( 
+        {_id: req.user.id},
+        { $addToSet: { recommendations: { name: show, tags: tags}} }
+);
+    await createRecommendationPromise.save();
+    res.redirect('/userHome');
+};
+
 exports.addWatchingNow = async (req, res) => {
     const show = req.body.name
-    const userId = req.body.user_id
+    const tag = req.body.tags;
     const watchingNowPromise = await User.findOneAndUpdate( 
             {_id: req.user.id},
-            { $addToSet: { watchingNow: { name: show }} }
+            { $addToSet: { watchingNow: { name: show, tags: tag }} }
     );
     await watchingNowPromise.save();
     res.redirect('/userHome');
@@ -43,43 +59,21 @@ exports.addShow = (req, res) => {
     })
 };
 
-exports.getWatchingNowById = async (req, res) => {
-    // const id = req.params.id;
-    // const show = await User.find(
-    //     { _id: req.user.id },
-    //     { watchingNow: { $elemMatch: {_id: id }}}
-    // )
-    // res.send(show);
-};
-exports.removeWatchingNow = async (req, res) => {
-   const watchingNow = req.user.watchingNow.map(obj => obj.toString());
-   const user = await User.findByIdAndUpdate(req.user._id,
-   { $pull: { watchingNow: {_id: req.params.id}}},
-   { new: true }
-   )
-   res.json(user);
-    // const showId = req.params.id
-    // if(!ObjectID.isValid(showId)){
-    //     return res.status(404).send()
-    // }
-    // const check = await User.update(
-    //     { _id: req.user.id},
-    //     { $pull : { watchingNow: { $elemMatch: {_id: id }}} } 
-    // )
-    // console.log(check);
-    // // deleteWatchingNow(showId);
-    // // redirect('/userHome');
-    // // TO DO add Flash of delete
-    // // res.redirect('/userHome');
-    // res.send(check);
-};
+// exports.getWatchingNowById = async (req, res) => {
+//     // const id = req.params.id;
+//     // const show = await User.find(
+//     //     { _id: req.user.id },
+//     //     { watchingNow: { $elemMatch: {_id: id }}}
+//     // )
+//     // res.send(show);
+// };
 
-exports.createShow = async (req, res) => {
-    req.body.author = req.user._id;
-    const show = new Shows(req.body);
-    await show.save();
-    // res.redirect(`/show/${show.slug}`);
-    res.redirect('/userHome');
+exports.removeWatchingNow = async (req, res) => {
+//    const user = await User.findByIdAndUpdate(req.user._id,
+//    { $pull: { watchingNow: {_id: req.params.id}}},
+//    { new: true }
+//    )
+   res.json(user);
 };
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Creation and Deletion ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

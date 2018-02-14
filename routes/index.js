@@ -19,8 +19,10 @@ router.get('/createShow',
 router.post('/createShow', 
 //     showController.upload,
 //     catchErrors(showController.resize),
-    catchErrors(showController.createShow),
+    // authenticationController.checkIfLoggedIn,
+    catchErrors(showController.createRecommendation),
 );
+
 router.post('/createShow/:id', 
     // showController.upload,
     // catchErrors(showController.resize),
@@ -52,10 +54,6 @@ router.post('/api/watchingNow/:id',
 );
 
 
-router.get('/shows', showController.getShows);
-
-
-router.get('/show/:id/edit', catchErrors(showController.editShow));
 router.get('/show/:slug', catchErrors(showController.getShowBySlug));
 
 router.get('/tags', catchErrors(showController.getShowByTag));

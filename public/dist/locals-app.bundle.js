@@ -940,13 +940,10 @@ module.exports = Cancel;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__ = __webpack_require__(9);
 
-
 // typeSearch(searchBar);
 
-const removeForms = document.querySelectorAll('form.remove')
-const shows = document.querySelectorAll('.show');
-// console.log(removeForms);
-// removeForms.addEventListener('submit', removeWatchingNow)
+const removeForms = document.querySelectorAll('form.remove');
+
 Array.prototype.forEach.call( removeForms, function(element) {
      element.addEventListener('submit' , __WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__["a" /* default */]) 
 });
@@ -966,11 +963,12 @@ function removeFromWatchingNow(e) {
     e.preventDefault();
     const showId = this.id;
     var showBeingRemoved = document.getElementsByClassName(showId);
+    console.log(showBeingRemoved.parentElement.nodeName);
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post(this.action)
         .then(res => { 
             // Remove from DOM
-            showBeingRemoved[0].remove();
+            // showBeingRemoved[0].remove();
         }).catch(err =>{
             console.log(error);
         });

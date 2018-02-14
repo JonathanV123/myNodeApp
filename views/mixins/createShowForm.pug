@@ -23,6 +23,6 @@ mixin createShowForm(show = {})
             ul.tags
                 each option in showOptionsReview 
                     .tagChoicesReview
-                        input(type="checkbox" id=choice value=option name="tags" checked=(tags.includes(option)))
+                        input(type="radio" id=choice value=option name="tags" checked=(tags.includes(option)))
                         label(for=option) #{option}
             input(type="submit" id="formSubmit" value="Save" class="button")    

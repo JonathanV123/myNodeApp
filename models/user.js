@@ -15,14 +15,23 @@ const userSchema = new Schema({
         validate:[validator.isEmail, 'Invalid Email Address'],
         required: 'Please Provide an email address'
     },
-    watchingNow: [{
-        name: String,
-    }],
     name: {
         type: String,
         required: 'Please supply a name',
         trim: true,
     },
+    watchingNow: [{
+        name: String,
+        tags: [String],
+    }],
+    recommendations: [{
+        name: String,
+        tags: [String],
+    }],
+    mustWatch: [{
+        name: String,
+        tags: [String],
+    }],
    photo: String,
    resetPasswordToken: String,
    resetPasswordTokenExpires: Date

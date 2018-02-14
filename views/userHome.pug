@@ -1,22 +1,21 @@
 extend layout  
 include mixins/showCard
 block content
-    pre= helpers.dump(user)
+    .recOptions
+    h2= user.name
+        .recOptionsLinks
+            a(href=`/manageShows`) Manage Your Shows
+        //- .recOptionsLinks
+        //-     a(href=`/friendsTopPicks`) Friends Top Picks
     h2 Watching Now
     .watchingNow
         each show in watchingNowArr
             +showCard(show)
     h2 Your Recommendations
     .yourRecommendations
-        each show in recommendations
+        each show in recommendationsArr
             +showCard(show)
-    .recOptions
-    h2= user.name
-        .recOptionsLinks
-            a(href=`/manageShows`) Manage Your Shows
-        .recOptionsLinks
-            a(href=`/friendsTopPicks`) Friends Top Picks
-        .recOptionsLinks
+
         
 
 

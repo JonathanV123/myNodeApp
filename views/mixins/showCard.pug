@@ -1,5 +1,6 @@
 mixin showCard(show = {})
     div(class= `show ${show.id}`)
+    pre= helpers.dump(show)
         h2.title
         .removeForm
             form.remove(id=`${show.id}` method="POST" action=`/api/watchingNow/${show._id}/`)
