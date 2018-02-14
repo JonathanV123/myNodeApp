@@ -20,18 +20,20 @@ const userSchema = new Schema({
         required: 'Please supply a name',
         trim: true,
     },
-    watchingNow: [{
-        name: String,
-        tags: [String],
-    }],
-    recommendations: [{
-        name: String,
-        tags: [String],
-    }],
-    mustWatch: [{
-        name: String,
-        tags: [String],
-    }],
+    myShows: {
+        watchingNow: [{
+            name: String,
+            tags: [String],
+        }],
+        recommendations: [{
+            name: String,
+            tags: [String],
+        }],
+        mustWatch: [{
+            name: String,
+            tags: [String],
+        }],
+    },
    photo: String,
    resetPasswordToken: String,
    resetPasswordTokenExpires: Date

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 // const Shows = mongoose.model('Media');
 const User = mongoose.model('User');
-var ObjectID = require('mongodb').ObjectID;
 
 
 exports.landingPage = (req, res) => {
@@ -10,18 +9,12 @@ exports.landingPage = (req, res) => {
 
 exports.userHome = async (req, res) => {
     // Get user recommendations
-    // const recommendations = await Shows.find({ author: req.user._id });
-    const watchingNow = await User.find( 
+    const data = await User.find( 
         {_id: req.user._id},
-        { watchingNow : 1 }
+        { myShows : 1 },
     )
-    const recommendations = await User.find( 
-        {_id: req.user._id},
-        { recommendations : 1 }
-    )
-    const watchingNowArr = watchingNow[0].watchingNow
-    const recommendationsArr = recommendations[0].recommendations
-    // res.json(watchingNow);
+    const watchingNowArr = data[0].myShows.watchingNow
+    const recommendationsArr = data[0].myShows.recommendations
     res.render(`userHome`, {user: req.user , recommendationsArr, watchingNowArr});
 }
 
@@ -30,15 +23,14 @@ exports.watchingNow = (req, res) => {
 };
 
 
-
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 exports.createRecommendation = async (req, res) => {
     const show = req.body.name
-    const tags = req.body.tags;
+    const tag = req.body.tags;
     const createRecommendationPromise = await User.findOneAndUpdate( 
         {_id: req.user.id},
-        { $addToSet: { recommendations: { name: show, tags: tags}} }
-);
+        { $addToSet: { "myShows.recommendations": { name: show, tags: tag }} }
+    );
     await createRecommendationPromise.save();
     res.redirect('/userHome');
 };
@@ -48,7 +40,7 @@ exports.addWatchingNow = async (req, res) => {
     const tag = req.body.tags;
     const watchingNowPromise = await User.findOneAndUpdate( 
             {_id: req.user.id},
-            { $addToSet: { watchingNow: { name: show, tags: tag }} }
+            { $addToSet: { "myShows.watchingNow": { name: show, tags: tag }} }
     );
     await watchingNowPromise.save();
     res.redirect('/userHome');
@@ -70,7 +62,7 @@ exports.addShow = (req, res) => {
 
 exports.removeShow = async (req, res) => {
     // This is an ugly if else statement. Why isn't it possible to
-    // change queryName directly in one findByIdAndUpdate?
+    // change queryName directly in a single findByIdAndUpdate?
     // ask on stackoverflow
     const queryName = req.body.category.toString();
     if(queryName === "watchingNow"){
