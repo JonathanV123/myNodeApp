@@ -1,8 +1,8 @@
 mixin showCard(show = {})
-    div(class=`show.${show.id}`)
+    div(class= `show ${show.id}`)
         h2.title
         .removeForm
-            form.remove(method="POST" action=`/api/watchingNow/${show._id}/`)
+            form.remove(id=`${show.id}` method="POST" action=`/api/watchingNow/${show._id}/`)
                 button(type= "submit" name="removeWatchingNow") Delete
                 //- if user && show.author.equals(user._id)
                 //-     .edit

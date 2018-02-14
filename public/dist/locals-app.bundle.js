@@ -943,13 +943,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // typeSearch(searchBar);
 
-// const removeForms = document.querySelectorAll('form.remove')
+const removeForms = document.querySelectorAll('form.remove')
+const shows = document.querySelectorAll('.show');
 // console.log(removeForms);
 // removeForms.addEventListener('submit', removeWatchingNow)
-Array.prototype.forEach.call(document.querySelectorAll('form.remove'), function(element) {
+Array.prototype.forEach.call( removeForms, function(element) {
      element.addEventListener('submit' , __WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__["a" /* default */]) 
-    
 });
+
 
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__modules_removeWatchingNow__["a" /* default */]);
 
@@ -961,18 +962,21 @@ Array.prototype.forEach.call(document.querySelectorAll('form.remove'), function(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
-
 function removeFromWatchingNow(e) {
     e.preventDefault();
+    const showId = this.id;
+    var showBeingRemoved = document.getElementsByClassName(showId);
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post(this.action)
-        .then(res => {
-            console.log(this);
-            console.log(this.className)
+        .then(res => { 
+            // Remove from DOM
+            showBeingRemoved[0].remove();
         }).catch(err =>{
             console.log(error);
         });
 }
+
+
 
 /* harmony default export */ __webpack_exports__["a"] = (removeFromWatchingNow);
 

@@ -24,6 +24,8 @@ exports.watchingNow = (req, res) => {
     res.render('watchingNow');
 };
 
+
+
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 exports.addWatchingNow = async (req, res) => {
     const show = req.body.name
@@ -50,12 +52,12 @@ exports.getWatchingNowById = async (req, res) => {
     // res.send(show);
 };
 exports.removeWatchingNow = async (req, res) => {
-//    const watchingNow = req.user.watchingNow.map(obj => obj.toString());
-//    const user = await User.findByIdAndUpdate(req.user._id,
-//    { $pull: { watchingNow: {_id: req.params.id}}},
-//    { new: true }
-//    )
-//    res.json(user);
+   const watchingNow = req.user.watchingNow.map(obj => obj.toString());
+   const user = await User.findByIdAndUpdate(req.user._id,
+   { $pull: { watchingNow: {_id: req.params.id}}},
+   { new: true }
+   )
+   res.json(user);
     // const showId = req.params.id
     // if(!ObjectID.isValid(showId)){
     //     return res.status(404).send()
