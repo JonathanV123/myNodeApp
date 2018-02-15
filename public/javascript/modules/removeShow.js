@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 function removeShow(e) {
     e.preventDefault();
     const showId = this.id;
@@ -13,7 +14,6 @@ function removeShow(e) {
             console.log(error);
         });
 }
-
 
 
 export default removeShow

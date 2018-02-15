@@ -34,7 +34,7 @@ const userSchema = new Schema({
             tags: [String],
         }],
     },
-    friends:{
+    friendsStorage:{
         pending:[],
         friends:[]
     },

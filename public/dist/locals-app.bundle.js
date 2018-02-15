@@ -377,6 +377,12 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(11);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -472,12 +478,6 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(11);
 
 /***/ }),
 /* 3 */
@@ -945,18 +945,22 @@ module.exports = Cancel;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_searchFriends__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_searchFriends__ = __webpack_require__(30);
 
+
+// import denyFriendRequest from './modules/denyFriendRequest';
 
 
 // typeSearch(searchBar);
 
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
+const acceptRequest = document.querySelectorAll('form.acceptFriend');
 
 
 function addEventListener(element, func){
-    // Don't run if there is no element on page
+    // Don't run if there is no corresponding element on page
     if(element.length == 0) return;
     console.log('running add event listener func');
     Array.prototype.forEach.call(element, function(html) {
@@ -965,15 +969,17 @@ function addEventListener(element, func){
 }
 
 
-addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
-addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_1__modules_searchFriends__["a" /* default */]);
+// addEventListener(removeForms, removeShow);
+addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_2__modules_searchFriends__["a" /* default */]);
+addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
  
 
-
-console.log(addFriends.action);
-console.log(removeForms);
-console.log(addFriends);
-/* harmony default export */ __webpack_exports__["default"] = ({removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */], searchFriends: __WEBPACK_IMPORTED_MODULE_1__modules_searchFriends__["a" /* default */]}); 
+/* harmony default export */ __webpack_exports__["default"] = ({
+    removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */], 
+    searchFriends: __WEBPACK_IMPORTED_MODULE_2__modules_searchFriends__["a" /* default */], 
+    acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */], 
+    // denyFriendRequest
+}); 
 
 
 /***/ }),
@@ -981,8 +987,9 @@ console.log(addFriends);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
 
 function removeShow(e) {
     e.preventDefault();
@@ -1000,8 +1007,8 @@ function removeShow(e) {
 }
 
 
-
 /* harmony default export */ __webpack_exports__["a"] = (removeShow);
+
 
 /***/ }),
 /* 11 */
@@ -1013,7 +1020,7 @@ function removeShow(e) {
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(3);
 var Axios = __webpack_require__(13);
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -1096,7 +1103,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(22);
 var dispatchRequest = __webpack_require__(23);
@@ -1637,7 +1644,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(24);
 var isCancel = __webpack_require__(7);
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 var isAbsoluteURL = __webpack_require__(25);
 var combineURLs = __webpack_require__(26);
 
@@ -1892,7 +1899,30 @@ module.exports = function spread(callback) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+function acceptFriendRequest(e) {
+    e.preventDefault();
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
+        .post(this.action)
+        .then(res => { 
+           console.log(res.data);
+        }).catch(err =>{
+            console.log(error);
+        });
+}
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (acceptFriendRequest);
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 function searchFriends(e) {

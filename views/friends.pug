@@ -8,7 +8,7 @@ block content
                 input(type="name" name="name")  
                 button(type="submit" name="addFriend") Search
         .friendRequestContainer
-            if user.friends.pending.length >= 1 
-                each friend in user.friends.pending
+            if user.friendsStorage.pending.length >= 1 
+                each friend in user.friendsStorage.pending
                     .friendRequest
                         +friendRequest(friend)

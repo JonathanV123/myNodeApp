@@ -88,9 +88,52 @@ exports.addFriend = async (req, res) => {
     // Add your request to your requested friend pending array
     const addFriend = await User.findOneAndUpdate( 
         {_id: friendId},
-        { $addToSet: { "friends.pending" : user }}
+        { $addToSet: { "friendsStorage.pending" : user }}
     );
     res.send('Friend Request Sent');
+};
+
+exports.acceptFriendRequest = async (req , res) =>{
+    // Id of person who sent the request
+    const friendId = req.params.id;
+    // Current user that is logged in
+    const userId = req.user._id;
+    const user = {
+        name: req.user.name,
+        email: req.user.email,
+        shows: req.user.myShows,
+    };  
+    const blah = 'c@c.com';
+    // Send friend our info
+    const sendFriendInfo = await User.findOneAndUpdate(
+        {_id: friendId},
+        { $addToSet: { "friendsStorage.friends" : user }}
+    ) ;
+   
+    // Get friend info that sent request
+    const friendInformation = await User.find(
+        {_id: friendId},
+    )
+      // Store information of friend we want to pass
+      const friendObj = {
+        name: friendInformation[0].name,
+        email: friendInformation[0].email,
+        shows: friendInformation[0].myShows,
+    };
+    // Friend name to search for due to $pull on friend_id not working
+    const friendEmail = friendObj.email
+    // Remove friend from current users pending array
+    const removeFromPending = await User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
+        { new: true }
+    );
+    // Add friend to our friends array
+    const addToUserFriendsArray = await User.findOneAndUpdate(
+        {_id: userId},
+        { $addToSet: { "friendsStorage.friends" : friendObj }}
+    )
+    res.send('Added Friend');
 };
 
 // Keeping these as an option for this project. I might still incorporate this
