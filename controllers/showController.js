@@ -8,14 +8,7 @@ exports.landingPage = (req, res) => {
 };
 
 exports.userHome = async (req, res) => {
-    // Get user recommendations
-    const data = await User.find( 
-        {_id: req.user._id},
-        { myShows : 1 },
-    )
-    const watchingNowArr = data[0].myShows.watchingNow
-    const recommendationsArr = data[0].myShows.recommendations
-    res.render(`userHome`, {user: req.user , recommendationsArr, watchingNowArr});
+    res.render(`userHome`);
 }
 
 exports.watchingNow = (req, res) => {
@@ -93,8 +86,14 @@ exports.removeShow = async (req, res) => {
 
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Editing / Updating ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-exports.manageShows = (req, res) => {
-    res.render('manageShows');
+exports.manageShows = async (req, res) => {
+    const data = await User.find( 
+        {_id: req.user._id},
+        { myShows : 1 },
+    );
+    const watchingNowArr = data[0].myShows.watchingNow
+    const recommendationsArr = data[0].myShows.recommendations
+    res.render(`manageShows`, {user: req.user , recommendationsArr, watchingNowArr});
 };
 
 exports.getShows = async (req, res) => {

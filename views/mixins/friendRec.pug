@@ -1,0 +1,12 @@
+mixin friendRec(showRec = {})
+    -const watchingNow = showRec.shows.watchingNow
+    -const recommendations = showRec.shows.recommendations
+    each show in watchingNow
+        .friendWatchingNow  
+            p= show.name
+            p= show.tags
+    each show in recommendations
+        .friendRecommendations  
+            p= show.name
+            p= show.tags
+               

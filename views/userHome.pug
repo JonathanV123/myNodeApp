@@ -1,20 +1,20 @@
 extend layout  
-include mixins/showCard
+include mixins/friendCard
+include mixins/friendRec
 block content
+    -const friends = user.friendsStorage.friends
     .recOptions
     h2= user.name
         .recOptionsLinks
             a(href=`/manageShows`) Manage Your Shows
-        //- .recOptionsLinks
-        //-     a(href=`/friendsTopPicks`) Friends Top Picks
-    h2 Watching Now
-    .watchingNow
-        each show in watchingNowArr
-            +showCard(show)
-    h2 Your Recommendations
-    .recommendations
-        each show in recommendationsArr
-            +showCard(show)
+        if friends.length >=1
+            each friend in friends
+                .friendContainer
+                    +friendCard(friend)
+                        .friend
+                    +friendRec(friend)
+                        
+   
 
         
 
