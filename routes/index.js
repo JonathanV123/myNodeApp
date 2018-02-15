@@ -69,11 +69,18 @@ router.get('/friends', userController.friends);
 
 router.post('/api/addFriend', 
     authenticationController.checkIfLoggedIn,
-    userController.addFriend );
+    userController.addFriend 
+);
 
 router.post('/api/acceptFriendRequest/:id', 
     authenticationController.checkIfLoggedIn,
-    userController.acceptFriendRequest );
+    userController.acceptFriendRequest 
+);
+
+    router.post('/api/denyFriendRequest/:id', 
+    authenticationController.checkIfLoggedIn,
+    userController.denyFriendRequest 
+);
 
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Friend Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

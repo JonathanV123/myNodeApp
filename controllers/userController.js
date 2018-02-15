@@ -103,7 +103,6 @@ exports.acceptFriendRequest = async (req , res) =>{
         email: req.user.email,
         shows: req.user.myShows,
     };  
-    const blah = 'c@c.com';
     // Send friend our info
     const sendFriendInfo = await User.findOneAndUpdate(
         {_id: friendId},
@@ -114,7 +113,7 @@ exports.acceptFriendRequest = async (req , res) =>{
     const friendInformation = await User.find(
         {_id: friendId},
     )
-      // Store information of friend we want to pass
+    // Store information of friend we want to pass
       const friendObj = {
         name: friendInformation[0].name,
         email: friendInformation[0].email,
@@ -136,6 +135,25 @@ exports.acceptFriendRequest = async (req , res) =>{
     res.send('Added Friend');
 };
 
+exports.denyFriendRequest = async (req, res) => {
+    // Current user
+    const userId = req.user._id;
+    // Get friend info that sent request
+    const friendId = req.params.id;
+    const friendInformation = await User.find(
+        {_id: friendId},
+    )
+    // Store information of friend we want to pass
+    const friendEmail = friendInformation[0].email;
+
+    // Remove friend from current users pending array
+    const removeFromPending = await User.findOneAndUpdate(
+       { _id: userId },
+       { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
+       { new: true }
+    );
+    res.send('Request denied')
+};
 // Keeping these as an option for this project. I might still incorporate this
 
 // Where file will be stored when uploaded and what type of files are allowed

@@ -946,10 +946,11 @@ module.exports = Cancel;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_searchFriends__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__ = __webpack_require__(31);
 
 
-// import denyFriendRequest from './modules/denyFriendRequest';
+
 
 
 // typeSearch(searchBar);
@@ -957,6 +958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
+const denyRequest = document.querySelectorAll('form.denyRequest');
 
 
 function addEventListener(element, func){
@@ -970,15 +972,16 @@ function addEventListener(element, func){
 
 
 // addEventListener(removeForms, removeShow);
-addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_2__modules_searchFriends__["a" /* default */]);
+addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */]);
 addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
+addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
  
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */], 
-    searchFriends: __WEBPACK_IMPORTED_MODULE_2__modules_searchFriends__["a" /* default */], 
+    searchFriends: __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */], 
     acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */], 
-    // denyFriendRequest
+    denyFriendRequest: __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]
 }); 
 
 
@@ -1919,6 +1922,29 @@ function acceptFriendRequest(e) {
 
 /***/ }),
 /* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+function denyFriendRequest(e) {
+    e.preventDefault();
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
+        .post(this.action)
+        .then(res => { 
+           console.log(res.data);
+        }).catch(err =>{
+            console.log(error);
+        });
+}
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (denyFriendRequest);
+
+/***/ }),
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

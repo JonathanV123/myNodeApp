@@ -1,6 +1,6 @@
 import removeShow from './modules/removeShow';
 import acceptFriendRequest from './modules/acceptFriendRequest';
-// import denyFriendRequest from './modules/denyFriendRequest';
+import denyFriendRequest from './modules/denyFriendRequest';
 import searchFriends from './modules/searchFriends';
 
 // typeSearch(searchBar);
@@ -8,6 +8,7 @@ import searchFriends from './modules/searchFriends';
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
+const denyRequest = document.querySelectorAll('form.denyRequest');
 
 
 function addEventListener(element, func){
@@ -23,11 +24,12 @@ function addEventListener(element, func){
 // addEventListener(removeForms, removeShow);
 addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
+addEventListener(denyRequest, denyFriendRequest);
  
 
 export default {
     removeShow, 
     searchFriends, 
     acceptFriendRequest, 
-    // denyFriendRequest
+    denyFriendRequest
 }; 
