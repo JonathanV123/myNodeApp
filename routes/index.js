@@ -66,7 +66,9 @@ router.get('/tags/:tag', catchErrors(showController.getShowByTag));
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  Friend Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/friends', userController.friends);
-router.post('/api/addFriend', userController.addFriend );
+router.post('/api/addFriend', 
+    authenticationController.checkIfLoggedIn ,
+    userController.addFriend );
 
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Friend Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

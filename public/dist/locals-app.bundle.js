@@ -954,18 +954,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 
-// Array.prototype.forEach.call( removeForms, function(element) {
-//      element.addEventListener('submit' , removeShow) 
-// });
 
 function addEventListener(element, func){
+    // Don't run if there is no element on page
+    if(element.length == 0) return;
+    console.log('running add event listener func');
     Array.prototype.forEach.call(element, function(html) {
         html.addEventListener('submit' , func) 
    });
 }
 
+
 addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_1__modules_searchFriends__["a" /* default */]);
+ 
+
 
 console.log(addFriends.action);
 console.log(removeForms);

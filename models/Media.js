@@ -8,7 +8,7 @@ const media = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        required: 'Please enter a Show name!'
+        required: 'Please enter a show name!'
     },
     slug: String,
     tags: [String],
@@ -24,9 +24,9 @@ const media = new mongoose.Schema({
 });
 
 // Indexes (Indexed as text so you can perform a search on anything that is text)
-media.index({
-    name: 'text',
-});
+// media.index({
+//     name: 'text',
+// });
 
 // mediaSchema.statics.getTags = function(){
 //     // return array of possible items we are looking for

@@ -16,14 +16,19 @@ html
                         .navContainer
                             a(class="navLinkButton" href="/logout") Log Out    
                         .navContainer    
-                            a(class="navLinkButton" href="/account") Account 
-                        .navContainer
-                            a(class="navLinkButton" href="/friends") Friends       
+                            a(class="navLinkButton" href="/account") Account
+                        if user.friends.pending.length >= 1 
+                            .navContainer
+                                a(class="navLinkButton" href="/friends") #{user.friends.pending.length}
+                        else
+                            .navContainer
+                                    a(class="navLinkButton" href="/friends") Friends               
                     else
                         .navContainer
                             a(class="navLinkButton" href="/register") Register
                         .navContainer
                             a(class="navLinkButton" href="/login") Log In
+                           
         block content
         block scripts
         script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)

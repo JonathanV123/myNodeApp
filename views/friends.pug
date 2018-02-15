@@ -1,8 +1,14 @@
 extends layout
+include mixins/friendRequest
 block content
     if user
-        .friendContainer
-               form.friends(method="POST" action=`/api/addFriend`)
-                    label(for="name") Name
-                    input(type="name" name="name")  
-                    button(type="submit" name="addFriend") Search
+        .addFriendContainer
+            form.friends(method="POST" action=`/api/addFriend`)
+                label(for="name") Name
+                input(type="name" name="name")  
+                button(type="submit" name="addFriend") Search
+        .friendRequestContainer
+            if user.friends.pending.length >= 1 
+                each friend in user.friends.pending
+                    .friendRequest
+                        +friendRequest(friend)

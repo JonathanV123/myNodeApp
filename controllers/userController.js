@@ -70,11 +70,27 @@ exports.friends = (req, res) => {
 };
 
 exports.addFriend = async (req, res) => {
-    const nameToSearch = req.body.name;
+    const emailToSearch = req.body.name;
+    // Get friend you are searching for
     const friend = await User.find(
-        {name: nameToSearch},
+        {email: emailToSearch},
     );
-    res.json(friend);
+    // If no friend notify user
+    if(friend.length == 0){
+        res.send('No users match');
+        // quit if no user
+        return;
+    } 
+    // Save friend ID
+    const friendId = friend[0]._id;
+    // Information of person sending request
+    const user = req.user;
+    // Add your request to your requested friend pending array
+    const addFriend = await User.findOneAndUpdate( 
+        {_id: friendId},
+        { $addToSet: { "friends.pending" : user }}
+    );
+    res.send('Friend Request Sent');
 };
 
 // Keeping these as an option for this project. I might still incorporate this
