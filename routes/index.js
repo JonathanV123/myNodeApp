@@ -1,41 +1,134 @@
 const express = require('express');
 const router = express.Router();
-const itineraryController = require('../controllers/itineraryController');
+const showController = require('../controllers/showController');
 const userController = require('../controllers/userController');
 const authenticationController = require('../controllers/authenticationController');
 const { catchErrors } = require('../errorHandler/errorHandling');
 
-router.get('/', itineraryController.landingPage);
-router.get('/createGathering', itineraryController.addGathering);
-router.get('/gatherings', itineraryController.getGatherings);
-router.post('/createGathering', 
-    itineraryController.upload,
-    catchErrors(itineraryController.resize),
-    catchErrors(itineraryController.createGathering),
+router.get('/', showController.landingPage);
+router.get('/userHome', 
+    authenticationController.checkIfLoggedIn,
+    showController.userHome 
 );
-router.post('/createGathering:id', 
-    itineraryController.upload,
-    catchErrors(itineraryController.resize),
-    catchErrors(itineraryController.updateGathering));
-router.get('/gatherings/:id/edit', catchErrors(itineraryController.editGathering));
-router.get('/gathering/:slug', catchErrors(itineraryController.getGatheringBySlug));
 
-router.get('/tags', catchErrors(itineraryController.getGatheringsByTag));
-router.get('/tags/:tag', catchErrors(itineraryController.getGatheringsByTag));
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+router.get('/createShow',
+     authenticationController.checkIfLoggedIn,
+     showController.addShow
+);
+router.post('/createShow', 
+//     showController.upload,
+//     catchErrors(showController.resize),
+    // authenticationController.checkIfLoggedIn,
+    catchErrors(showController.createRecommendation),
+);
+// router.get('/showOptions',
+//      authenticationController.checkIfLoggedIn,
+//      showController.showOptions
+// );
+// router.post('/createShow/:id', 
+//     // showController.upload,
+//     // catchErrors(showController.resize),
+//     catchErrors(showController.updateShow)
+// );
 
+router.get('/manageShows',
+    authenticationController.checkIfLoggedIn,
+    showController.manageShows
+);
+
+router.get('/watchingNow',
+    authenticationController.checkIfLoggedIn,
+    showController.watchingNow
+);
+
+router.post('/watchingNow',
+    showController.addWatchingNow,
+);
+
+// router.get('/api/watchingNow/:id',   
+//     authenticationController.checkIfLoggedIn, 
+//     showController.getWatchingNowById
+// );
+
+router.post('/api/removeShow/:id', 
+    authenticationController.checkIfLoggedIn,    
+    showController.removeShow,
+);
+
+
+router.get('/show/:slug', catchErrors(showController.getShowBySlug));
+
+router.get('/tags', catchErrors(showController.getShowByTag));
+router.get('/tags/:tag', catchErrors(showController.getShowByTag));
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Show Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+ 
+
+
+
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  Friend Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+router.get('/friends', userController.friends);
+
+router.post('/api/addFriend', 
+    authenticationController.checkIfLoggedIn,
+    userController.addFriend 
+);
+
+router.post('/api/acceptFriendRequest/:id', 
+    authenticationController.checkIfLoggedIn,
+    userController.acceptFriendRequest 
+);
+
+    router.post('/api/denyFriendRequest/:id', 
+    authenticationController.checkIfLoggedIn,
+    userController.denyFriendRequest 
+);
+
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Friend Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
+
+
+
+
+
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Account and Login Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/login', userController.loginForm);
+
 router.post('/login', authenticationController.login);
 
 router.get('/register', userController.registerForm);
+
 router.post('/register', 
     // 1. Validate registration data
     userController.validateRegistration,
-    // 2. Register the user
     userController.register,
     // 3. Log user in
     authenticationController.login
 );
 
+router.get('/account', 
+    authenticationController.checkIfLoggedIn, 
+    userController.account
+);
+
+router.post('/account', catchErrors(userController.updateAccount));
+
 router.get('/logout', authenticationController.logout);
+
+router.post('/account/forgotPassword', catchErrors(authenticationController.forgotPassword));
+
+router.get('/account/reset/:token', catchErrors(authenticationController.reset));
+
+router.post('/account/reset/:token',
+    authenticationController.confirmedPasswords, 
+    catchErrors(authenticationController.update)
+);
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Account and Login Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
+// // API
+// router.get('/api/search', catchErrors(showController.searchShows));
 
 module.exports = router;

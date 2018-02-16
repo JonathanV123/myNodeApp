@@ -1,0 +1,8 @@
+extends layout
+include mixins/createShowForm
+block content
+    pre= helpers.dump(show)
+    .showForm
+        +createShowForm(show)
+    .watchingNow
+        .whatYouAreWatchingNow

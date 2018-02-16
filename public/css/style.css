@@ -26,7 +26,7 @@ body {
 .top{
     width: 100%;
     height: 250px;
-    background-color: black;
+    border: 1px solid black;
 }
 
 .nav{
@@ -39,17 +39,41 @@ body {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .navContainer{
-    border: 1px solid white;
-    width: 25%;
-    height: 50px;
+    border: 1px solid black;
     color: white;
     font-size: 2em;
 }
 
-.gatheringForm{
+.recOptions{
+    width:100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border: 1px solid brown;
+}
+
+.recOptionsLinks{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.showForm{
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -62,18 +86,8 @@ body {
     background-color: gray;
 }
 
-.gathering{
+.show{
     width: 300px;
     height: 300px;
     border: 2px solid black;
-}
-
-.staticMap{
-    width: 900px;
-    height: 300px;
-}
-
-.mapImg{
-    width:850px;
-    height: 150px;
 }

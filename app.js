@@ -13,7 +13,7 @@ require('./passport');
 
 const app = express();
 // Where we keep our pug files
-app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -27,27 +27,34 @@ app.use(expressValidator());
 // The flash middleware let's us use req.flash
 // app.use(flash());
 
-app.use(cookieParser()) // required before session.
-app.use(session({
-     secret: 'anything',
-     resave: false,
-     saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use((req, res, next) => {
-    res.locals.helpers = helpers;
-    res.locals.user = req.user || null;
-    console.log(req.user);
-    next();
-});
-
 // promisify some callback based APIs
 app.use((req, res, next) => {
     req.login = promisify(req.login, req);
     next();
   });
+
+app.use(cookieParser()) // required before session.
+app.use(session({
+     secret: 'dogsRule',
+     // Only save session after each request when something changes
+     resave: false,
+     // If true
+     saveUninitialized: false,
+}));
+
+// Client will only store session id
+// The session itself is stored on the server or db
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+    res.locals.helpers = helpers;
+    // req.user available because of passport
+    res.locals.user = req.user || null;
+    res.locals.currentPath = req.path;
+    next();
+});
+
 
 app.use('/', routes);
 

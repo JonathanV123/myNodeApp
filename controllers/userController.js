@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
+// const multer = require('multer');
+// const jimp = require('jimp');
+// const uuid = require('uuid');
 promisify.Promise = require("bluebird");
 
 
@@ -41,3 +44,147 @@ exports.register = async (req, res, next) => {
     await registerWithPromise(user, req.body.password);
     next();
 };
+
+exports.account = (req, res) => {
+    res.render('account', {title: 'Edit Account'});
+}
+
+exports.updateAccount = async (req, res) => {
+    const updated = {
+        name: req.body.name,
+        email: req.body.email
+    };
+    const user = await User.findOneAndUpdate(
+        // query
+        { _id: req.user.id},
+        // Take updated and set it on top of what already exists
+        { $set: updated},
+        // Return new user, run validation steps, query is required to do it properly 
+        { new: true, runValidators: true, context: 'query'}
+    );
+    res.redirect('back');
+};
+
+exports.friends = (req, res) => {
+    res.render('friends');
+};
+
+exports.addFriend = async (req, res) => {
+    const emailToSearch = req.body.name;
+    // Get friend you are searching for
+    const friend = await User.find(
+        {email: emailToSearch},
+    );
+    // If no friend notify user
+    if(friend.length == 0){
+        res.send('No users match');
+        // quit if no user
+        return;
+    } 
+    // Save friend ID
+    const friendId = friend[0]._id;
+    // Information of person sending request
+    const user = req.user;
+    // Add your request to your requested friend pending array
+    const addFriend = await User.findOneAndUpdate( 
+        {_id: friendId},
+        { $addToSet: { "friendsStorage.pending" : user }}
+    );
+    res.send('Friend Request Sent');
+};
+
+exports.acceptFriendRequest = async (req , res) =>{
+    // Id of person who sent the request
+    const friendId = req.params.id;
+    // Current user that is logged in
+    const userId = req.user._id;
+    const user = {
+        name: req.user.name,
+        email: req.user.email,
+        shows: req.user.myShows,
+    };  
+    // Send friend our info
+    const sendFriendInfo = await User.findOneAndUpdate(
+        {_id: friendId},
+        { $addToSet: { "friendsStorage.friends" : user }}
+    ) ;
+   
+    // Get friend info that sent request
+    const friendInformation = await User.find(
+        {_id: friendId},
+    )
+    // Store information of friend we want to pass
+      const friendObj = {
+        name: friendInformation[0].name,
+        email: friendInformation[0].email,
+        shows: friendInformation[0].myShows,
+    };
+    // Friend name to search for due to $pull on friend_id not working
+    const friendEmail = friendObj.email
+    // Remove friend from current users pending array
+    const removeFromPending = await User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
+        { new: true }
+    );
+    // Add friend to our friends array
+    const addToUserFriendsArray = await User.findOneAndUpdate(
+        {_id: userId},
+        { $addToSet: { "friendsStorage.friends" : friendObj }}
+    )
+    res.send('Added Friend');
+};
+
+exports.denyFriendRequest = async (req, res) => {
+    // Current user
+    const userId = req.user._id;
+    // Get friend info that sent request
+    const friendId = req.params.id;
+    const friendInformation = await User.find(
+        {_id: friendId},
+    )
+    // Store information of friend we want to pass
+    const friendEmail = friendInformation[0].email;
+
+    // Remove friend from current users pending array
+    const removeFromPending = await User.findOneAndUpdate(
+       { _id: userId },
+       { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
+       { new: true }
+    );
+    res.send('Request denied')
+};
+// Keeping these as an option for this project. I might still incorporate this
+
+// Where file will be stored when uploaded and what type of files are allowed
+// const multerOptions = {
+//     // read image to memory for resizing.
+//     storage: multer.memoryStorage(),
+//     fileFilter: function (req, file, next) {
+//         const isPhoto = file.mimetype.startsWith('image/');
+//         if(isPhoto){
+//             // if it starts with image, it's fine. continue with file upload
+//             next(null, true);
+//         } else {
+//             next({ message: 'That filetype isn\'t allowed!'}, false);
+//         }
+//     }
+// };
+// exports.upload = multer(multerOptions).single('photo');
+// stores to memory of server (temporary)
+// exports.resize = async (req, res, next) => {
+//     // check if there is a new file to resize
+//     if( !req.file ){
+//         next(); // skip to next middleware
+//     }
+//     const fileExtension = req.file.mimetype.split('/')[1];
+//     // pass info to req.body gathering saved to req.body
+//     req.body.photo = `${uuid.v4()}.${fileExtension}`; 
+//     // resize
+//     const photo = await jimp.read(req.file.buffer);
+//     await photo.resize(400, jimp.AUTO);
+//     await photo.write(`./public/uploads/${req.body.photo}`);
+//     // once saved to filesystem, continue.
+//     next();
+// }
+

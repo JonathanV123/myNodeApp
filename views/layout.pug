@@ -7,29 +7,29 @@ html
     body 
         block header
             header.top
-            pre=helpers.dump(user)
                 nav.nav
                     .navContainer
-                        a(class="navLinkButton" href="/") Home
-                    .navContainer
-                        a(class="navLinkButton" href="/createGathering") Add
-                    .navContainer
-                        a(class="navLinkButton" href="/gatherings") Gatherings
-                    .navContainer
-                        a(class="navLinkButton" href="/tags") Tags   
-                    .navContainerUser
-                        if user
+                        a(class="navLinkButton" href="/userHome") Home
+                    if user
+                        .navContainer
+                            a(class="navLinkButton" href="/tags") Tags
+                        .navContainer
+                            a(class="navLinkButton" href="/logout") Log Out    
+                        .navContainer    
+                            a(class="navLinkButton" href="/account") Account
+                          
+                        if user.friendsStorage.pending.length >= 1 
                             .navContainer
-                                a(class="navLinkButton" href="/logout") Log Out    
-                            .navContainer    
-                                a(class="navLinkButton" href="/account") Account 
+                                a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
                         else
                             .navContainer
-                                a(class="navLinkButton" href="/register") Register
-                            .navContainer
-                                a(class="navLinkButton" href="/login") Log In 
-
+                                    a(class="navLinkButton" href="/friends") Friends               
+                    else
+                        .navContainer
+                            a(class="navLinkButton" href="/register") Register
+                        .navContainer
+                            a(class="navLinkButton" href="/login") Log In
+                           
         block content
         block scripts
-        script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
         script(type="module" src="/dist/locals-app.bundle.js")

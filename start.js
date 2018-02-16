@@ -10,10 +10,9 @@ mongoose.connection.on('error', (err) => {
   console.error(`${err.message}`);
 });
 // import all models
-require('./models/PlaceToVisit');
-require('./models/user');
+require('./models/Media');
+require('./models/User');
 
 const app = require('./app');
 app.set('port', 3000)
-app.listen(3000, () => console.log('Doggie App listening on port 3000!'))
-
+app.listen(3000, () => console.log('What To Watch App listening on port 3000!'))
