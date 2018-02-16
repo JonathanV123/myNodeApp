@@ -1,7 +1,7 @@
 mixin createShowForm(show = {})
-    form(action=`${locals.currentPath}/${show._id || ''}` method="POST" class="showForm" type="text")
+    form.getShowInformation(action=`${locals.currentPath}/${show._id || ''}` method="POST" class="showForm" type="text")
             label(for="name") Name Of Show
-            input(type="text" name="name" value=show.name)
+            input(type="text" name="name")
             //- label(for="description") Description
             //- textarea(name="description")= recommendation.description
             //- Location

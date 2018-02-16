@@ -24,14 +24,30 @@ const userSchema = new Schema({
         watchingNow: [{
             name: String,
             tags: [String],
+            posterPath: String,
+            genreIds: [Number],
+            id: Number,
+            backdropPath: String,
+            overview: String
+
         }],
         recommendations: [{
             name: String,
             tags: [String],
+            posterPath: String,
+            genreIds: [Number],
+            id: Number,
+            backdropPath: String,
+            overview: String
         }],
         mustWatch: [{
             name: String,
             tags: [String],
+            posterPath: String,
+            genreIds: [Number],
+            id: Number,
+            backdropPath: String,
+            overview: String
         }],
     },
     friendsStorage:{

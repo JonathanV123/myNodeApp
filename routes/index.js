@@ -22,12 +22,15 @@ router.post('/createShow',
     // authenticationController.checkIfLoggedIn,
     catchErrors(showController.createRecommendation),
 );
-
-router.post('/createShow/:id', 
-    // showController.upload,
-    // catchErrors(showController.resize),
-    catchErrors(showController.updateShow)
-);
+// router.get('/showOptions',
+//      authenticationController.checkIfLoggedIn,
+//      showController.showOptions
+// );
+// router.post('/createShow/:id', 
+//     // showController.upload,
+//     // catchErrors(showController.resize),
+//     catchErrors(showController.updateShow)
+// );
 
 router.get('/manageShows',
     authenticationController.checkIfLoggedIn,
