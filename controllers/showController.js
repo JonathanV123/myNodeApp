@@ -41,14 +41,14 @@ exports.addWatchingNow = async (req, res) => {
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true // Automatically parses the JSON string in the response
+        json: true 
     };
     rp(options)
     .then(function (repos) {
         if(repos.results.length < 1){
             res.send('No matches');
         } else {
-            res.json(repos);
+            res.render('showOptions',{showSelections: repos.results});
         }
     })
     .catch(function (err) {
@@ -63,6 +63,12 @@ exports.addWatchingNow = async (req, res) => {
     // await watchingNowPromise.save();
     // res.redirect('/userHome');
 };
+
+exports.chooseShow = (req, res) => { 
+    
+};
+
+
 exports.addShow = (req, res) => { 
     res.render('addShow', {
         title: 'Add A Show'

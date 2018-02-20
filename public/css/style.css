@@ -91,3 +91,9 @@ body {
     height: 300px;
     border: 2px solid black;
 }
+
+.showPoster{
+    width: 300px;
+    height: 400px;
+    background-size: cover;
+}

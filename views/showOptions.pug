@@ -1,2 +1,7 @@
 extends layout
+include mixins/showOptionCard
 block content
+    .container
+        if showSelections.length >= 1
+            each show in showSelections 
+                +showOptionCard(show)    

@@ -56,6 +56,10 @@ router.post('/api/removeShow/:id',
     showController.removeShow,
 );
 
+router.post('/api/chooseShow',
+    authenticationController.checkIfLoggedIn,    
+    showController.chooseShow,
+);
 
 router.get('/show/:slug', catchErrors(showController.getShowBySlug));
 

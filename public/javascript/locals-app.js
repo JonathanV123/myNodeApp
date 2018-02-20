@@ -2,14 +2,17 @@ import removeShow from './modules/removeShow';
 import acceptFriendRequest from './modules/acceptFriendRequest';
 import denyFriendRequest from './modules/denyFriendRequest';
 import searchFriends from './modules/searchFriends';
-// import getShowInfo from './modules/getShowInfo';
+import posterBGImage from './modules/posterBG';
+import chooseThisShow from './modules/chooseThisShow';
+
 // typeSearch(searchBar);
 
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
-// const getShowInformation = document.querySelectorAll('form.getShowInformation');
+const showPoster = document.querySelectorAll('.showPoster');
+const chooseShow = document.querySelectorAll('form.chooseShow');
 
 
 function addEventListener(element, func){
@@ -21,18 +24,18 @@ function addEventListener(element, func){
    });
 }
 
-
-// addEventListener(removeForms, removeShow);
+addEventListener(chooseShow, chooseThisShow);
 addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
 addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
-// addEventListener(getShowInformation, getShowInfo);
-
 
  
+posterBGImage(showPoster);
 
 export default {
+    chooseShow,
+    posterBGImage,
     removeShow, 
     searchFriends, 
     acceptFriendRequest, 

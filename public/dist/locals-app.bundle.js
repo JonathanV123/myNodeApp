@@ -948,8 +948,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_getShowInfo__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_getShowInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__modules_getShowInfo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_posterBG__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__ = __webpack_require__(33);
+
+
 
 
 
@@ -961,8 +963,8 @@ const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
-const getShowInformation = document.querySelectorAll('form.getShowInformation');
-const createShow = document.querySelectorAll('form.createShow');
+const showPoster = document.querySelectorAll('.showPoster');
+const chooseShow = document.querySelectorAll('form.chooseShow');
 
 
 function addEventListener(element, func){
@@ -974,23 +976,23 @@ function addEventListener(element, func){
    });
 }
 
-
-// addEventListener(removeForms, removeShow);
+addEventListener(chooseShow, __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__["a" /* default */]);
 addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */]);
 addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
 addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
-addEventListener(getShowInformation, __WEBPACK_IMPORTED_MODULE_4__modules_getShowInfo___default.a);
-
 
  
+Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPoster);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    chooseShow,
+    posterBGImage: __WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */],
     removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */], 
     searchFriends: __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */], 
     acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */], 
     denyFriendRequest: __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */],
-    getShowInfo: __WEBPACK_IMPORTED_MODULE_4__modules_getShowInfo___default.a
+    // getShowInfo
 }); 
 
 
@@ -1980,24 +1982,48 @@ function searchFriends(e) {
 
 /***/ }),
 /* 32 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// import axios from 'axios';
-// function getShowInfo(e) {
-//     e.preventDefault();
-//     const showName = this.name.value;
-//     axios
-//         .post(`https://api.themoviedb.org/3/search/movie?api_key=${locals.env.MOVIEDB_KEY}&query=${showName}`)
-//         .then(res => { 
-//            console.log(res.data);
-//         }).catch(err =>{
-//             console.log(error);
-//         });
-// }
+"use strict";
+
+function posterBGImage (element){
+    if(element.length == 0) return;
+    console.log('running show poster func');
+    element.forEach((show) => { 
+        show.style.backgroundImage = `url(http://image.tmdb.org/t/p/w185//${show.id}`
+    });
+
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (posterBGImage);
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 
+function chooseThisShow(e) {
+    e.preventDefault();
+    console.log('running!');
+    const showChoice = document.querySelectorAll('.chooseShow');
+    const name = showChoice[0].parentElement;
+    console.log(name);
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
+        .post(this.action)
+        .then(res => { 
+            console.log('hi!');
+        }).catch(err =>{
+            console.log(error);
+        });
+}
 
-// export default getShowInfo;
+
+/* harmony default export */ __webpack_exports__["a"] = (chooseThisShow);
+
 
 /***/ })
 /******/ ]);

@@ -1,0 +1,11 @@
+mixin showOptionCard(showSelections = {})
+    div.showPoster(id=`${showSelections.poster_path}`)
+        h2= showSelections.name
+        form.chooseShow(method="POST" action=`/api/chooseShow/`)
+            button(type= "submit" name="chooseShow") Add to list
+        //- if user && show.author.equals(user._id)
+        //-     .edit
+        //-         a(href=`/show/${show._id}/edit`) Edit
+        .showDescription
+            p= showSelections.overview.split(' ').slice(0, 30).join(' ')
+
