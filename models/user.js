@@ -22,32 +22,13 @@ const userSchema = new Schema({
     },
     myShows: {
         watchingNow: [{
-            name: String,
-            tags: [String],
-            posterPath: String,
-            genreIds: [Number],
-            id: Number,
-            backdropPath: String,
-            overview: String
 
         }],
         recommendations: [{
-            name: String,
-            tags: [String],
-            posterPath: String,
-            genreIds: [Number],
-            id: Number,
-            backdropPath: String,
-            overview: String
+    
         }],
         mustWatch: [{
-            name: String,
-            tags: [String],
-            posterPath: String,
-            genreIds: [Number],
-            id: Number,
-            backdropPath: String,
-            overview: String
+            
         }],
         showChoices: [],
     },

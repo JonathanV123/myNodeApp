@@ -1,7 +1,21 @@
 mixin showOptionCard(showSelections = {})
     div.showPoster(id=`${showSelections.poster_path}`)
         h2= showSelections.name
-        form.chooseShow(id=`${showSelections.id}` method="POST" action=`/api/chooseShow/`)
+        form.chooseShow(id=`${showSelections.id}` method="POST" action=`/saveShow`)
+            - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
+            - const showCategoryOptions = ['Watching Now','Must Watch','Recommendations']
+            - const tags = showSelections.tags || []
+            - const showCategory = showSelections.showCategory || []
+            ul.tagsReview
+                each option in showOptionsReview 
+                    .tagChoicesReview
+                        input(type="radio" id=choice value=option name="tags" checked=(tags.includes(option)))
+                        label(for=option) #{option}
+            ul.tagsCategory
+                each option in showCategoryOptions 
+                    .tagChoicesReview
+                        input(type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
+                        label(for=option) #{option}  
             button(type= "submit" name="chooseShow") Add to list
         //- if user && show.author.equals(user._id)
         //-     .edit

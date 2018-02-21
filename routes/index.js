@@ -14,13 +14,13 @@ router.get('/userHome',
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/createShow',
      authenticationController.checkIfLoggedIn,
-     showController.addShow
+     showController.submitShow
 );
 router.post('/createShow', 
 //     showController.upload,
 //     catchErrors(showController.resize),
-    // authenticationController.checkIfLoggedIn,
-    catchErrors(showController.createRecommendation),
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.createShow),
 );
 // router.get('/showOptions',
 //      authenticationController.checkIfLoggedIn,
@@ -56,9 +56,9 @@ router.post('/api/removeShow/:id',
     showController.removeShow,
 );
 
-router.post('/api/chooseShow',
+router.post('/saveShow',
     authenticationController.checkIfLoggedIn,    
-    showController.chooseShow,
+    showController.saveShow,
 );
 
 

@@ -2,13 +2,22 @@ extends layout
 include mixins/showCard
 block content
     h2= user.name
-        .recOptionsLinks
-            a(href=`/watchingNow`) Add Shows You are Currently Watching
-            .watchingNow
+        a(href="/createShow") Add to your shows collection   
+        .watchingNow
+            if watchingNowArr.length < 1
+                a(href="/createShow") Add To Watching Now Collection   
+            else      
                 each show in watchingNowArr
                     +showCard(show)
-        .recOptionsLinks
-            a(href="/createShow") Add a Recommendation    
-            .recommendations
+        .recommendations
+            if recommendationsArr.length < 1
+                a(href="/createShow") Add To Recommendations Collection   
+            else
                 each show in recommendationsArr
-                    +showCard(show)                            
+                    +showCard(show)    
+        .mustWatch
+            if mustWatchArr.length < 1
+                a(href="/createShow") Add To Must Watch Collection   
+            else
+                each show in mustWatchArr
+                    +showCard(show)                                      

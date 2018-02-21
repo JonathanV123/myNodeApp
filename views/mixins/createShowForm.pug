@@ -1,5 +1,5 @@
 mixin createShowForm(show = {})
-    form.getShowInformation(action=`${locals.currentPath}/${show._id || ''}` method="POST" class="showForm" type="text")
+    form.showForm(action="/createShow" method="POST" class="showForm" type="text")
             label(for="name") Name Of Show
             input(type="text" name="name")
             //- label(for="description") Description
@@ -18,11 +18,19 @@ mixin createShowForm(show = {})
             //-         img(src=`/uploads/${recommendation.photo}`, alt=recommendation.name width=300)
             //- label(for="date") Date
             //- input(type="text" name="date" value=recommendation.date)
-            - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
-            - const tags = show.tags || []
-            ul.tags
-                each option in showOptionsReview 
-                    .tagChoicesReview
-                        input(type="radio" id=choice value=option name="tags" checked=(tags.includes(option)))
-                        label(for=option) #{option}
+            
+            //- - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
+            //- - const showCategoryOptions = ['Watching Now','Must Watch','Recommendations']
+            //- - const tags = show.tags || []
+            //- - const showCategory = show.showCategory || []
+            //- ul.tagsReview
+            //-     each option in showOptionsReview 
+            //-         .tagChoicesReview
+            //-             input(type="radio" id=choice value=option name="tags" checked=(tags.includes(option)))
+            //-             label(for=option) #{option}
+            //- ul.tagsCategory
+            //-     each option in showCategoryOptions 
+            //-         .tagChoicesReview
+            //-             input(type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
+            //-             label(for=option) #{option}            
             input(type="submit" id="formSubmit" value="Save" class="button")    

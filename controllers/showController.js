@@ -20,15 +20,40 @@ exports.watchingNow = (req, res) => {
 
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-exports.createRecommendation = async (req, res) => {
+exports.createShow = async (req, res) => {
     const show = req.body.name
     const tag = req.body.tags;
-    const createRecommendationPromise = await User.findOneAndUpdate( 
-        {_id: req.user.id},
-        { $addToSet: { "myShows.recommendations": { name: show, tags: tag }} }
-    );
-    await createRecommendationPromise.save();
-    res.redirect('/userHome');
+    const category = req.body.showCategory
+    var testing = User;
+    var options = {
+        uri: `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIEDB_KEY}&query=${show}`,
+        // qs: {
+        //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
+        // },
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true,
+        User: testing,
+    };
+    rp(options)
+        .then(async function (repos) {
+            if(repos.results.length < 1){
+                res.send('No matches');
+            } else {
+                const showOptionsSaved = await User.update( 
+                    {_id: req.user.id},
+                    { $push: { "myShows.showChoices": { $each: repos.results} } }
+                );    
+                res.render('showOptions', { 
+                    showSelections : repos.results, 
+                 });    
+            }        
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    // res.redirect('/userHome');
 };
 
 exports.addWatchingNow = async (req, res) => {
@@ -52,7 +77,7 @@ exports.addWatchingNow = async (req, res) => {
             } else {
                 const showOptionsSaved = await User.update( 
                     {_id: req.user.id},
-                    { $push: { "myShows.showChoices": { $each: repos.results} } }
+                    { $addToSet: { "myShows.showChoices": { $each: repos.results} } }
                 );    
                 res.render('showOptions', { showSelections : repos.results });    
             }        
@@ -69,42 +94,39 @@ exports.addWatchingNow = async (req, res) => {
     // res.redirect('/userHome');
 };
 
-exports.chooseShow = async (req, res) => {
+exports.saveShow = async (req, res) => {
         const showID = parseInt(req.body.showId);
-        console.log(typeof showID)
-        // const show = await User.aggregate([
-        //     { "$match": {
-        //       "_id" :  req.user._id,
-        //       "myShows.showChoices.id": showID
-        //     }},
-        //     { "$unwind": "$myShows.showChoices"},
-        //     ]);
-        const show = await User.aggregate([
-            { "$match": {
-              "_id" :  req.user._id,
-              // test without this. May not do anything
-              "myShows.showChoices.id": showID
-            }},
-            // returns all if no match beneath it
-            { $unwind: "$myShows.showChoices" },
-            { $match: {
-                "myShows.showChoices.id": showID
-            }},
-            { $project: {
-                "myShows.showChoices.name": 1,
-                "myShows.showChoices.poster_path": 1,
-                "myShows.showChoices.genre_ids": 1,
-                "myShows.showChoices.overview":1
-
-            }},
-        ])
-    console.log(show);
-    res.json(show);
+        const userShowsArr = req.user.myShows.showChoices;
+        const result = userShowsArr.filter(show => show.id === showID);
+        console.log(result[0]);
+        if(req.body.radioValCategory === "Must Watch"){
+            const saveShow = await User.update( 
+                {_id: req.user.id},
+                { $push: { "myShows.mustWatch": result[0] }}
+            );  
+        }
+        if(req.body.radioValCategory === "Watching Now"){
+            const saveShow = await User.update( 
+                {_id: req.user.id},
+                { $push: { "myShows.watchingNow": result[0] }}
+            );  
+        }
+        if(req.body.radioValCategory === "Recommendations"){
+            const saveShow = await User.update( 
+                {_id: req.user.id},
+                { $push: { "myShows.recommendations": result[0] }}
+            );  
+        }
+        await User.update(
+            { _id: req.user.id },
+            { $set: {"myShows.showChoices": [] } }
+        )
+         res.render('manageShows')
 };
 
 
 
-exports.addShow = (req, res) => { 
+exports.submitShow = (req, res) => { 
     res.render('addShow', {
         title: 'Add A Show'
     })
@@ -157,9 +179,10 @@ exports.manageShows = async (req, res) => {
         {_id: req.user._id},
         { myShows : 1 },
     );
-    const watchingNowArr = data[0].myShows.watchingNow
-    const recommendationsArr = data[0].myShows.recommendations
-    res.render(`manageShows`, {user: req.user , recommendationsArr, watchingNowArr});
+    const watchingNowArr = data[0].myShows.watchingNow;
+    const recommendationsArr = data[0].myShows.recommendations;
+    const mustWatchArr = data[0].myShows.mustWatch
+    res.render(`manageShows`, {user: req.user , recommendationsArr, watchingNowArr, mustWatchArr});
 };
 
 exports.getShows = async (req, res) => {
