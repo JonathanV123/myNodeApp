@@ -90,11 +90,13 @@ exports.chooseShow = async (req, res) => {
             { $match: {
                 "myShows.showChoices.id": showID
             }},
-            {$group:{
-            name: {$name},
-            id: {$id}    ,      
-            overview: {$overview}  ,                  
-            }}
+            { $project: {
+                "myShows.showChoices.name": 1,
+                "myShows.showChoices.poster_path": 1,
+                "myShows.showChoices.genre_ids": 1,
+                "myShows.showChoices.overview":1
+
+            }},
         ])
     console.log(show);
     res.json(show);
