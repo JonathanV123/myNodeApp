@@ -2008,14 +2008,11 @@ function posterBGImage (element){
 
 function chooseThisShow(e) {
     e.preventDefault();
-    console.log('running!');
-    const showChoice = document.querySelectorAll('.chooseShow');
-    const name = showChoice[0].parentElement;
-    console.log(name);
+    const show = this.id;
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action)
+        .post(this.action, {showId: show})
         .then(res => { 
-            console.log('hi!');
+            console.log(res.data);
         }).catch(err =>{
             console.log(error);
         });

@@ -2,15 +2,11 @@ import axios from 'axios';
 
 function chooseThisShow(e) {
     e.preventDefault();
-    console.log('running!');
-    const showChoice = document.querySelectorAll('.chooseShow');
-    const name = showChoice[0].parentElement;
-    console.log(showChoice);
-    console.log(name);
+    const show = this.id;
     axios
-        .post(this.action)
+        .post(this.action, {showId: show})
         .then(res => { 
-            console.log('hi!');
+            console.log(res.data);
         }).catch(err =>{
             console.log(error);
         });

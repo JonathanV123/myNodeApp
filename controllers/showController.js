@@ -33,6 +33,7 @@ exports.createRecommendation = async (req, res) => {
 
 exports.addWatchingNow = async (req, res) => {
     const show = req.body.name;
+    var testing = User;
     var options = {
         uri: `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIEDB_KEY}&query=${show}`,
         // qs: {
@@ -41,20 +42,24 @@ exports.addWatchingNow = async (req, res) => {
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true 
+        json: true,
+        User: testing,
     };
     rp(options)
-    .then(function (repos) {
-        if(repos.results.length < 1){
-            res.send('No matches');
-        } else {
-            res.render('showOptions',{showSelections: repos.results});
-        }
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
-
+        .then(async function (repos) {
+            if(repos.results.length < 1){
+                res.send('No matches');
+            } else {
+                const showOptionsSaved = await User.update( 
+                    {_id: req.user.id},
+                    { $push: { "myShows.showChoices": { $each: repos.results} } }
+                );    
+                res.render('showOptions', { showSelections : repos.results });    
+            }        
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
     // const tag = req.body.tags;
     // const watchingNowPromise = await User.findOneAndUpdate( 
     //         {_id: req.user.id},
@@ -64,9 +69,37 @@ exports.addWatchingNow = async (req, res) => {
     // res.redirect('/userHome');
 };
 
-exports.chooseShow = (req, res) => { 
-    
+exports.chooseShow = async (req, res) => {
+        const showID = parseInt(req.body.showId);
+        console.log(typeof showID)
+        // const show = await User.aggregate([
+        //     { "$match": {
+        //       "_id" :  req.user._id,
+        //       "myShows.showChoices.id": showID
+        //     }},
+        //     { "$unwind": "$myShows.showChoices"},
+        //     ]);
+        const show = await User.aggregate([
+            { "$match": {
+              "_id" :  req.user._id,
+              // test without this. May not do anything
+              "myShows.showChoices.id": showID
+            }},
+            // returns all if no match beneath it
+            { $unwind: "$myShows.showChoices" },
+            { $match: {
+                "myShows.showChoices.id": showID
+            }},
+            {$group:{
+            name: {$name},
+            id: {$id}    ,      
+            overview: {$overview}  ,                  
+            }}
+        ])
+    console.log(show);
+    res.json(show);
 };
+
 
 
 exports.addShow = (req, res) => { 
@@ -141,16 +174,6 @@ exports.editShow = async (req, res) => {
     // 3. Render edit form 
     res.render('editshow', {title: `Edit ${show.name}`, show: show})
 }
-
-// exports.updateShow = async (req, res) => {
-//     // set the location data to be a point 
-//     const show = await Shows.findOneAndUpdate({ _id: req.params.id}, req.body,
-//         {
-//         new: true, //return the new show instead of old one
-//         runValidators: true,
-//     }).exec();
-//     res.redirect(`/show/${show._id}/edit`);
-// };
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Editing / Updating ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 

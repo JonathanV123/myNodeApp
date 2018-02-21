@@ -49,15 +49,7 @@ const userSchema = new Schema({
             backdropPath: String,
             overview: String
         }],
-        showChoices: [{
-            name: String,
-            tags: [String],
-            posterPath: String,
-            genreIds: [Number],
-            id: Number,
-            backdropPath: String,
-            overview: String
-        }],
+        showChoices: [],
     },
     friendsStorage:{
         pending:[],

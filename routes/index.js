@@ -61,6 +61,7 @@ router.post('/api/chooseShow',
     showController.chooseShow,
 );
 
+
 router.get('/show/:slug', catchErrors(showController.getShowBySlug));
 
 router.get('/tags', catchErrors(showController.getShowByTag));
