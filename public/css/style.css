@@ -99,3 +99,7 @@ body {
     height: 400px;
     background-size: cover;
 }
+
+.searchResult{
+    display: block;
+}

@@ -1,32 +1,22 @@
 const mongoose = require('mongoose');
-// const Shows = mongoose.model('Media');
 const User = mongoose.model('User');
 const request = require('request');
 const rp = require('request-promise');
 
-
-
 exports.landingPage = (req, res) => {
     res.render('layout')
 };
-
 exports.userHome = async (req, res) => {
     res.render(`userHome`);
 }
 
-exports.watchingNow = (req, res) => {
-    res.render('watchingNow');
-};
-
-
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 exports.createShow = async (req, res) => {
-    const show = req.body.name
-    const tag = req.body.tags;
-    const category = req.body.showCategory
-    var testing = User;
+    const showID = req.params.id;
+    console.log(showID);
+    var userModel = User;
     var options = {
-        uri: `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIEDB_KEY}&query=${show}`,
+        uri: `https://api.themoviedb.org/3/tv/${showID}?api_key=${process.env.MOVIEDB_KEY}&language=en-US`,
         // qs: {
         //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
         // },
@@ -34,65 +24,24 @@ exports.createShow = async (req, res) => {
             'User-Agent': 'Request-Promise'
         },
         json: true,
-        User: testing,
+        User: userModel,
     };
     rp(options)
-        .then(async function (repos) {
-            if(repos.results.length < 1){
-                res.send('No matches');
-            } else {
+        .then(async function (data) {
                 const showOptionsSaved = await User.update( 
                     {_id: req.user.id},
-                    { $push: { "myShows.showChoices": { $each: repos.results} } }
+                    { $addToSet: { "myShows.showChoices": data } }
                 );    
                 res.render('showOptions', { 
-                    showSelections : repos.results, 
-                 });    
-            }        
+                    showSelection : data, 
+                 });                 
         })
         .catch(function (err) {
             console.log(err);
         });
-    // res.redirect('/userHome');
 };
 
-exports.addWatchingNow = async (req, res) => {
-    const show = req.body.name;
-    var testing = User;
-    var options = {
-        uri: `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIEDB_KEY}&query=${show}`,
-        // qs: {
-        //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
-        // },
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true,
-        User: testing,
-    };
-    rp(options)
-        .then(async function (repos) {
-            if(repos.results.length < 1){
-                res.send('No matches');
-            } else {
-                const showOptionsSaved = await User.update( 
-                    {_id: req.user.id},
-                    { $addToSet: { "myShows.showChoices": { $each: repos.results} } }
-                );    
-                res.render('showOptions', { showSelections : repos.results });    
-            }        
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    // const tag = req.body.tags;
-    // const watchingNowPromise = await User.findOneAndUpdate( 
-    //         {_id: req.user.id},
-    //         { $addToSet: { "myShows.watchingNow": { name: show, tags: tag }} }
-    // );
-    // await watchingNowPromise.save();
-    // res.redirect('/userHome');
-};
+
 
 exports.saveShow = async (req, res) => {
         const showID = parseInt(req.body.showId);
@@ -129,14 +78,7 @@ exports.submitShow = (req, res) => {
     })
 };
 
-// exports.getWatchingNowById = async (req, res) => {
-//     // const id = req.params.id;
-//     // const show = await User.find(
-//     //     { _id: req.user.id },
-//     //     { watchingNow: { $elemMatch: {_id: id }}}
-//     // )
-//     // res.send(show);
-// };
+// exports.getWatchingNowById = async (req, res) =
 
 exports.removeShow = async (req, res) => {
     // This is an ugly if else statement. Why isn't it possible to

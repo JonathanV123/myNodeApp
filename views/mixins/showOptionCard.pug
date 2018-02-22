@@ -1,11 +1,11 @@
-mixin showOptionCard(showSelections = {})
-    div.showPoster(id=`${showSelections.poster_path}`)
-        h2= showSelections.name
-        form.chooseShow(id=`${showSelections.id}` method="POST" action=`/saveShow`)
+mixin showOptionCard(showSelection = {})
+    div.showPoster(id=`${showSelection.poster_path}`)
+        h2= showSelection.name
+        form.chooseShow(id=`${showSelection.id}` method="POST" action=`/saveShow`)
             - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
             - const showCategoryOptions = ['Watching Now','Must Watch','Recommendations']
-            - const tags = showSelections.tags || []
-            - const showCategory = showSelections.showCategory || []
+            - const tags = showSelection.tags || []
+            - const showCategory = showSelection.showCategory || []
             ul.tagsReview
                 each option in showOptionsReview 
                     .tagChoicesReview
@@ -17,9 +17,6 @@ mixin showOptionCard(showSelections = {})
                         input(type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
                         label(for=option) #{option}  
             button(type= "submit" name="chooseShow") Add to list
-        //- if user && show.author.equals(user._id)
-        //-     .edit
-        //-         a(href=`/show/${show._id}/edit`) Edit
         .showDescription
-            p= showSelections.overview.split(' ').slice(0, 30).join(' ')
+            p= showSelection.overview.split(' ').slice(0, 30).join(' ')
 

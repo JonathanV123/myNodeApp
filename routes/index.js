@@ -12,16 +12,20 @@ router.get('/userHome',
 );
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-router.get('/createShow',
+router.get('/createShow/:id',
+     authenticationController.checkIfLoggedIn,
+     catchErrors(showController.createShow)
+);
+router.get('/createShow/',
      authenticationController.checkIfLoggedIn,
      showController.submitShow
 );
-router.post('/createShow', 
-//     showController.upload,
-//     catchErrors(showController.resize),
-    authenticationController.checkIfLoggedIn,
-    catchErrors(showController.createShow),
-);
+// router.post('/createShow', 
+// //     showController.upload,
+// //     catchErrors(showController.resize),
+//     authenticationController.checkIfLoggedIn,
+//     catchErrors(showController.createShow),
+// );
 // router.get('/showOptions',
 //      authenticationController.checkIfLoggedIn,
 //      showController.showOptions
@@ -36,20 +40,6 @@ router.get('/manageShows',
     authenticationController.checkIfLoggedIn,
     showController.manageShows
 );
-
-router.get('/watchingNow',
-    authenticationController.checkIfLoggedIn,
-    showController.watchingNow
-);
-
-router.post('/watchingNow',
-    showController.addWatchingNow,
-);
-
-// router.get('/api/watchingNow/:id',   
-//     authenticationController.checkIfLoggedIn, 
-//     showController.getWatchingNowById
-// );
 
 router.post('/api/removeShow/:id', 
     authenticationController.checkIfLoggedIn,    

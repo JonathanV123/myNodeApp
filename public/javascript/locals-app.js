@@ -4,8 +4,7 @@ import denyFriendRequest from './modules/denyFriendRequest';
 import searchFriends from './modules/searchFriends';
 import posterBGImage from './modules/posterBG';
 import chooseThisShow from './modules/chooseThisShow';
-
-// typeSearch(searchBar);
+import typeSearch from './modules/typeSearch';
 
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
@@ -14,6 +13,7 @@ const denyRequest = document.querySelectorAll('form.denyRequest');
 const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
 const showPosterManageShows = document.querySelectorAll('.show');
+const searchBar = document.querySelector('.search');
 
 
 function addEventListener(element, func){
@@ -30,11 +30,12 @@ addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
 addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
-
 posterBGImage(showPosterManageShows);
 posterBGImage(showPoster);
+typeSearch(searchBar);
 
 export default {
+    typeSearch,
     chooseShow,
     posterBGImage,
     removeShow, 
