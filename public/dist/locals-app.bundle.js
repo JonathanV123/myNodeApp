@@ -965,6 +965,7 @@ const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
 const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
+const showPosterManageShows = document.querySelectorAll('.show');
 
 
 function addEventListener(element, func){
@@ -982,7 +983,7 @@ addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFrien
 addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
 
- 
+Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPosterManageShows);
 Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPoster);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1007,14 +1008,15 @@ Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showP
 
 function removeShow(e) {
     e.preventDefault();
-    const showId = this.id;
-    const showBeingRemoved = document.getElementsByClassName(showId);
-    const name = showBeingRemoved[0].parentElement.className;
+    const id = this.parentElement.parentElement.id;
+    const show = document.getElementById(id);
+    const showCategory = this.parentElement.parentElement.parentElement.className;
+    console.log(showCategory);
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action, {category: name})
+        .post(this.action, {category: showCategory})
         .then(res => { 
             // Remove from DOM
-            showBeingRemoved[0].remove();
+            show.remove();
         }).catch(err =>{
             console.log(error);
         });

@@ -2,14 +2,16 @@ import axios from 'axios';
 
 function removeShow(e) {
     e.preventDefault();
-    const showId = this.id;
-    const showBeingRemoved = document.getElementsByClassName(showId);
-    const name = showBeingRemoved[0].parentElement.className;
+    // This is very brittle. Look at other avenues for refactor
+    const id = this.parentElement.parentElement.id;
+    const show = document.getElementById(id);
+    const showCategory = this.parentElement.parentElement.parentElement.className;
+    console.log(showCategory);
     axios
-        .post(this.action, {category: name})
+        .post(this.action, {category: showCategory})
         .then(res => { 
             // Remove from DOM
-            showBeingRemoved[0].remove();
+            show.remove();
         }).catch(err =>{
             console.log(error);
         });

@@ -13,6 +13,7 @@ const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
 const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
+const showPosterManageShows = document.querySelectorAll('.show');
 
 
 function addEventListener(element, func){
@@ -30,7 +31,7 @@ addEventListener(acceptRequest, acceptFriendRequest);
 addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
 
- 
+posterBGImage(showPosterManageShows);
 posterBGImage(showPoster);
 
 export default {
