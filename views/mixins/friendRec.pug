@@ -1,8 +1,7 @@
-mixin friendRec(showRec = {})
-    pre= helpers.dump(showRec)
-    -const watchingNow = showRec.shows.watchingNow
-    -const recommendations = showRec.shows.recommendations
-    -const mustWatch = showRec.shows.mustWatch
+mixin friendRec(friend = {})
+    -const watchingNow = friend.myShows.watchingNow
+    -const recommendations = friend.myShows.recommendations
+    -const mustWatch = friend.myShows.mustWatch
     each show in watchingNow
         div.show(id = `${show.poster_path}`)
             p= show.name

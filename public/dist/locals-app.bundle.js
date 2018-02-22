@@ -2021,7 +2021,7 @@ function chooseThisShow(e) {
         .post(this.action, {showId: show, radioValReview: radioReview, radioValCategory: radioCategory})
         .then(res => { 
             console.log(res.data);
-            window.location.pathname = "/manageShows"
+            // window.location.pathname = "/manageShows"
         }).catch(err =>{
             console.log(error);
         });

@@ -7,7 +7,25 @@ exports.landingPage = (req, res) => {
     res.render('layout')
 };
 exports.userHome = async (req, res) => {
-    res.render(`userHome`);
+    // const data = await User.find( 
+    //     {_id: req.user._id},
+    //     { "friendsStorage.friends" : 1 },
+    // );
+    // req.user.friendsStorage.friends.forEach((friend) => {
+    //     await User.find( 
+    //         {email: friend.email},
+    //         { "friendsStorage.myShows" : 1 },
+    //     );
+    // });
+    // 1. Get Friends Array
+    const friendsArr = req.user.friendsStorage.friends;
+    const arr = [];
+    // 2. Store Each Friend Email in Result
+    const result = friendsArr.forEach(friend => arr.push(friend.email));
+    // Find Each User with email and get all their contents
+    const friendsInfo = await User.find({email: arr })
+    res.render(`userHome`, {friendInformation: friendsInfo});
+
 }
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -44,6 +62,7 @@ exports.createShow = async (req, res) => {
 
 
 exports.saveShow = async (req, res) => {
+    // Refactor possible
         const showID = parseInt(req.body.showId);
         const userShowsArr = req.user.myShows.showChoices;
         const result = userShowsArr.filter(show => show.id === showID);
@@ -69,7 +88,7 @@ exports.saveShow = async (req, res) => {
             { _id: req.user.id },
             { $set: {"myShows.showChoices": [] } }
         )
-       res.send("Saved the show!");
+      res.send("Saved the show!")
     };
 
 exports.submitShow = (req, res) => { 

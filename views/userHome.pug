@@ -2,16 +2,18 @@ extend layout
 include mixins/friendCard
 include mixins/friendRec
 block content
-    -const friends = user.friendsStorage.friends
+    -const friendInfo = friendInformation
     .recOptions
     h2= user.name
         .recOptionsLinks
             a(href=`/manageShows`) Manage Your Shows
-        if friends.length >=1
-            each friend in friends
+        if friendInfo.length >= 1
+            each friend in friendInfo
                 .friendContainer
                     +friendCard(friend)
                     +friendRec(friend)
+        else 
+            h2 Add some friends!
                         
    
 

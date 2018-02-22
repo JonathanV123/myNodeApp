@@ -16,7 +16,7 @@ router.get('/createShow/:id',
      authenticationController.checkIfLoggedIn,
      catchErrors(showController.createShow)
 );
-router.get('/createShow/',
+router.get('/createShow',
      authenticationController.checkIfLoggedIn,
      showController.submitShow
 );
