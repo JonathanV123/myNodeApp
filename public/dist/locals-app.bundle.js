@@ -1008,6 +1008,7 @@ Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showP
 
 function removeShow(e) {
     e.preventDefault();
+    // This is very brittle. Look at other avenues for refactor
     const id = this.parentElement.parentElement.id;
     const show = document.getElementById(id);
     const showCategory = this.parentElement.parentElement.parentElement.className;
@@ -2011,15 +2012,14 @@ function posterBGImage (element){
 function chooseThisShow(e) {
     e.preventDefault();
     const radioReview = document.querySelector('input[name=tags]:checked').value
-    console.log(radioReview)
     const radioCategory =  document.querySelector('input[name=showCategory]:checked').value
-    console.log(radioCategory)
     const show = this.id;
     console.log(this)
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post(this.action, {showId: show, radioValReview: radioReview, radioValCategory: radioCategory})
         .then(res => { 
             console.log(res.data);
+            window.location.pathname = "/manageShows"
         }).catch(err =>{
             console.log(error);
         });

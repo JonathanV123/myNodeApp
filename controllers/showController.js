@@ -98,31 +98,30 @@ exports.saveShow = async (req, res) => {
         const showID = parseInt(req.body.showId);
         const userShowsArr = req.user.myShows.showChoices;
         const result = userShowsArr.filter(show => show.id === showID);
-        console.log(result[0]);
         if(req.body.radioValCategory === "Must Watch"){
             const saveShow = await User.update( 
                 {_id: req.user.id},
-                { $push: { "myShows.mustWatch": result[0] }}
+                { $addToSet: { "myShows.mustWatch": result[0] }}
             );  
         }
         if(req.body.radioValCategory === "Watching Now"){
             const saveShow = await User.update( 
                 {_id: req.user.id},
-                { $push: { "myShows.watchingNow": result[0] }}
+                { $addToSet: { "myShows.watchingNow": result[0] }}
             );  
         }
         if(req.body.radioValCategory === "Recommendations"){
             const saveShow = await User.update( 
                 {_id: req.user.id},
-                { $push: { "myShows.recommendations": result[0] }}
+                { $addToSet: { "myShows.recommendations": result[0] }}
             );  
         }
         await User.update(
             { _id: req.user.id },
             { $set: {"myShows.showChoices": [] } }
         )
-         res.render('manageShows')
-};
+       res.send("Saved the show!");
+    };
 
 exports.submitShow = (req, res) => { 
     res.render('addShow', {
