@@ -14,16 +14,40 @@ const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
 const showPosterManageShows = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
+const menuButton = document.querySelector('.menuLinkButton');
+const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
+const navResponsive = document.querySelector('.navResponsive');
+const responsiveMenu = document.querySelector('.responsiveMenu');
 
 
-function addEventListener(element, func){
+function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
-    if(element.length == 0) return;
+    if (element.length == 0) return;
     console.log('running add event listener func');
-    Array.prototype.forEach.call(element, function(html) {
-        html.addEventListener('submit' , func) 
-   });
+    Array.prototype.forEach.call(element, function (html) {
+        html.addEventListener('submit', func)
+    });
 }
+
+function checkIfResponsive() {
+    if (navResponsive.style.display === "none") return;
+    menuButton.addEventListener("click", function () {
+        responsiveMenu.style.display = "flex";
+        responsiveMenuClose();
+    })
+};
+
+function responsiveMenuClose() {
+    if (responsiveMenu.style.display === "flex") {
+        responsiveMenuButton.addEventListener("click", function () {
+            responsiveMenu.style.display = "none";
+        })
+    } else {
+        return;
+    }
+}
+
+checkIfResponsive();
 
 addEventListener(chooseShow, chooseThisShow);
 addEventListener(addFriends, searchFriends);
@@ -38,9 +62,8 @@ export default {
     typeSearch,
     chooseShow,
     posterBGImage,
-    removeShow, 
-    searchFriends, 
-    acceptFriendRequest, 
+    removeShow,
+    searchFriends,
+    acceptFriendRequest,
     denyFriendRequest,
-    // getShowInfo
-}; 
+};

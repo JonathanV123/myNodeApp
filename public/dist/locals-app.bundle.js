@@ -967,16 +967,41 @@ const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
 const showPosterManageShows = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
+const menuButton = document.querySelector('.menuLinkButton');
+const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
+const navResponsive = document.querySelector('.navResponsive');
+const responsiveMenu = document.querySelector('.responsiveMenu');
 
 
-function addEventListener(element, func){
+function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
-    if(element.length == 0) return;
+    if (element.length == 0) return;
     console.log('running add event listener func');
-    Array.prototype.forEach.call(element, function(html) {
-        html.addEventListener('submit' , func) 
-   });
+    Array.prototype.forEach.call(element, function (html) {
+        html.addEventListener('submit', func)
+    });
 }
+
+function checkIfResponsive() {
+    if (navResponsive.style.display === "none") return;
+    menuButton.addEventListener("click", function () {
+        responsiveMenu.style.display = "flex";
+        responsiveMenuClose();
+    })
+};
+
+function responsiveMenuClose() {
+    console.log("running");
+    if (responsiveMenu.style.display === "flex") {
+        responsiveMenuButton.addEventListener("click", function () {
+            console.log("clicked");
+            responsiveMenu.style.display = "none";
+        })
+    } else {
+        return;
+    }
+}
+checkIfResponsive();
 
 addEventListener(chooseShow, __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__["a" /* default */]);
 addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */]);
@@ -991,13 +1016,11 @@ Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(sea
     typeSearch: __WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */],
     chooseShow,
     posterBGImage: __WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */],
-    removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */], 
-    searchFriends: __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */], 
-    acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */], 
+    removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */],
+    searchFriends: __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */],
+    acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */],
     denyFriendRequest: __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */],
-    // getShowInfo
-}); 
-
+});
 
 /***/ }),
 /* 10 */

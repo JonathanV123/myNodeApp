@@ -82,11 +82,13 @@ body {
 }
 
 .menuLinkButton{
-    font-size: 1.2em;
-    margin-right: 9px;
-    padding: 4px;
-    text-decoration: none;
     color: white;
+    padding: 2px;
+    margin: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.3em;
+    border: none;
+    background-color: transparent;
 }
 
 
@@ -131,6 +133,44 @@ body {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+}
+
+.responsiveMenu{
+    height: 100vh;
+    width: 100%;
+    background-color: #0082ff;
+    color: white;
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    display: none;
+}
+
+.responsiveMenuContent{
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.responsiveMenuButton{
+    color: white;
+    padding: 2px;
+    margin: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.3em;
+    border: none;
+    background-color: transparent;
 }
 
 .acctInfoContainer{
