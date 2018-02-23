@@ -5,31 +5,46 @@ html
         link(href='/css/style.css' rel='stylesheet', type='text/css')
         meta(name="viewport" content="width=device-width, initial-scale=1")
     body 
-        block header
-            header.top
-                nav.nav
-                    .navContainer
-                        a(class="navLinkButton" href="/userHome") Home
-                    if user
-                        .navContainer
-                            a(class="navLinkButton" href="/tags") Tags
-                        .navContainer
-                            a(class="navLinkButton" href="/logout") Log Out    
-                        .navContainer    
-                            a(class="navLinkButton" href="/account") Account
+        .containerLanding                   
+            block header
+                header.top
+                    .logoContainer
+                       p Watchy
+                    .navResponsive 
+                        .menuButton
+                            a(class="menuLinkButton" href="/userHome") Menu
+                    nav.nav
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/userHome") Home
+                        if user
+                            .navButtonContainer
+                                a(class="navLinkButton" href="/tags") Tags
+                            .navButtonContainer
+                                a(class="navLinkButton" href="/logout") Log Out    
+                            .navButtonContainer    
+                                a(class="navLinkButton" href="/account") Account
                           
-                        if user.friendsStorage.pending.length >= 1 
-                            .navContainer
-                                a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
+                            if user.friendsStorage.pending.length >= 1 
+                                .navButtonContainer
+                                    a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
+                            else
+                                .navButtonContainer
+                                        a(class="navLinkButton" href="/friends") Friends               
                         else
-                            .navContainer
-                                    a(class="navLinkButton" href="/friends") Friends               
-                    else
-                        .navContainer
-                            a(class="navLinkButton" href="/register") Register
-                        .navContainer
-                            a(class="navLinkButton" href="/login") Log In
-                           
-        block content
+                            .navButtonContainer
+                                a(class="navLinkButton" href="/register") Register
+                            .navButtonContainer
+                                a(class="navLinkButton" href="/login") Log In
+            block content
+                .landingContent
+                    .introContainer
+                        p See what shows your friends are watching and rate your own
+                         .navButtonContainer
+                                a(class="navLinkButton" href="/register") Register Now
+                    .acctInfoContainer
+                        p Don't feel like making an account?
+                        p Use account name: 123@123.com as username
+                        p Use 123 as password
         block scripts
         script(type="module" src="/dist/locals-app.bundle.js")
+
