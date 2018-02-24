@@ -4,9 +4,9 @@ block content
     if user
         .addFriendContainer
             form.friends(method="POST" action=`/api/addFriend`)
-                label(for="name") Email
-                input(type="name" name="name")  
-                button(type="submit" name="addFriend") Search
+                label(for="name" class="email") Search by email
+                input(class= "friendsInput" type="name" name="name" placeholder="Enter Friends Email Address")  
+                button(class="buttonStylingYellowBG" type="submit" name="addFriend") Search
         .friendRequestContainer
             if user.friendsStorage.pending.length >= 1 
                 each friend in user.friendsStorage.pending

@@ -1,23 +1,28 @@
 mixin showOptionCard(showSelection = {})
     div.show(id= `${showSelection.id}` data-poster=`${showSelection.poster_path}`)
+    div.showSelectionUserInput
         h2= showSelection.name
+        .showDescription
+            p= showSelection.overview.split(' ').slice(0, 30).join(' ')
         form.chooseShow(id=`${showSelection.id}` method="POST" action=`/saveShow`)
             - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
             - const showCategoryOptions = ['Watching Now','Must Watch','Recommendations']
             - const tags = showSelection.tags || []
             - const showCategory = showSelection.showCategory || []
+            h3 Rate This Show
             ul.tagsReview
                 each option in showOptionsReview 
                     .tagChoicesReview
-                        input(type="radio" id=choice value=option name="tags" checked=(tags.includes(option)))
+                        input(class="radioButton" type="radio" id=choice value=option name="tags" checked=(tags.includes(option)))
                         label(for=option) #{option}
+            h3 Select A Collection To Add This Show To
             ul.tagsCategory
                 each option in showCategoryOptions 
                     .tagChoicesReview
-                        input(type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
+                        input(class="radioButton"  type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
                         label(for=option) #{option}  
-            textarea(id="userComment" name="comment" form=`${showSelection.id}`) Enter text here...
-            button(type= "submit" name="chooseShow") Add to list
-        .showDescription
-            p= showSelection.overview.split(' ').slice(0, 30).join(' ')
+            h3 Quick Show Description
+            textarea(class= "textArea" id="userComment" name="comment" form=`${showSelection.id}` placeholder="Enter comments about the show. Funny, Scary, Happy Ect..") 
+            button(class= "buttonStylingYellowBG" type= "submit" name="chooseShow") Add to list
+        
 

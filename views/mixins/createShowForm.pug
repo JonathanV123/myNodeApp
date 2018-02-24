@@ -1,6 +1,6 @@
 mixin createShowForm(show = {})
-    form.showForm(autocomplete = "off" action="/createShow" method="POST"  type="text")
+    h2.textCenter Search For Shows
+    form.showForm(class= "formStyling" autocomplete = "off" action="/createShow" method="POST"  type="text")
         .search
-                input(type="text" name="name" placeholder= "Search for a show")
-                .searchResults    
-        input(type="submit" id="formSubmit" value="Save" class="button")    
+                input(class= "formInputStyling" type="text" name="name" placeholder= "Search for a show")
+        .searchResults    
