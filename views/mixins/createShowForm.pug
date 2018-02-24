@@ -2,5 +2,5 @@ mixin createShowForm(show = {})
     form.showForm(autocomplete = "off" action="/createShow" method="POST"  type="text")
         .search
                 input(type="text" name="name" placeholder= "Search for a show")
-                .searchResults        
+                .searchResults    
         input(type="submit" id="formSubmit" value="Save" class="button")    

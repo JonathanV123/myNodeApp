@@ -963,7 +963,6 @@ const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
-const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
 const showPosterManageShows = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
@@ -1011,7 +1010,6 @@ addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFrien
 addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
 Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPosterManageShows);
-Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPoster);
 Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(searchBar);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2018,11 +2016,19 @@ function searchFriends(e) {
 
 function posterBGImage (element){
     if(element.length == 0) return;
-    console.log('running show poster func');
-    element.forEach((show) => { 
-        show.style.backgroundImage = `url(http://image.tmdb.org/t/p/w185//${show.id}`
+    element.forEach((show) => {
+    const imageURL = `url(http://image.tmdb.org/t/p/w185//${show.id}`;
+    let checkURL = function (url) {
+        // Check if url ends with jpg, jpeg, gif, png
+        if((url.match(/\.(jpeg|jpg|gif|png)$/) != null)){
+            show.style.backgroundImage = `url(http://image.tmdb.org/t/p/w185//${show.id})`
+        // If it doesn't there is no poster image
+        } else {
+            show.style.backgroundImage = "url(../assets/images/noPosterAvailable.jpg)"
+        }
+    }      
+    checkURL(imageURL);  
     });
-
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (posterBGImage);
@@ -2040,10 +2046,15 @@ function chooseThisShow(e) {
     e.preventDefault();
     const radioReview = document.querySelector('input[name=tags]:checked').value
     const radioCategory =  document.querySelector('input[name=showCategory]:checked').value
+    const comment =  document.querySelector('#userComment').value
     const show = this.id;
-    console.log(this)
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action, {showId: show, radioValReview: radioReview, radioValCategory: radioCategory})
+        .post(this.action, {
+            showId: show, 
+            radioValReview: radioReview, 
+            radioValCategory: radioCategory,
+            userComment: comment
+        })
         .then(res => { 
             console.log(res.data);
             // window.location.pathname = "/manageShows"

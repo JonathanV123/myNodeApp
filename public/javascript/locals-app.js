@@ -10,9 +10,8 @@ const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
-const showPoster = document.querySelectorAll('.showPoster');
 const chooseShow = document.querySelectorAll('form.chooseShow');
-const showPosterManageShows = document.querySelectorAll('.show');
+const showPoster = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
 const menuButton = document.querySelector('.menuLinkButton');
 const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
@@ -57,7 +56,6 @@ addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
 addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
-posterBGImage(showPosterManageShows);
 posterBGImage(showPoster);
 typeSearch(searchBar);
 

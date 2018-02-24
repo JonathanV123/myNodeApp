@@ -31,6 +31,7 @@ exports.userHome = async (req, res) => {
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 exports.createShow = async (req, res) => {
     const showID = req.params.id;
+    const comment = req.body.comment;
     console.log(showID);
     var userModel = User;
     var options = {
@@ -64,8 +65,15 @@ exports.createShow = async (req, res) => {
 exports.saveShow = async (req, res) => {
     // Refactor possible
         const showID = parseInt(req.body.showId);
+        const comment = req.body.userComment;
+        const review = req.body.radioValReview;
+        console.log(comment)
         const userShowsArr = req.user.myShows.showChoices;
         const result = userShowsArr.filter(show => show.id === showID);
+        // Add user review and description
+        result[0].ownerComment = comment;
+        result[0].ownerReview = review;
+
         if(req.body.radioValCategory === "Must Watch"){
             const saveShow = await User.update( 
                 {_id: req.user.id},

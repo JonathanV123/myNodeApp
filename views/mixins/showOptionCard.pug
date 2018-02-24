@@ -1,5 +1,5 @@
 mixin showOptionCard(showSelection = {})
-    div.showPoster(id=`${showSelection.poster_path}`)
+    div.show(id=`${showSelection.poster_path}`)
         h2= showSelection.name
         form.chooseShow(id=`${showSelection.id}` method="POST" action=`/saveShow`)
             - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
@@ -16,6 +16,7 @@ mixin showOptionCard(showSelection = {})
                     .tagChoicesReview
                         input(type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
                         label(for=option) #{option}  
+            textarea(id="userComment" name="comment" form=`${showSelection.id}`) Enter text here...
             button(type= "submit" name="chooseShow") Add to list
         .showDescription
             p= showSelection.overview.split(' ').slice(0, 30).join(' ')

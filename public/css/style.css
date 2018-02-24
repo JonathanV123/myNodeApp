@@ -315,9 +315,11 @@ h2{
 
 
 .showPoster {
-    width: 300px;
-    height: 400px;
+    width: 190px;
+    height: 285px;
     background-size: cover;
+    margin: 10px;
+    padding: 2px;
 }
 
 .searchResult {
