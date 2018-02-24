@@ -1,23 +1,9 @@
 extends layout
 include mixins/showCard
 block content
-    h2= user.name
-        a(href="/createShow") Add to your shows collection   
-        .watchingNow
-            if watchingNowArr.length < 1
-                a(href="/createShow") Add To Watching Now Collection   
-            else      
-                each show in watchingNowArr
-                    +showCard(show)
-        .recommendations
-            if recommendationsArr.length < 1
-                a(href="/createShow") Add To Recommendations Collection   
-            else
-                each show in recommendationsArr
-                    +showCard(show)    
-        .mustWatch
-            if mustWatchArr.length < 1
-                a(href="/createShow") Add To Must Watch Collection   
-            else
-                each show in mustWatchArr
-                    +showCard(show)                                      
+    .welcomeContainer
+        h2  Hello! #{user.name}
+        a(class="buttonStylingYellowBG" href=`/createShow`) Add to your shows collection
+        a(class="buttonStylingYellowBG" href="/manageWatchingNow") Manage shows you are watching now  
+        a(class="buttonStylingYellowBG" href="/manageRecommendations") Manage show recommendations    
+        a(class="buttonStylingYellowBG" href="/manageMustWatch") Manage your must watch shows                                  

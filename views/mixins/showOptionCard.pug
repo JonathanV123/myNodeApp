@@ -1,5 +1,5 @@
 mixin showOptionCard(showSelection = {})
-    div.show(id=`${showSelection.poster_path}`)
+    div.show(id= `${showSelection.id}` data-poster=`${showSelection.poster_path}`)
         h2= showSelection.name
         form.chooseShow(id=`${showSelection.id}` method="POST" action=`/saveShow`)
             - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']

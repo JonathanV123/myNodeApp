@@ -6,6 +6,7 @@ import posterBGImage from './modules/posterBG';
 import chooseThisShow from './modules/chooseThisShow';
 import typeSearch from './modules/typeSearch';
 
+
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
@@ -18,7 +19,6 @@ const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
 const menuButtonNormal = document.querySelector('.menuLinkButton');
 const navResponsive = document.querySelector('.navResponsive');
 const responsiveMenu = document.querySelector('.responsiveMenu');
-
 
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page

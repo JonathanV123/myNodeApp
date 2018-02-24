@@ -959,19 +959,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
 const chooseShow = document.querySelectorAll('form.chooseShow');
-const showPosterManageShows = document.querySelectorAll('.show');
+const showPoster = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
 const menuButton = document.querySelector('.menuLinkButton');
 const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
 const menuButtonNormal = document.querySelector('.menuLinkButton');
 const navResponsive = document.querySelector('.navResponsive');
 const responsiveMenu = document.querySelector('.responsiveMenu');
-
 
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
@@ -1009,7 +1009,7 @@ addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends_
 addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
 addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
-Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPosterManageShows);
+Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPoster);
 Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(searchBar);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1033,11 +1033,8 @@ Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(sea
 
 function removeShow(e) {
     e.preventDefault();
-    // This is very brittle. Look at other avenues for refactor
-    const id = this.parentElement.parentElement.id;
-    const show = document.getElementById(id);
-    const showCategory = this.parentElement.parentElement.parentElement.className;
-    console.log(showCategory);
+    const show = document.getElementById(idToRemove);
+    const showCategory = this.dataset.category;
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post(this.action, {category: showCategory})
         .then(res => { 
@@ -2017,11 +2014,12 @@ function searchFriends(e) {
 function posterBGImage (element){
     if(element.length == 0) return;
     element.forEach((show) => {
-    const imageURL = `url(http://image.tmdb.org/t/p/w185//${show.id}`;
+        console.log(show);
+    const imageURL = `url(http://image.tmdb.org/t/p/w185//${show.dataset.poster}`;
     let checkURL = function (url) {
         // Check if url ends with jpg, jpeg, gif, png
         if((url.match(/\.(jpeg|jpg|gif|png)$/) != null)){
-            show.style.backgroundImage = `url(http://image.tmdb.org/t/p/w185//${show.id})`
+            show.style.backgroundImage = `url(http://image.tmdb.org/t/p/w185//${show.dataset.poster})`
         // If it doesn't there is no poster image
         } else {
             show.style.backgroundImage = "url(../assets/images/noPosterAvailable.jpg)"

@@ -32,7 +32,6 @@ exports.userHome = async (req, res) => {
 exports.createShow = async (req, res) => {
     const showID = req.params.id;
     const comment = req.body.comment;
-    console.log(showID);
     var userModel = User;
     var options = {
         uri: `https://api.themoviedb.org/3/tv/${showID}?api_key=${process.env.MOVIEDB_KEY}&language=en-US`,
@@ -67,26 +66,28 @@ exports.saveShow = async (req, res) => {
         const showID = parseInt(req.body.showId);
         const comment = req.body.userComment;
         const review = req.body.radioValReview;
+        const category = req.body.radioValCategory;
         console.log(comment)
         const userShowsArr = req.user.myShows.showChoices;
         const result = userShowsArr.filter(show => show.id === showID);
         // Add user review and description
         result[0].ownerComment = comment;
         result[0].ownerReview = review;
+        result[0].showCategory = category;
 
-        if(req.body.radioValCategory === "Must Watch"){
+        if(category === "Must Watch"){
             const saveShow = await User.update( 
                 {_id: req.user.id},
                 { $addToSet: { "myShows.mustWatch": result[0] }}
             );  
         }
-        if(req.body.radioValCategory === "Watching Now"){
+        if(category === "Watching Now"){
             const saveShow = await User.update( 
                 {_id: req.user.id},
                 { $addToSet: { "myShows.watchingNow": result[0] }}
             );  
         }
-        if(req.body.radioValCategory === "Recommendations"){
+        if(category === "Recommendations"){
             const saveShow = await User.update( 
                 {_id: req.user.id},
                 { $addToSet: { "myShows.recommendations": result[0] }}
@@ -113,6 +114,7 @@ exports.removeShow = async (req, res) => {
     // ask on stackoverflow
     const showID = parseInt(req.params.id);
     let queryName = req.body.category;
+    console.log(queryName);
     if(queryName === "watchingNow"){
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.watchingNow" : {id: showID}}},
@@ -166,6 +168,32 @@ exports.editShow = async (req, res) => {
     // 3. Render edit form 
     res.render('editshow', {title: `Edit ${show.name}`, show: show})
 }
+
+// Not a fan of these three routes. Should be one single route.
+exports.manageMustWatch = async (req, res) => {
+    const category = "mustWatch";
+    const data = await User.find( 
+        {_id: req.user._id},
+        { "myShows.mustWatch" : 1 },
+    );
+    res.render('manageShowCollection', {showInfo: data, showCategory: category })
+};
+exports.manageRecommendations = async (req, res) => {
+    const category = "recommendations";
+    const data = await User.find( 
+        {_id: req.user._id},
+        { "myShows.recommendations" : 1 },
+);
+    res.render('manageShowCollection', {showInfo: data, showCategory: category })
+};
+exports.watchingNow = async (req, res) => {
+    const category = "watchingNow";
+    const data = await User.find( 
+        {_id: req.user._id},
+        { "myShows.watchingNow" : 1 },
+    );
+    res.render('manageShowCollection', {showInfo: data, showCategory: category })
+};
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Editing / Updating ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 

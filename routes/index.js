@@ -16,10 +16,26 @@ router.get('/createShow/:id',
      authenticationController.checkIfLoggedIn,
      catchErrors(showController.createShow)
 );
+
 router.get('/createShow',
      authenticationController.checkIfLoggedIn,
      showController.submitShow
 );
+
+// Want to refactor these 3 into a single route.
+router.get('/manageMustWatch',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.manageMustWatch)
+)
+router.get('/manageRecommendations',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.manageRecommendations)
+)
+router.get('/manageWatchingNow',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.watchingNow)
+)
+
 // router.post('/createShow', 
 // //     showController.upload,
 // //     catchErrors(showController.resize),
