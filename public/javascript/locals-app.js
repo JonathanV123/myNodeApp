@@ -16,6 +16,7 @@ const showPosterManageShows = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
 const menuButton = document.querySelector('.menuLinkButton');
 const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
+const menuButtonNormal = document.querySelector('.menuLinkButton');
 const navResponsive = document.querySelector('.navResponsive');
 const responsiveMenu = document.querySelector('.responsiveMenu');
 
@@ -33,6 +34,7 @@ function checkIfResponsive() {
     if (navResponsive.style.display === "none") return;
     menuButton.addEventListener("click", function () {
         responsiveMenu.style.display = "flex";
+        menuButtonNormal.style.display = "none";
         responsiveMenuClose();
     })
 };
@@ -41,6 +43,7 @@ function responsiveMenuClose() {
     if (responsiveMenu.style.display === "flex") {
         responsiveMenuButton.addEventListener("click", function () {
             responsiveMenu.style.display = "none";
+            menuButtonNormal.style.display = "initial";
         })
     } else {
         return;

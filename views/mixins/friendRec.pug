@@ -2,15 +2,22 @@ mixin friendRec(friend = {})
     -const watchingNow = friend.myShows.watchingNow
     -const recommendations = friend.myShows.recommendations
     -const mustWatch = friend.myShows.mustWatch
+    h2=friend.name
     each show in watchingNow
-        div.show(id = `${show.poster_path}`)
-            p= show.name
-            p= show.overview
+        .watchingNowContainer
+            h2 Currently Watching
+            div.show(id = `${show.poster_path}`)
+                //- p= show.name
+                //- p= show.overview
     each show in recommendations
-        div.show(id = `${show.poster_path}`)
-            p= show.name
-            p= show.overview
+        .recommendations
+            h2 Recommendations
+            div.show(id = `${show.poster_path}`)
+                //- p= show.name
+                //- p= show.overview
     each show in mustWatch
-        div.show(id = `${show.poster_path}`)
-            p= show.name
-            p= show.overview          
+        .mustWatch
+            h2 Must Watch
+            div.show(id = `${show.poster_path}`)
+                //- p= show.name
+                //- p= show.overview          

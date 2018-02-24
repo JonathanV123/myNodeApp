@@ -5,66 +5,71 @@ html
         link(href='/css/style.css' rel='stylesheet', type='text/css')
         meta(name="viewport" content="width=device-width, initial-scale=1")
     body 
-        .responsiveMenu
-            header.top
-                .logoContainer
-                    p Watchy
-                .navResponsive 
-                    .menuButton
-                        button(class="responsiveMenuButton") Close
-            .responsiveMenuContent
-                if user
-                    .navButtonContainer    
-                        a(class="navLinkButton" href="/account") Account
-                    .navButtonContainer
-                        a(class="navLinkButton" href="/logout") Log Out   
-                    if user.friendsStorage.pending.length >= 1 
-                        .navButtonContainer
-                            a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
-                    else
-                        .navButtonContainer
-                            a(class="navLinkButton" href="/friends") Friends               
-                else
-                    .navButtonContainer
-                        a(class="navLinkButton" href="/register") Register
-                    .navButtonContainer
-                        a(class="navLinkButton" href="/login") Log In        
-        .containerLanding                   
-            block header
+        block header
+            .responsiveMenu
                 header.top
                     .logoContainer
-                       p Watchy
+                        if user
+                            a(class="navLinkButton" href="/userHome") Watchy
+                        else
+                            a(class="navLinkButton" href="/") Watchy
+                    .navResponsive 
+                        .menuButton
+                            button(class="responsiveMenuButton") Close
+                .responsiveMenuContent
+                    if user
+                        .navButtonContainer    
+                            a(class="navLinkButton" href="/account") Account
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/logout") Log Out   
+                        if user.friendsStorage.pending.length >= 1 
+                            .navButtonContainer
+                                a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
+                        else
+                            .navButtonContainer
+                                a(class="navLinkButton" href="/friends") Friends               
+                    else
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/register") Register
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/login") Log In  
+            header.top
+                .logoContainer
+                    if user
+                        a(class="navLinkButton" href="/userHome") Watchy
+                    else
+                        a(class="navLinkButton" href="/") Watchy
                     .navResponsive 
                         .menuButton
                             button(class="menuLinkButton") Menu
-                    nav.nav
+                nav.nav
+                    .navButtonContainer
+                        a(class="navLinkButton" href="/userHome") Home
+                    if user
                         .navButtonContainer
-                            a(class="navLinkButton" href="/userHome") Home
-                        if user
+                            a(class="navLinkButton" href="/logout") Log Out    
+                        .navButtonContainer    
+                            a(class="navLinkButton" href="/account") Account
+                        if user.friendsStorage.pending.length >= 1 
                             .navButtonContainer
-                                a(class="navLinkButton" href="/tags") Tags
-                            .navButtonContainer
-                                a(class="navLinkButton" href="/logout") Log Out    
-                            .navButtonContainer    
-                                a(class="navLinkButton" href="/account") Account
-                          
-                            if user.friendsStorage.pending.length >= 1 
-                                .navButtonContainer
-                                    a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
-                            else
-                                .navButtonContainer
-                                        a(class="navLinkButton" href="/friends") Friends               
+                                a(class="navLinkButton" href="/friends") #{user.friendsStorage.pending.length}
                         else
                             .navButtonContainer
-                                a(class="navLinkButton" href="/register") Register
-                            .navButtonContainer
-                                a(class="navLinkButton" href="/login") Log In
+                                a(class="navLinkButton" href="/friends") Friends               
+                    else
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/register") Register
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/login") Log In                  
+        .containerLanding                   
             block content
                 .landingContent
                     .introContainer
                         p See what shows your friends are watching and rate your own
-                         .navButtonContainer
-                                a(class="navLinkButton" href="/register") Register Now
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/register") Register Now
+                        .navButtonContainer
+                            a(class="navLinkButton" href="/login") Log In
                     .acctInfoContainer
                         p Don't feel like making an account?
                         p Use account name: 123@123.com as username
