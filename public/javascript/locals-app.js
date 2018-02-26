@@ -6,7 +6,8 @@ import posterBGImage from './modules/posterBG';
 import chooseThisShow from './modules/chooseThisShow';
 import typeSearch from './modules/typeSearch';
 import backdropBGImage from './modules/backDropBG';
-
+import $ from 'jquery';
+import 'slick-carousel';
 
 const removeForms = document.querySelectorAll('form.remove');
 const addFriends = document.querySelectorAll('form.friends');
@@ -22,6 +23,42 @@ const menuButtonNormal = document.querySelector('.menuLinkButton');
 const navResponsive = document.querySelector('.navResponsive');
 const responsiveMenu = document.querySelector('.responsiveMenu');
 const backdrop = document.querySelectorAll('.showBackdropContainer');
+const carousel = document.querySelectorAll('.carousel');
+
+$('.carousel').slick({
+    dots: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [{
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: false
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+    ]
+});
 
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page

@@ -2,22 +2,35 @@ mixin friendRec(friend = {})
     -const watchingNow = friend.myShows.watchingNow
     -const recommendations = friend.myShows.recommendations
     -const mustWatch = friend.myShows.mustWatch
-    h2=friend.name
-    each show in watchingNow
-        .watchingNowContainer
-            h2 Currently Watching
-            div.friendShowPoster(id = `${show.poster_path}`)
-            p= show.name
-                //- p= show.overview
-    each show in recommendations
-        .recommendations
-            h2 Recommendations
-            div.friendShowPoster(id = `${show.poster_path}`)
-            p= show.name
-                //- p= show.overview
-    each show in mustWatch
-        .mustWatch
-            h2 Must Watch
-            div.friendShowPoster(id = `${show.poster_path}`)
-            p= show.name
-                //- p= show.overview          
+    -const apostrophe = "'s"
+    h2 #{friend.name.concat(apostrophe)} Collection
+    h2 Currently Watching
+    if watchingNow.length < 1
+        div Currently not watching any shows
+    else 
+        div.carousel
+            each show in watchingNow
+                div.friendShowPoster(id = `${show.poster_path}`)
+                    //- div.friendShowPoster(id = `${show.poster_path}`)
+                    //- p= show.overview
+                    p.posterTitleOverlay #{show.name}
+    h2 Recommendations
+    if recommendations.length < 1
+        div Currently no show recommendations
+    else 
+        div.carousel
+            each show in recommendations
+                div.friendShowPoster(id = `${show.poster_path}`)
+                    //- div.friendShowPoster(id = `${show.poster_path}`)
+                    //- p= show.overview
+                    p.posterTitleOverlay #{show.name}                
+    h2 Must Watch
+    if mustWatch.length < 1
+        div Currently no show recommendations
+    else 
+        div.carousel
+            each show in mustWatch
+                div.friendShowPoster(id = `${show.poster_path}`)
+                    //- div.friendShowPoster(id = `${show.poster_path}`)
+                    //- p= show.overview
+                    p.posterTitleOverlay #{show.name}   
