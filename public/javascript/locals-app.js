@@ -5,6 +5,7 @@ import searchFriends from './modules/searchFriends';
 import posterBGImage from './modules/posterBG';
 import chooseThisShow from './modules/chooseThisShow';
 import typeSearch from './modules/typeSearch';
+import backdropBGImage from './modules/backDropBG';
 
 
 const removeForms = document.querySelectorAll('form.remove');
@@ -12,6 +13,7 @@ const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
 const chooseShow = document.querySelectorAll('form.chooseShow');
+const friendShowPoster = document.querySelectorAll('.friendShowPoster');
 const showPoster = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
 const menuButton = document.querySelector('.menuLinkButton');
@@ -19,6 +21,7 @@ const responsiveMenuButton = document.querySelector('.responsiveMenuButton');
 const menuButtonNormal = document.querySelector('.menuLinkButton');
 const navResponsive = document.querySelector('.navResponsive');
 const responsiveMenu = document.querySelector('.responsiveMenu');
+const backdrop = document.querySelectorAll('.showBackdropContainer');
 
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
@@ -56,10 +59,13 @@ addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
 addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
+posterBGImage(friendShowPoster);
 posterBGImage(showPoster);
+backdropBGImage(backdrop);
 typeSearch(searchBar);
 
 export default {
+    backdropBGImage,
     typeSearch,
     chooseShow,
     posterBGImage,

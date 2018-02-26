@@ -4,5 +4,5 @@ mixin showCard(show = {})
         div.show(data-poster=`${show.poster_path}`)
         .removeForm
             form.remove(data-identity=`${show.id}` data-catageory=`${show.showCategory}` method="POST" action=`/api/removeShow/${show.id}/`)
-                button(type= "submit" name="removeShow") Remove
+                button(class="buttonStylingYellowBG" type= "submit" name="removeShow") Remove
                 

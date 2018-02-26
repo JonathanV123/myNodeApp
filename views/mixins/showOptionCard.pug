@@ -1,9 +1,15 @@
 mixin showOptionCard(showSelection = {})
-    div.show(id= `${showSelection.id}` data-poster=`${showSelection.poster_path}`)
-    div.showSelectionUserInput
-        h2= showSelection.name
+    div(class="showBackdropContainer"  data-backdrop=`${showSelection.backdrop_path}`)
+        div.show(id= `${showSelection.id}` data-poster=`${showSelection.poster_path}`)
         .showDescription
-            p= showSelection.overview.split(' ').slice(0, 30).join(' ')
+            h2= showSelection.name
+            p= showSelection.overview
+            span.showInfo Network: #{showSelection.networks[0].name}
+            span.showInfo Episode Run Time: #{showSelection.episode_run_time[0]}
+            each genre in showSelection.genres
+                span.showInfo Genre: #{genre.name}
+
+    div.showSelectionUserInput
         form.chooseShow(id=`${showSelection.id}` method="POST" action=`/saveShow`)
             - const showOptionsReview = ['Must Watch','Great', 'Good', 'Not A Fan']
             - const showCategoryOptions = ['Watching Now','Must Watch','Recommendations']

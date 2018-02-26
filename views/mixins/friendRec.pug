@@ -6,18 +6,18 @@ mixin friendRec(friend = {})
     each show in watchingNow
         .watchingNowContainer
             h2 Currently Watching
-            div.show(id = `${show.poster_path}`)
-                //- p= show.name
+            div.friendShowPoster(id = `${show.poster_path}`)
+            p= show.name
                 //- p= show.overview
     each show in recommendations
         .recommendations
             h2 Recommendations
-            div.show(id = `${show.poster_path}`)
-                //- p= show.name
+            div.friendShowPoster(id = `${show.poster_path}`)
+            p= show.name
                 //- p= show.overview
     each show in mustWatch
         .mustWatch
             h2 Must Watch
-            div.show(id = `${show.poster_path}`)
-                //- p= show.name
+            div.friendShowPoster(id = `${show.poster_path}`)
+            p= show.name
                 //- p= show.overview          
