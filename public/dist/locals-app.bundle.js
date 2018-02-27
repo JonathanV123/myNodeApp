@@ -11357,10 +11357,10 @@ const carouselContainer = document.querySelector('.recOptions');
 
 
 __WEBPACK_IMPORTED_MODULE_8_jquery___default()('.carousel').slick({
-    dots: false,
+    dots: true,
     infinite: false,
     speed: 300,
-    arrows: true,
+    arrows: false,
     zIndex: 10,
     slidesToShow: 7,
     slidesToScroll: 1,
@@ -11461,6 +11461,7 @@ Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(sea
     acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */],
     denyFriendRequest: __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */],
 });
+
 
 /***/ }),
 /* 11 */

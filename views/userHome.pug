@@ -1,24 +1,28 @@
 extend layout  
 include mixins/friendRec
 block content
-    
     -const friendInfo = friendInformation
     h2  Welcome #{user.name}
     .welcomeContainer
         a(class="buttonStylingBlueWhiteSquare" href=`/manageShows`) Manage Your Shows
             img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
-
-        a(class="buttonStylingBlueWhiteSquare" href=`/displayFriends`) View Friends
+    if user.friendsStorage.friends.length < 1    
+        a(class="buttonStylingBlueWhiteSquare" href=`/friends`) Add Friends
+            img.icon(src="../assets/images/users.png" alt="Two People")
+    else
+     a(class="buttonStylingBlueWhiteSquare" href=`/displayFriends`) View Friends
             img.icon(src="../assets/images/users.png" alt="Two People")
     .recOptions
-        .recOptionsLinks
+        .recControls
+            span Swipe Left or Right to View Recommendations
+            img.icon(src="../assets/images/swipeLeftRight.png" alt="Finger Swiping Left and Right")
+            span Or
+            img.icon(src="../assets/images/mouseClick.png" alt="Mouse Click")
+            span Click and Drag
         if friendInfo.length >= 1
             each friend in friendInfo
                 .friendContainer
                     +friendRec(friend)
-        else 
-            h2 Add some friends!
-            a(class="buttonStylingYellowBG" href=`/friends`) Add Friends
 
                         
    

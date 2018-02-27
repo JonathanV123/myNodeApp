@@ -20,6 +20,7 @@ body {
 .containerLanding {
     width: 100%;
     /* height: 100vh; */
+    position: relative;
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -198,6 +199,15 @@ h3 {
     text-decoration: none;
 }
 
+.testingJoint:after{
+    content: '';
+    position:absolute;
+    width: 50px;
+    height:50px;
+    background-color:red;
+}
+
+
 .buttonStylingBlueWhiteSquare{
     display: -webkit-box;
     display: -webkit-flex;
@@ -216,6 +226,9 @@ h3 {
     margin: 5px;
     text-decoration: none;
     height: 105px;
+    -webkit-box-shadow: 0 8px 12px -6px black;
+    -moz-box-shadow: 0 8px 12px -6px black;
+    box-shadow: 0 8px 12px -6px black;
 }
 .profilePic{
     background-color:#0370d9;;
@@ -228,7 +241,10 @@ h3 {
 }
 
 .navLinkButton:hover{
-    color:  #0370d9;
+    color:  #fbbd0e;
+}
+.navButtonContainer:hover{
+    border-color:  #fbbd0e;
 }
 
 .buttonStylingBlueWhiteSquare:hover{
@@ -242,6 +258,27 @@ h3 {
 
 }
 
+.slick-next:before {
+    content: '→';
+}
+
+#nightMode{
+    width: 89px;
+    height: 90px;
+    background: black;
+    bottom: -30px;
+    right: -10px;
+    position: fixed;
+    border-radius: 50px;
+    z-index: 500;
+}
+
+#nightMode:before{
+    content: '';
+    width: 10px;
+    height: 20px;
+    background-color: gray;
+}
 
 .buttonStylingYellowBGSquare {
     display: -webkit-box;
@@ -524,6 +561,10 @@ input[type="radio"]:checked {
     font-family: 'Open Sans', sans-serif;
 }
 
+span{
+    font-family: 'Open Sans', sans-serif;
+
+}
 .welcomeContainer {
     display: -webkit-box;
     display: -webkit-flex;
@@ -549,7 +590,7 @@ input[type="radio"]:checked {
     flex-wrap: wrap;
 }
 
-.recOptionsLinks {
+.recControls {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -557,6 +598,8 @@ input[type="radio"]:checked {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
 }
 
 .textCenter {
@@ -711,13 +754,13 @@ input[type="radio"]:checked {
 
 @media only screen and (max-width: 1600px) {
     .friendShowPoster {
-        height: 275px;
+        height: 300px;
     }
 }
 
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: 1500px) {
     .friendShowPoster {
-        height: 250px;
+        height: 275px;
     }
 }
 
@@ -943,3 +986,14 @@ input[type="radio"]:checked {
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+
+
+
+
+
+
+
+
+
+

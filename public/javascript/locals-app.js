@@ -31,7 +31,7 @@ $('.carousel').slick({
     dots: false,
     infinite: false,
     speed: 300,
-    arrows: true,
+    arrows: false,
     zIndex: 10,
     slidesToShow: 7,
     slidesToScroll: 1,
