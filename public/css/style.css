@@ -498,21 +498,25 @@ input[type="radio"]:checked {
     padding: 9px;
 }
 
-.posterTitleOverlay{
+.posterTitleOverlay {
     text-align: center;
     position: relative;
     top: 0%;
     color: white;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, .7);
+    border-bottom: 4px solid #fff;
+    border-top: 4px solid #fff;
+    margin: 0;
 }
 
 .addFriendContainer {
     width: 50%;
 }
 
-.friendContainer{
-    width:95%;
+.friendContainer {
+    width: 100%;
 }
 
 .friends {
@@ -527,11 +531,13 @@ input[type="radio"]:checked {
     -webkit-flex-direction: column;
     flex-direction: column;
 }
-.test{
-    width:50px;
-    height:40px;
+
+.test {
+    width: 50px;
+    height: 40px;
     border: 2px solid black;
 }
+
 .searchResult {
     display: block;
     color: white;
@@ -590,7 +596,7 @@ input[type="radio"]:checked {
 
 .friendShowPoster {
     width: 110px;
-    height: 260px;
+    height: 350px;
     background-size: cover;
     -webkit-box-shadow: 0 8px 12px -6px black;
     -moz-box-shadow: 0 8px 12px -6px black;
@@ -624,130 +630,237 @@ input[type="radio"]:checked {
     }
 }
 
+@media only screen and (max-width: 1600px) {
+    .friendShowPoster {
+        height: 275px;
+    }
+}
 
+@media only screen and (max-width: 1600px) {
+    .friendShowPoster {
+        height: 250px;
+    }
+}
 
+@media only screen and (max-width: 1330px) {
+    .friendShowPoster {
+        height: 225px;
+    }
+}
+
+@media only screen and (max-width: 1225px) {
+    .friendShowPoster {
+        height: 215px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .friendShowPoster {
+        height: 245px;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .friendShowPoster {
+        height: 220px;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .friendShowPoster {
+        height: 235px;
+    }
+}
+
+@media only screen and (max-width: 910px) {
+    .friendShowPoster {
+        height: 210px;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    .friendShowPoster {
+        height: 252px;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .friendShowPoster {
+        height: 230px;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    .friendShowPoster {
+        height: 205px;
+    }
+}
+
+@media only screen and (max-width:650px) {
+    .friendShowPoster {
+        height: 280px;
+    }
+}
+
+@media only screen and (max-width:620px) {
+    .friendShowPoster {
+        height: 255px;
+    }
+}
+
+@media only screen and (max-width:580px) {
+    .friendShowPoster {
+        height: 240px;
+    }
+}
+
+@media only screen and (max-width:580px) {
+    .friendShowPoster {
+        height: 220px;
+    }
+}
+
+@media only screen and (max-width:510px) {
+    .friendShowPoster {
+        height: 205px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .friendShowPoster {
+        height: 260px;
+        background-size: 100% 100%;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .friendShowPoster {
+        height: 230px;
+        background-size: 100% 100%;
+    }
+}
+
+@media only screen and (max-width: 310px) {
+    .friendShowPoster {
+        height: 210px;
+        background-size: 100% 100%;
+    }
+}
+
+@media only screen and (max-width: 260px) {
+    .friendShowPoster {
+        height: 180px;
+        background-size: 100% 100%;
+    }
+}
 
 /* Slider */
-.slick-slider
-{
-    position: relative;
 
+.slick-slider {
+    position: relative;
     display: block;
     box-sizing: border-box;
-
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     -webkit-touch-callout: none;
     -khtml-user-select: none;
     -ms-touch-action: pan-y;
-        touch-action: pan-y;
+    touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
 }
 
-.slick-list
-{
+.slick-list {
     position: relative;
-
     display: block;
     overflow: hidden;
-
     margin: 0;
     padding: 0;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, 0.2);
+    border-bottom: 4px solid #fff;
+    border-top: 4px solid #fff;
 }
-.slick-list:focus
-{
+
+.slick-list:focus {
     outline: none;
 }
-.slick-list.dragging
-{
+
+.slick-list.dragging {
     cursor: pointer;
     cursor: hand;
 }
 
 .slick-slider .slick-track,
-.slick-slider .slick-list
-{
+.slick-slider .slick-list {
     -webkit-transform: translate3d(0, 0, 0);
-       -moz-transform: translate3d(0, 0, 0);
-        -ms-transform: translate3d(0, 0, 0);
-         -o-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
-.slick-track
-{
+.slick-track {
     position: relative;
     top: 0;
     left: 0;
-
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-.slick-track:before,
-.slick-track:after
-{
-    display: table;
 
+.slick-track:before,
+.slick-track:after {
+    display: table;
     content: '';
 }
-.slick-track:after
-{
+
+.slick-track:after {
     clear: both;
 }
-.slick-loading .slick-track
-{
+
+.slick-loading .slick-track {
     visibility: hidden;
 }
 
-.slick-slide
-{
+.slick-slide {
     display: none;
     float: left;
-
     height: 100%;
     min-height: 1px;
     margin: 8px;
 }
-[dir='rtl'] .slick-slide
-{
+
+[dir='rtl'] .slick-slide {
     float: right;
 }
-.slick-slide img
-{
+
+.slick-slide img {
     display: block;
 }
-.slick-slide.slick-loading img
-{
+
+.slick-slide.slick-loading img {
     display: none;
 }
-.slick-slide.dragging img
-{
+
+.slick-slide.dragging img {
     pointer-events: none;
 }
-.slick-initialized .slick-slide
-{
+
+.slick-initialized .slick-slide {
     display: block;
 }
-.slick-loading .slick-slide
-{
+
+.slick-loading .slick-slide {
     visibility: hidden;
 }
-.slick-vertical .slick-slide
-{
+
+.slick-vertical .slick-slide {
     display: block;
-
     height: auto;
-
     border: 1px solid transparent;
 }
+
 .slick-arrow.slick-hidden {
     display: none;
 }
-
-
-
-
