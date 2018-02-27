@@ -3,23 +3,25 @@ const router = express.Router();
 const showController = require('../controllers/showController');
 const userController = require('../controllers/userController');
 const authenticationController = require('../controllers/authenticationController');
-const { catchErrors } = require('../errorHandler/errorHandling');
+const {
+    catchErrors
+} = require('../errorHandler/errorHandling');
 
 router.get('/', showController.landingPage);
-router.get('/userHome', 
+router.get('/userHome',
     authenticationController.checkIfLoggedIn,
-    showController.userHome 
+    showController.userHome
 );
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/createShow/:id',
-     authenticationController.checkIfLoggedIn,
-     catchErrors(showController.createShow)
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.createShow)
 );
 
 router.get('/createShow',
-     authenticationController.checkIfLoggedIn,
-     showController.submitShow
+    authenticationController.checkIfLoggedIn,
+    showController.submitShow
 );
 
 // Want to refactor these 3 into a single route.
@@ -57,13 +59,13 @@ router.get('/manageShows',
     showController.manageShows
 );
 
-router.post('/api/removeShow/:id', 
-    authenticationController.checkIfLoggedIn,    
+router.post('/api/removeShow/:id',
+    authenticationController.checkIfLoggedIn,
     showController.removeShow,
 );
 
 router.post('/saveShow',
-    authenticationController.checkIfLoggedIn,    
+    authenticationController.checkIfLoggedIn,
     showController.saveShow,
 );
 
@@ -74,28 +76,36 @@ router.get('/tags', catchErrors(showController.getShowByTag));
 router.get('/tags/:tag', catchErrors(showController.getShowByTag));
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Show Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
- 
+
 
 
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  Friend Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/friends', userController.friends);
 
-router.post('/api/addFriend', 
+router.post('/api/addFriend',
     authenticationController.checkIfLoggedIn,
-    userController.addFriend 
+    userController.addFriend
 );
 
-router.post('/api/acceptFriendRequest/:id', 
+router.post('/api/acceptFriendRequest/:id',
     authenticationController.checkIfLoggedIn,
-    userController.acceptFriendRequest 
+    userController.acceptFriendRequest
 );
 
-    router.post('/api/denyFriendRequest/:id', 
+router.post('/api/denyFriendRequest/:id',
     authenticationController.checkIfLoggedIn,
-    userController.denyFriendRequest 
+    userController.denyFriendRequest
 );
+router.get('/displayFriends',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.displayFriends)
+)
 
+router.get('/displayFriend/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.displayFriend)
+)
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Friend Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
@@ -111,7 +121,7 @@ router.post('/login', authenticationController.login);
 
 router.get('/register', userController.registerForm);
 
-router.post('/register', 
+router.post('/register',
     // 1. Validate registration data
     userController.validateRegistration,
     userController.register,
@@ -119,8 +129,8 @@ router.post('/register',
     authenticationController.login
 );
 
-router.get('/account', 
-    authenticationController.checkIfLoggedIn, 
+router.get('/account',
+    authenticationController.checkIfLoggedIn,
     userController.account
 );
 
@@ -133,7 +143,7 @@ router.post('/account/forgotPassword', catchErrors(authenticationController.forg
 router.get('/account/reset/:token', catchErrors(authenticationController.reset));
 
 router.post('/account/reset/:token',
-    authenticationController.confirmedPasswords, 
+    authenticationController.confirmedPasswords,
     catchErrors(authenticationController.update)
 );
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Account and Login Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

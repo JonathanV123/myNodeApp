@@ -3,7 +3,11 @@ include mixins/showCard
 block content
     .welcomeContainer
         h2  Hello! #{user.name}
-        a(class="buttonStylingYellowBG" href=`/createShow`) Add to your shows collection
-        a(class="buttonStylingYellowBG" href="/manageWatchingNow") Manage shows you are watching now  
-        a(class="buttonStylingYellowBG" href="/manageRecommendations") Manage show recommendations    
-        a(class="buttonStylingYellowBG" href="/manageMustWatch") Manage your must watch shows                                  
+        a(class="buttonStylingYellowBGSquare" href=`/createShow`) Add to your shows collection
+            img.icon(src="../assets/images/004-tv-screen.png" alt="TV Screen")
+        a(class="buttonStylingYellowBGSquare" href="/manageWatchingNow") Manage shows you are watching now  
+            img.icon(src="../assets/images/watchingTV.png" alt="Person Watching TV")
+        a(class="buttonStylingYellowBGSquare" href="/manageRecommendations") Manage show recommendations    
+            img.icon(src="../assets/images/001-like.png" alt="Thumbs Up")
+        a(class="buttonStylingYellowBGSquare" href="/manageMustWatch") Manage your must watch shows                                  
+            img.icon(src="../assets/images/fireIcon.png" alt="Fire")

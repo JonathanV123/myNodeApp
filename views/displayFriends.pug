@@ -1,0 +1,19 @@
+extend layout  
+include mixins/friendRec
+block content
+    h2  Your Friends:
+    .welcomeContainer
+        a(class="buttonStylingBlueWhiteSquare" href=`/manageShows`) Manage Your Shows
+            img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
+
+        a(class="buttonStylingBlueWhiteSquare" href=`/displayFriends`) View Friends
+            img.icon(src="../assets/images/users.png" alt="Two People")
+    .friendsList
+        each friend in friendInformation
+            .friendProfile
+                h2= friend.name   
+                img.profilePic(alt="Profile Image")
+                a(class="buttonStylingBlueWhiteSquare" href=`/displayFriend/${friend._id}`) View #{friend.name} Collection
+
+
+

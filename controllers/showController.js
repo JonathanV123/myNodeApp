@@ -25,7 +25,6 @@ exports.userHome = async (req, res) => {
     // Find Each User with email and get all their contents
     const friendsInfo = await User.find({email: arr })
     res.render(`userHome`, {friendInformation: friendsInfo});
-
 }
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓

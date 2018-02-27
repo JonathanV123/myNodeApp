@@ -24,12 +24,15 @@ const navResponsive = document.querySelector('.navResponsive');
 const responsiveMenu = document.querySelector('.responsiveMenu');
 const backdrop = document.querySelectorAll('.showBackdropContainer');
 const carousel = document.querySelectorAll('.carousel');
+const carouselContainer = document.querySelector('.recOptions');
+
 
 $('.carousel').slick({
     dots: false,
     infinite: false,
     speed: 300,
     arrows: true,
+    zIndex: 10,
     slidesToShow: 7,
     slidesToScroll: 1,
     focusOnSelect: true,
@@ -89,6 +92,7 @@ function checkIfResponsive() {
     if (navResponsive.style.display === "none") return;
     menuButton.addEventListener("click", function () {
         responsiveMenu.style.display = "flex";
+        carouselContainer.style.display = "none";
         menuButtonNormal.style.display = "none";
         responsiveMenuClose();
     })
@@ -98,6 +102,7 @@ function responsiveMenuClose() {
     if (responsiveMenu.style.display === "flex") {
         responsiveMenuButton.addEventListener("click", function () {
             responsiveMenu.style.display = "none";
+            carouselContainer.style.display = "flex";
             menuButtonNormal.style.display = "initial";
         })
     } else {

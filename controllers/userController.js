@@ -154,6 +154,29 @@ exports.denyFriendRequest = async (req, res) => {
     );
     res.send('Request denied')
 };
+
+exports.displayFriends = async (req, res) => {
+    // Current user
+    const userId = req.user._id;
+    // Current user's friends
+    const friends = req.user.friendsStorage.friends;
+    const emailsList =[];
+    const friendsEmails = friends.forEach((friend)=> {
+        emailsList.push(friend.email);
+    });
+    const friendsInfo = await User.find({email: emailsList })
+    res.render(`displayFriends`, {friendInformation: friendsInfo});
+};
+
+exports.displayFriend = async (req, res) => {
+    // Current user
+    const friendID = req.params.id;
+    // Current user's friends
+    const friendsInfo = await User.find({_id: friendID })
+    res.render(`displayFriend`, {friendInformation: friendsInfo[0]});
+};
+
+
 // Keeping these as an option for this project. I might still incorporate this
 
 // Where file will be stored when uploaded and what type of files are allowed
