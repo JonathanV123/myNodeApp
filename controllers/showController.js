@@ -112,14 +112,13 @@ exports.removeShow = async (req, res) => {
     // ask on stackoverflow
     const showID = parseInt(req.params.id);
     let queryName = req.body.category;
-    console.log(queryName);
-    if(queryName === "watchingNow"){
+    if(queryName === "Watching Now"){
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.watchingNow" : {id: showID}}},
             { new: true }
         )
             res.json(user);
-    } else if (queryName === "recommendations")
+    } else if (queryName === "Recommendations")
     {
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.recommendations" : {id: showID}}},
@@ -127,7 +126,7 @@ exports.removeShow = async (req, res) => {
         )
             res.json(user);    
     }
-    else if (queryName = 'mustWatch') {
+    else if (queryName = 'Must Watch') {
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.mustWatch" : {id: showID}}},
             { new: true }

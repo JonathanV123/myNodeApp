@@ -11506,7 +11506,8 @@ Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(sea
 
 function removeShow(e) {
     e.preventDefault();
-    const show = document.getElementById(idToRemove);
+    const id = this.dataset.identity
+    const show = document.getElementById(id);
     const showCategory = this.dataset.category;
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post(this.action, {category: showCategory})
@@ -13619,7 +13620,7 @@ function exitComment(e) {
 
 function darken(e) {
     e.preventDefault();
-    // If night mode is activated and button is clicked again deactive night mode
+    // If night mode is activated and button is clicked again deactivate night mode
     if (this.classList.contains("nightModeActivated")) {
         this.classList.remove("nightModeActivated");
         this.classList.add("nightModeDeactivate");
@@ -13630,7 +13631,7 @@ function darken(e) {
     }
 
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post("/nightMode", {})
+        .post("/nightMode")
         .then(res => {
             console.log(res.data);
             // window.location.pathname = "/manageShows"

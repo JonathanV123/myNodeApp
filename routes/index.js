@@ -3,9 +3,7 @@ const router = express.Router();
 const showController = require('../controllers/showController');
 const userController = require('../controllers/userController');
 const authenticationController = require('../controllers/authenticationController');
-const {
-    catchErrors
-} = require('../errorHandler/errorHandling');
+const {catchErrors} = require('../errorHandler/errorHandling');
 
 router.get('/', showController.landingPage);
 

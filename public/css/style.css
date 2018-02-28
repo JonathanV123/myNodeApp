@@ -1,6 +1,8 @@
 body {
     margin: 0;
     background: #0370d9;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
 }
 
 /* WEBKIT STUFF   
@@ -781,7 +783,7 @@ span {
 }
 
 .addFriendContainer {
-    width: 50%;
+    width: 100%;
 }
 
 .friendContainer {

@@ -2,33 +2,30 @@ extends layout
 include mixins/showCard
 block content
     if showCategory === "watchingNow"
-        .showManagementContainer
-            img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
-            h2 What I'm Watching Now
-            if showInfo[0].myShows.watchingNow.length >= 1
-                each show in showInfo[0].myShows.watchingNow
-                    +showCard(show)
-            else
-                h2 You have no shows!
-                a(class="buttonStylingYellowBG" href="/createShow") Add Shows To Your Collection                                 
+        img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        h2 What I'm Watching Now
+        if showInfo[0].myShows.watchingNow.length >= 1
+            each show in showInfo[0].myShows.watchingNow
+                +showCard(show)
+        else
+            h2 You have no shows!
+            a(class="buttonStylingYellowBG" href="/createShow") Add Shows To Your Collection                                 
     if showCategory === "recommendations"
         img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
-        .showManagementContainer
-            h2 My Recommendations
-            if showInfo[0].myShows.recommendations.length >= 1
-                each show in showInfo[0].myShows.recommendations
-                    +showCard(show)
-            else
-                h2 You have no shows!
-                a(class="buttonStylingYellowBG" href="/createShow") Add Shows To Your Collection    
+        h2 My Recommendations
+        if showInfo[0].myShows.recommendations.length >= 1
+            each show in showInfo[0].myShows.recommendations
+                +showCard(show)
+        else
+            h2 You have no shows!
+            a(class="buttonStylingYellowBG" href="/createShow") Add Shows To Your Collection    
     if showCategory === "mustWatch"
         img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
-        .showManagementContainer
-            h2 My Must Watch Shows
-            if showInfo[0].myShows.mustWatch.length >= 1
-                each show in showInfo[0].myShows.mustWatch
-                    +showCard(show)
-            else
-                h2 You have no shows!
-                a(class="buttonStylingYellowBG" href="/createShow") Add Shows To Your Collection    
+        h2 My Must Watch Shows
+        if showInfo[0].myShows.mustWatch.length >= 1
+            each show in showInfo[0].myShows.mustWatch
+                +showCard(show)
+        else
+            h2 You have no shows!
+            a(class="buttonStylingYellowBG" href="/createShow") Add Shows To Your Collection    
 
