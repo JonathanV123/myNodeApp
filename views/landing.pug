@@ -1,11 +1,13 @@
 extends layout
 block content
-  .landing_container
-    .landing_content_container
-      .name
-        h1 What To Watch
-      .welcome
-        if (!user)
-          p Welcome
-        else 
-          p= user.name
+  .landingContainer
+    .introContainer
+      p See what shows your friends are watching and rate your own
+      .navButtonContainer
+        a(class="navLinkButton" href="/register") Register Now
+      .navButtonContainer
+        a(class="navLinkButton" href="/login") Log In
+    .acctInfoContainer
+      p Don't feel like making an account?
+      p Use account name: 123@123.com as username
+      p Use 123 as password

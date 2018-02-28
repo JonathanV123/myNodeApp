@@ -36,6 +36,10 @@ const userSchema = new Schema({
         pending:[],
         friends:[]
     },
+    nightMode: {
+        type: Boolean,
+        default: false
+    },
 //    photo: String,
    resetPasswordToken: String,
    resetPasswordTokenExpires: Date

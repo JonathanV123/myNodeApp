@@ -4,13 +4,13 @@ block content
     -const friendInfo = friendInformation
     h2  Welcome #{user.name}
     .welcomeContainer
-        a(class="buttonStylingBlueWhiteSquare" href=`/manageShows`) Manage Your Shows
+        a(class="buttonStylingYellowBGSquare" href=`/manageShows`) Manage Your Shows
             img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
         if user.friendsStorage.friends.length < 1    
-            a(class="buttonStylingBlueWhiteSquare" href=`/friends`) Add Friends
+            a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends
                 img.icon(src="../assets/images/users.png" alt="Two People")
         else
-        a(class="buttonStylingBlueWhiteSquare" href=`/displayFriends`) View Friends
+        a(class="buttonStylingYellowBGSquare" href=`/displayFriends`) View Friends
                 img.icon(src="../assets/images/users.png" alt="Two People")
         .recOptions
             .recControls
@@ -20,6 +20,7 @@ block content
                 img.icon(src="../assets/images/mouseClick.png" alt="Mouse Click")
                 span Click and Drag
     .friendsContentContainer
+        img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
         if friendInfo.length >= 1
         each friend in friendInfo
                 .friendContainer

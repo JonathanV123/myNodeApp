@@ -4,7 +4,7 @@ const request = require('request');
 const rp = require('request-promise');
 
 exports.landingPage = (req, res) => {
-    res.render('layout')
+    res.render('landing')
 };
 exports.userHome = async (req, res) => {
     // const data = await User.find( 
@@ -105,7 +105,6 @@ exports.submitShow = (req, res) => {
     })
 };
 
-// exports.getWatchingNowById = async (req, res) =
 
 exports.removeShow = async (req, res) => {
     // This is an ugly if else statement. Why isn't it possible to
@@ -150,7 +149,7 @@ exports.manageShows = async (req, res) => {
     const watchingNowArr = data[0].myShows.watchingNow;
     const recommendationsArr = data[0].myShows.recommendations;
     const mustWatchArr = data[0].myShows.mustWatch
-    res.render(`manageShows`, {user: req.user , recommendationsArr, watchingNowArr, mustWatchArr});
+    res.render(`showCollectionSelection`, {user: req.user , recommendationsArr, watchingNowArr, mustWatchArr});
 };
 
 exports.getShows = async (req, res) => {

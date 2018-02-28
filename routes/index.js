@@ -8,6 +8,7 @@ const {
 } = require('../errorHandler/errorHandling');
 
 router.get('/', showController.landingPage);
+
 router.get('/userHome',
     authenticationController.checkIfLoggedIn,
     showController.userHome
@@ -145,6 +146,11 @@ router.get('/account/reset/:token', catchErrors(authenticationController.reset))
 router.post('/account/reset/:token',
     authenticationController.confirmedPasswords,
     catchErrors(authenticationController.update)
+);
+
+router.post('/nightMode',
+    authenticationController.checkIfLoggedIn,
+    userController.nightMode,
 );
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Account and Login Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

@@ -1,5 +1,6 @@
 extend layout  
-include mixins/detailedFriendInfo
+include mixins/singleFriendInfo
 block content
     .friendInfoContainer
-        +detailedFriendInfo(friendInformation)
+        img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        +singleFriendInfo(friendInformation)

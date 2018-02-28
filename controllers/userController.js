@@ -176,6 +176,26 @@ exports.displayFriend = async (req, res) => {
     res.render(`displayFriend`, {friendInformation: friendsInfo[0]});
 };
 
+exports.nightMode = async (req, res) => {
+    const user = await User.find(
+        { _id: req.user._id }    
+    )
+    const currentNightModeValue = user[0].nightMode;
+    const userID = req.user._id
+
+    if(currentNightModeValue === false){
+        await User.update(
+            { _id: userID },
+            { $set: { nightMode: true } }  
+        )
+    } else {
+        await User.update(
+            {_id: userID },
+            {$set: { nightMode: false } }    
+        )
+    }
+    res.send("Night Mode Active!");
+};
 
 // Keeping these as an option for this project. I might still incorporate this
 

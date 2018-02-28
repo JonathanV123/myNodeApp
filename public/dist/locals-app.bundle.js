@@ -11325,10 +11325,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_jquery__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_slick_carousel__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_slick_carousel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_darken__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_jquery__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_slick_carousel__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_slick_carousel__);
+
 
 
 
@@ -11363,9 +11365,9 @@ const carouselContainer = document.querySelector('.recOptions');
 const nightModeButton = document.querySelector('#nightMode');
 const showPosterInCollection = document.querySelectorAll('.friendShowPosterPrivate');
 const exitCommentButton = document.querySelectorAll('#exitComment');
+const nightModeSwitch = document.querySelectorAll("#nightMode");
 
-
-__WEBPACK_IMPORTED_MODULE_10_jquery___default()('.carousel').slick({
+__WEBPACK_IMPORTED_MODULE_11_jquery___default()('.carousel').slick({
     dots: false,
     infinite: false,
     speed: 300,
@@ -11435,23 +11437,8 @@ function addEventListenerClick(element, func) {
     });
 }
 
-function nightMode(element) {
-    element.addEventListener('click', () => {
-        // Little ugly with multiple removes and adds but
-        // trying to prevent issues with second arguments in older browsers
-        if (element.classList.contains("nightModeActive")){
-            element.classList.remove("nightModeActive");
-            element.classList.add("nightModeDeactivate");
-        } else {
-            element.classList.remove("nightModeDeactivate");
-            element.classList.add("nightModeActive");
-        }
-    })
-}
-
-nightMode(nightModeButton);
-
 function checkIfResponsive() {
+    if(!navResponsive) return;
     if (navResponsive.style.display === "none") return;
     menuButton.addEventListener("click", function () {
         responsiveMenu.style.display = "flex";
@@ -11475,6 +11462,7 @@ function responsiveMenuClose() {
 
 checkIfResponsive();
 
+addEventListenerClick(nightModeSwitch, __WEBPACK_IMPORTED_MODULE_10__modules_darken__["a" /* default */]);
 addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__["a" /* default */]);
 addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__["a" /* default */]);
 addEventListener(chooseShow, __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__["a" /* default */]);
@@ -11493,6 +11481,7 @@ Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(sea
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    darken: __WEBPACK_IMPORTED_MODULE_10__modules_darken__["a" /* default */],
     exitComment: __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__["a" /* default */],
     showOwnerComment: __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__["a" /* default */],
     backdropBGImage: __WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__["a" /* default */],
@@ -13621,6 +13610,39 @@ function exitComment(e) {
 
 /***/ }),
 /* 40 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+function darken(e) {
+    e.preventDefault();
+    // If night mode is activated and button is clicked again deactive night mode
+    if (this.classList.contains("nightModeActivated")) {
+        this.classList.remove("nightModeActivated");
+        this.classList.add("nightModeDeactivate");
+        document.body.classList.remove("darken");
+    } else { // Otherwise we activate night mode 
+        this.classList.add("nightModeActivated");
+        document.body.classList.add("darken");
+    }
+
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
+        .post("/nightMode", {})
+        .then(res => {
+            console.log(res.data);
+            // window.location.pathname = "/manageShows"
+        }).catch(err => {
+            console.log(error);
+        });
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (darken);
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*

@@ -8,6 +8,7 @@ import typeSearch from './modules/typeSearch';
 import backdropBGImage from './modules/backDropBG';
 import showOwnerComment from './modules/showOwnerComment';
 import exitComment from './modules/exitComment';
+import darken from './modules/darken';
 
 
 import $ from 'jquery';
@@ -32,7 +33,7 @@ const carouselContainer = document.querySelector('.recOptions');
 const nightModeButton = document.querySelector('#nightMode');
 const showPosterInCollection = document.querySelectorAll('.friendShowPosterPrivate');
 const exitCommentButton = document.querySelectorAll('#exitComment');
-
+const nightModeSwitch = document.querySelectorAll("#nightMode");
 
 $('.carousel').slick({
     dots: false,
@@ -104,23 +105,8 @@ function addEventListenerClick(element, func) {
     });
 }
 
-function nightMode(element) {
-    element.addEventListener('click', () => {
-        // Little ugly with multiple removes and adds but
-        // trying to prevent issues with second arguments in older browsers
-        if (element.classList.contains("nightModeActive")){
-            element.classList.remove("nightModeActive");
-            element.classList.add("nightModeDeactivate");
-        } else {
-            element.classList.remove("nightModeDeactivate");
-            element.classList.add("nightModeActive");
-        }
-    })
-}
-
-nightMode(nightModeButton);
-
 function checkIfResponsive() {
+    if(!navResponsive) return;
     if (navResponsive.style.display === "none") return;
     menuButton.addEventListener("click", function () {
         responsiveMenu.style.display = "flex";
@@ -144,6 +130,7 @@ function responsiveMenuClose() {
 
 checkIfResponsive();
 
+addEventListenerClick(nightModeSwitch, darken);
 addEventListenerClick(exitCommentButton, exitComment);
 addEventListenerClick(showPosterInCollection, showOwnerComment);
 addEventListener(chooseShow, chooseThisShow);
@@ -162,6 +149,7 @@ typeSearch(searchBar);
 
 
 export default {
+    darken,
     exitComment,
     showOwnerComment,
     backdropBGImage,
