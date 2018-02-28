@@ -64,16 +64,12 @@ exports.saveShow = async (req, res) => {
     // Refactor possible
         const showID = parseInt(req.body.showId);
         const comment = req.body.userComment;
-        const review = req.body.radioValReview;
         const category = req.body.radioValCategory;
-        console.log(comment)
         const userShowsArr = req.user.myShows.showChoices;
         const result = userShowsArr.filter(show => show.id === showID);
-        // Add user review and description
+        // Add user comment and category
         result[0].ownerComment = comment;
-        result[0].ownerReview = review;
         result[0].showCategory = category;
-
         if(category === "Must Watch"){
             const saveShow = await User.update( 
                 {_id: req.user.id},

@@ -2,7 +2,10 @@ extends layout
 include mixins/friendRequest
 block content
     if user
-        img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        if user && user.nightMode === true
+            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        else
+            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
         .addFriendContainer
             form.friends(method="POST" action=`/api/addFriend`)
                 label(for="name" class="email") Enter friends email

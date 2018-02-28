@@ -4,4 +4,7 @@ include mixins/createShowForm
 block content  
     .recForm
         +createShowForm(show)
-    img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+    if user && user.nightMode === true
+        img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+    else
+        img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 

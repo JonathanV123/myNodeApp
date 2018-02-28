@@ -30,10 +30,9 @@ const responsiveMenu = document.querySelector('.responsiveMenu');
 const backdrop = document.querySelectorAll('.showBackdropContainer');
 const carousel = document.querySelectorAll('.carousel');
 const carouselContainer = document.querySelector('.recOptions');
-const nightModeButton = document.querySelector('#nightMode');
 const showPosterInCollection = document.querySelectorAll('.friendShowPosterPrivate');
 const exitCommentButton = document.querySelectorAll('#exitComment');
-const nightModeSwitch = document.querySelectorAll("#nightMode");
+const nightModeSwitch = document.querySelectorAll(".nightMode");
 
 $('.carousel').slick({
     dots: false,

@@ -286,7 +286,7 @@ h3 {
     color: #0370d9;
 }
 
-#nightMode {
+.nightMode {
     width: 135px;
     height: 134px;
     bottom: -64px;
@@ -322,6 +322,11 @@ h3 {
     animation-name: deactivateNightMode;
     animation-duration: 1s;
     animation: deactivateNightMode 1.0s forwards;
+}
+
+.sunOut{
+    -webkit-transform: rotate(218deg);
+    transform: rotate(218deg);
 }
 
 @-webkit-keyframes activateNightMode {

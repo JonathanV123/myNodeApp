@@ -11362,10 +11362,9 @@ const responsiveMenu = document.querySelector('.responsiveMenu');
 const backdrop = document.querySelectorAll('.showBackdropContainer');
 const carousel = document.querySelectorAll('.carousel');
 const carouselContainer = document.querySelector('.recOptions');
-const nightModeButton = document.querySelector('#nightMode');
 const showPosterInCollection = document.querySelectorAll('.friendShowPosterPrivate');
 const exitCommentButton = document.querySelectorAll('#exitComment');
-const nightModeSwitch = document.querySelectorAll("#nightMode");
+const nightModeSwitch = document.querySelectorAll(".nightMode");
 
 __WEBPACK_IMPORTED_MODULE_11_jquery___default()('.carousel').slick({
     dots: false,
@@ -12514,14 +12513,12 @@ let checkURL = function (url, show) {
 
 function chooseThisShow(e) {
     e.preventDefault();
-    const radioReview = document.querySelector('input[name=tags]:checked').value
     const radioCategory =  document.querySelector('input[name=showCategory]:checked').value
     const comment =  document.querySelector('#userComment').value
     const show = this.id;
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post(this.action, {
             showId: show, 
-            radioValReview: radioReview, 
             radioValCategory: radioCategory,
             userComment: comment
         })
@@ -13621,13 +13618,15 @@ function exitComment(e) {
 function darken(e) {
     e.preventDefault();
     // If night mode is activated and button is clicked again deactivate night mode
-    if (this.classList.contains("nightModeActivated")) {
+    if (this.classList.contains("sunOut")) {
         this.classList.remove("nightModeActivated");
         this.classList.add("nightModeDeactivate");
+        this.classList.remove("sunOut");
         document.body.classList.remove("darken");
     } else { // Otherwise we activate night mode 
         this.classList.add("nightModeActivated");
         document.body.classList.add("darken");
+        this.classList.add("sunOut");
     }
 
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a

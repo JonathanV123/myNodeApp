@@ -11,4 +11,7 @@ block content
             img.icon(src="../assets/images/001-like.png" alt="Thumbs Up")
         a(class="buttonStylingYellowBGSquare" href="/manageMustWatch") Manage your must watch shows                                  
             img.icon(src="../assets/images/fireIcon.png" alt="Fire")
-        img#nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        if user && user.nightMode === true
+            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        else
+            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
