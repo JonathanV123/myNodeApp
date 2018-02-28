@@ -1,12 +1,10 @@
 mixin friendRec(friend = {})
     -const watchingNow = friend.myShows.watchingNow
-    -const recommendations = friend.myShows.recommendations
-    -const mustWatch = friend.myShows.mustWatch
     -const apostrophe = "'s"
-    h2 #{friend.name.concat(apostrophe)} Collection
-    h2.testingJoint Currently Watching
+    span.categoryTab #{friend.name.concat(apostrophe)} Currently Watching
     if watchingNow.length < 1
-        div Currently not watching any shows
+        div.noShowContainer
+            span.noShowNotifcation #{friend.name.concat(apostrophe)} Not watching Any Shows
     else 
         div.carousel
             each show in watchingNow
@@ -14,23 +12,5 @@ mixin friendRec(friend = {})
                     //- div.friendShowPoster(id = `${show.poster_path}`)
                     //- p= show.overview
                     p.posterTitleOverlay #{show.name}
-    h2.testingJoint Recommendations
-    if recommendations.length < 1
-        div Currently no show recommendations
-    else 
-        div.carousel
-            each show in recommendations
-                div.friendShowPoster(id = `${show.poster_path}`)
-                    //- div.friendShowPoster(id = `${show.poster_path}`)
-                    //- p= show.overview
-                    p.posterTitleOverlay #{show.name}                
-    h2.testingJoint Must Watch
-    if mustWatch.length < 1
-        div Currently no show recommendations
-    else 
-        div.carousel
-            each show in mustWatch
-                div.friendShowPoster(id = `${show.poster_path}`)
-                    //- div.friendShowPoster(id = `${show.poster_path}`)
-                    //- p= show.overview
-                    p.posterTitleOverlay #{show.name}   
+    a(class="navLinkButtonTrimmed" href=`/displayFriend/${friend._id}`) 
+        span.viewProfileTab Click Here To View #{friend.name.concat(apostrophe)} Must Watch Shows and Recommendations

@@ -6,21 +6,22 @@ block content
     .welcomeContainer
         a(class="buttonStylingBlueWhiteSquare" href=`/manageShows`) Manage Your Shows
             img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
-    if user.friendsStorage.friends.length < 1    
-        a(class="buttonStylingBlueWhiteSquare" href=`/friends`) Add Friends
-            img.icon(src="../assets/images/users.png" alt="Two People")
-    else
-     a(class="buttonStylingBlueWhiteSquare" href=`/displayFriends`) View Friends
-            img.icon(src="../assets/images/users.png" alt="Two People")
-    .recOptions
-        .recControls
-            span Swipe Left or Right to View Recommendations
-            img.icon(src="../assets/images/swipeLeftRight.png" alt="Finger Swiping Left and Right")
-            span Or
-            img.icon(src="../assets/images/mouseClick.png" alt="Mouse Click")
-            span Click and Drag
+        if user.friendsStorage.friends.length < 1    
+            a(class="buttonStylingBlueWhiteSquare" href=`/friends`) Add Friends
+                img.icon(src="../assets/images/users.png" alt="Two People")
+        else
+        a(class="buttonStylingBlueWhiteSquare" href=`/displayFriends`) View Friends
+                img.icon(src="../assets/images/users.png" alt="Two People")
+        .recOptions
+            .recControls
+                span Swipe Left or Right to View Recommendations
+                img.icon(src="../assets/images/swipeLeftRight.png" alt="Finger Swiping Left and Right")
+                span Or
+                img.icon(src="../assets/images/mouseClick.png" alt="Mouse Click")
+                span Click and Drag
+    .friendsContentContainer
         if friendInfo.length >= 1
-            each friend in friendInfo
+        each friend in friendInfo
                 .friendContainer
                     +friendRec(friend)
 

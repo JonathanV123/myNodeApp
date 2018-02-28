@@ -164,6 +164,12 @@ h3 {
     font-family: 'Open Sans', sans-serif;
 }
 
+.navLinkButtonTrimmed {
+    text-decoration: none;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
 .buttonStyling {
     border: 2px solid white;
     background-color: transparent;
@@ -199,14 +205,6 @@ h3 {
     text-decoration: none;
 }
 
-.testingJoint:after{
-    content: '';
-    position:absolute;
-    width: 50px;
-    height:50px;
-    background-color:red;
-}
-
 
 .buttonStylingBlueWhiteSquare{
     display: -webkit-box;
@@ -238,6 +236,10 @@ h3 {
 }
 .menuLinkButton:hover{
     color:  #0370d9;
+}
+
+.viewProfileTab:hover{
+    color:  #fbbd0e;
 }
 
 .navLinkButton:hover{
@@ -631,7 +633,7 @@ span{
     text-align: center;
 }
 
-.recOptions {
+.friendsContentContainer {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
@@ -644,6 +646,56 @@ span{
     flex-direction: column;
     flex-wrap: wrap;
 }
+
+.noShowContainer{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.noShowNotifcation{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 200px;
+    border: 5px solid #fbbd0e;
+    font-size: 2em;
+    padding: 10px;
+}
+
+.friendInfoContainer {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.friendContainer{
+    width: 100%;
+    margin: 15px 0 15px 0;
+}
+
+
 
 .recControls {
     display: -webkit-box;
@@ -706,6 +758,10 @@ span{
     -webkit-align-items: center;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, 0.3);
+    /* border-bottom: 4px solid #fff;
+    border-top: 4px solid #fff; */
 }
 
 .friends {
@@ -721,10 +777,20 @@ span{
     flex-direction: column;
 }
 
-.test {
-    width: 50px;
-    height: 40px;
-    border: 2px solid black;
+.categoryTab{
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, .2);
+    font-size: 1.2em;
+    margin-top: 12px;
+    padding: 5px 8px 0 8px;
+}
+
+.viewProfileTab{
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, .2);
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0 8px 5px 5px;
 }
 
 .searchResult {
@@ -793,7 +859,7 @@ span{
 }
 
 .friendShowPosterPrivate{
-    position: relative;
+    /* position: relative; */
     width: 160px;
     height: 240px;
     margin: 10px;
@@ -805,12 +871,39 @@ span{
 }
 
 .ownerDescription{
-    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    position: absolute;
+    font-family: 'Open Sans', sans-serif;
     z-index: 1;
-    width: 350px;
-    border: 2px solid red;
-    background-color: black;
+    text-align: center;
+    background-color: #ff9800;
     color: white;
+    -webkit-box-shadow: 0 8px 12px -6px black;
+    -moz-box-shadow: 0 8px 12px -6px black;
+    box-shadow: 0px 0px 25px 20px black;
+    font-size: 1.7em;
+    
+}
+
+.ownerDescription h2{
+    border-bottom: 3px solid white;
+}
+.ownerComments{
+    padding: 5px;
+    margin: 1px;
+}
+.darken{
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, .7);
+    border-bottom: 4px solid #fff;
+    border-top: 4px solid #fff;
 }
 
 .hidden{

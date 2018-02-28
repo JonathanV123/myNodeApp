@@ -13596,10 +13596,8 @@ let checkURL = function (url, show) {
 "use strict";
 function showOwnerComment(e) {
     e.preventDefault();
-    const ownerDescriptionElement = this.childNodes[1];
-    const ownerDescription = this.childNodes[1].classList;
-    console.log("Owner Comment Is Firing");
-    ownerDescription.remove('hidden');
+    const ownerDescriptionElement = this.nextElementSibling;
+    ownerDescriptionElement.classList.remove('hidden');
 }
 
 
@@ -13613,9 +13611,8 @@ function showOwnerComment(e) {
 "use strict";
 function exitComment(e) {
     e.stopPropagation();
-    console.log("Exit comment is firing");
-    const ownderDescription = this.parentElement;
-    ownderDescription.classList.add("hidden");
+    const ownerDescription = this.parentElement;
+    ownerDescription.classList.add("hidden");
 }
 
 
