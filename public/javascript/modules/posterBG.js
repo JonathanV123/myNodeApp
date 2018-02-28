@@ -1,7 +1,6 @@
 function posterBGImage(element) {
     if (element.length == 0) return;
     element.forEach((show) => {
-        console.log(show);
         const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.id}`;
         checkURL(imageURL, show);
     });

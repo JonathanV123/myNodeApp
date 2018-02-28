@@ -258,26 +258,81 @@ h3 {
 
 }
 
-.slick-next:before {
-    content: '→';
-}
-
 #nightMode{
-    width: 89px;
-    height: 90px;
-    background: black;
-    bottom: -30px;
-    right: -10px;
+    width: 135px;
+    height: 134px;
+    bottom: -64px;
+    right: -69px;
     position: fixed;
     border-radius: 50px;
     z-index: 500;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
-#nightMode:before{
-    content: '';
-    width: 10px;
-    height: 20px;
-    background-color: gray;
+.nightModeIcon{
+    width: 40px;
+    height: 40px;
+}
+
+.nightModeActive{
+    -webkit-animation-name: activateNightMode; 
+    -webkit-animation-duration: 1s; 
+    -webkit-animation: activateNightMode 1.0s forwards; /* for less modern browsers */
+    animation-name: activateNightMode;
+    animation-duration: 1s;
+    animation: activateNightMode 1.0s forwards;
+}
+
+.nightModeDeactivate{
+    -webkit-animation-name: deactivateNightMode; 
+    -webkit-animation-duration: 1s; 
+    -webkit-animation: deactivateNightMode 1.0s forwards; /* for less modern browsers */
+    animation-name: deactivateNightMode;
+    animation-duration: 1s;
+    animation: deactivateNightMode 1.0s forwards;
+}
+
+@-webkit-keyframes activateNightMode {
+    0%   {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    100% {
+        -webkit-transform: rotate(218deg);
+        transform: rotate(218deg);
+    }
+}
+@keyframes activateNightMode {
+    0%   {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    100% {
+        -webkit-transform: rotate(218deg);
+        transform: rotate(218deg);
+    }
+}
+@-webkit-keyframes deactivateNightMode {
+    0%   {
+        -webkit-transform: rotate(218deg);
+        transform: rotate(218deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes deactivateNightMode {
+    0%   {
+        -webkit-transform: rotate(218deg);
+        transform: rotate(218deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
 }
 
 .buttonStylingYellowBGSquare {
@@ -641,6 +696,18 @@ span{
     width: 100%;
 }
 
+.friendCollection{
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .friends {
     width: 100%;
     display: -webkit-box;
@@ -723,6 +790,31 @@ span{
     -webkit-box-shadow: 0 8px 12px -6px black;
     -moz-box-shadow: 0 8px 12px -6px black;
     box-shadow: 0 8px 12px -6px black;
+}
+
+.friendShowPosterPrivate{
+    position: relative;
+    width: 160px;
+    height: 240px;
+    margin: 10px;
+    padding: 5px;
+    background-size: cover;
+    -webkit-box-shadow: 0 8px 12px -6px black;
+    -moz-box-shadow: 0 8px 12px -6px black;
+    box-shadow: 0 8px 12px -6px black;
+}
+
+.ownerDescription{
+    position: relative;
+    z-index: 1;
+    width: 350px;
+    border: 2px solid red;
+    background-color: black;
+    color: white;
+}
+
+.hidden{
+    visibility: hidden;
 }
 
 .showPoster {
@@ -900,9 +992,10 @@ span{
     margin: 0;
     padding: 0;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, 0.2);
-    border-bottom: 4px solid #fff;
-    border-top: 4px solid #fff;
+    /* border-bottom: 4px solid #fff;
+    border-top: 4px solid #fff; */
 }
+
 
 .slick-list:focus {
     outline: none;
@@ -986,9 +1079,6 @@ span{
 .slick-arrow.slick-hidden {
     display: none;
 }
-
-
-
 
 
 

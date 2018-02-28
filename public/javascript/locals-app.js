@@ -6,6 +6,10 @@ import posterBGImage from './modules/posterBG';
 import chooseThisShow from './modules/chooseThisShow';
 import typeSearch from './modules/typeSearch';
 import backdropBGImage from './modules/backDropBG';
+import showOwnerComment from './modules/showOwnerComment';
+import exitComment from './modules/exitComment';
+
+
 import $ from 'jquery';
 import 'slick-carousel';
 
@@ -25,6 +29,9 @@ const responsiveMenu = document.querySelector('.responsiveMenu');
 const backdrop = document.querySelectorAll('.showBackdropContainer');
 const carousel = document.querySelectorAll('.carousel');
 const carouselContainer = document.querySelector('.recOptions');
+const nightModeButton = document.querySelector('#nightMode');
+const showPosterInCollection = document.querySelectorAll('.friendShowPosterPrivate');
+const exitCommentButton = document.querySelectorAll('#exitComment');
 
 
 $('.carousel').slick({
@@ -73,20 +80,45 @@ $('.carousel').slick({
                 slidesToScroll: 1
             }
         }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
     ]
 });
+
+
 
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
     if (element.length == 0) return;
     console.log('running add event listener func');
     Array.prototype.forEach.call(element, function (html) {
+        console.log(element);
         html.addEventListener('submit', func)
     });
 }
+
+function addEventListenerClick(element, func) {
+    // Don't run if there is no corresponding element on page
+    if (element.length == 0) return;
+    console.log('running add event listener func');
+    Array.prototype.forEach.call(element, function (html) {
+        html.addEventListener('click', func)
+    });
+}
+
+function nightMode(element) {
+    element.addEventListener('click', () => {
+        // Little ugly with multiple removes and adds but
+        // trying to prevent issues with second arguments in older browsers
+        if (element.classList.contains("nightModeActive")){
+            element.classList.remove("nightModeActive");
+            element.classList.add("nightModeDeactivate");
+        } else {
+            element.classList.remove("nightModeDeactivate");
+            element.classList.add("nightModeActive");
+        }
+    })
+}
+
+nightMode(nightModeButton);
 
 function checkIfResponsive() {
     if (navResponsive.style.display === "none") return;
@@ -112,6 +144,8 @@ function responsiveMenuClose() {
 
 checkIfResponsive();
 
+addEventListenerClick(exitCommentButton, exitComment);
+addEventListenerClick(showPosterInCollection, showOwnerComment);
 addEventListener(chooseShow, chooseThisShow);
 addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
@@ -119,10 +153,17 @@ addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
 posterBGImage(friendShowPoster);
 posterBGImage(showPoster);
+posterBGImage(showPosterInCollection);
 backdropBGImage(backdrop);
 typeSearch(searchBar);
 
+
+
+
+
 export default {
+    exitComment,
+    showOwnerComment,
     backdropBGImage,
     typeSearch,
     chooseShow,

@@ -11323,10 +11323,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_jquery__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_slick_carousel__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_slick_carousel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_jquery__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_slick_carousel__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_slick_carousel__);
+
+
+
+
 
 
 
@@ -11354,10 +11360,13 @@ const responsiveMenu = document.querySelector('.responsiveMenu');
 const backdrop = document.querySelectorAll('.showBackdropContainer');
 const carousel = document.querySelectorAll('.carousel');
 const carouselContainer = document.querySelector('.recOptions');
+const nightModeButton = document.querySelector('#nightMode');
+const showPosterInCollection = document.querySelectorAll('.friendShowPosterPrivate');
+const exitCommentButton = document.querySelectorAll('#exitComment');
 
 
-__WEBPACK_IMPORTED_MODULE_8_jquery___default()('.carousel').slick({
-    dots: true,
+__WEBPACK_IMPORTED_MODULE_10_jquery___default()('.carousel').slick({
+    dots: false,
     infinite: false,
     speed: 300,
     arrows: false,
@@ -11402,20 +11411,45 @@ __WEBPACK_IMPORTED_MODULE_8_jquery___default()('.carousel').slick({
                 slidesToScroll: 1
             }
         }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
     ]
 });
+
+
 
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
     if (element.length == 0) return;
     console.log('running add event listener func');
     Array.prototype.forEach.call(element, function (html) {
+        console.log(element);
         html.addEventListener('submit', func)
     });
 }
+
+function addEventListenerClick(element, func) {
+    // Don't run if there is no corresponding element on page
+    if (element.length == 0) return;
+    console.log('running add event listener func');
+    Array.prototype.forEach.call(element, function (html) {
+        html.addEventListener('click', func)
+    });
+}
+
+function nightMode(element) {
+    element.addEventListener('click', () => {
+        // Little ugly with multiple removes and adds but
+        // trying to prevent issues with second arguments in older browsers
+        if (element.classList.contains("nightModeActive")){
+            element.classList.remove("nightModeActive");
+            element.classList.add("nightModeDeactivate");
+        } else {
+            element.classList.remove("nightModeDeactivate");
+            element.classList.add("nightModeActive");
+        }
+    })
+}
+
+nightMode(nightModeButton);
 
 function checkIfResponsive() {
     if (navResponsive.style.display === "none") return;
@@ -11441,6 +11475,8 @@ function responsiveMenuClose() {
 
 checkIfResponsive();
 
+addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__["a" /* default */]);
+addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__["a" /* default */]);
 addEventListener(chooseShow, __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__["a" /* default */]);
 addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */]);
 addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
@@ -11448,10 +11484,17 @@ addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__[
 addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
 Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(friendShowPoster);
 Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPoster);
+Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPosterInCollection);
 Object(__WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__["a" /* default */])(backdrop);
 Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(searchBar);
 
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    exitComment: __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__["a" /* default */],
+    showOwnerComment: __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__["a" /* default */],
     backdropBGImage: __WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__["a" /* default */],
     typeSearch: __WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */],
     chooseShow,
@@ -12454,7 +12497,6 @@ function searchFriends(e) {
 function posterBGImage(element) {
     if (element.length == 0) return;
     element.forEach((show) => {
-        console.log(show);
         const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.id}`;
         checkURL(imageURL, show);
     });
@@ -13549,6 +13591,39 @@ let checkURL = function (url, show) {
 
 /***/ }),
 /* 38 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function showOwnerComment(e) {
+    e.preventDefault();
+    const ownerDescriptionElement = this.childNodes[1];
+    const ownerDescription = this.childNodes[1].classList;
+    console.log("Owner Comment Is Firing");
+    ownerDescription.remove('hidden');
+}
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (showOwnerComment);
+
+/***/ }),
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function exitComment(e) {
+    e.stopPropagation();
+    console.log("Exit comment is firing");
+    const ownderDescription = this.parentElement;
+    ownderDescription.classList.add("hidden");
+}
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (exitComment);
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
