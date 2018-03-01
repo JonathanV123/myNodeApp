@@ -1,6 +1,6 @@
-import removeShow from './modules/removeShow';
-import acceptFriendRequest from './modules/acceptFriendRequest';
-import denyFriendRequest from './modules/denyFriendRequest';
+// import removeShow from './modules/removeShow';
+// import acceptFriendRequest from './modules/acceptFriendRequest';
+// import denyFriendRequest from './modules/denyFriendRequest';
 // import searchFriends from './modules/searchFriends';
 import posterBGImage from './modules/posterBG';
 // import chooseThisShow from './modules/chooseThisShow';
@@ -14,10 +14,10 @@ import darken from './modules/darken';
 import $ from 'jquery';
 import 'slick-carousel';
 
-const removeForms = document.querySelectorAll('form.remove');
+// const removeForms = document.querySelectorAll('form.remove');
 // const addFriends = document.querySelectorAll('form.friends');
-const acceptRequest = document.querySelectorAll('form.acceptFriend');
-const denyRequest = document.querySelectorAll('form.denyRequest');
+// const acceptRequest = document.querySelectorAll('form.acceptFriend');
+// const denyRequest = document.querySelectorAll('form.denyRequest');
 // const saveShow = document.querySelectorAll('form.saveShow');
 const friendShowPoster = document.querySelectorAll('.friendShowPoster');
 const showPoster = document.querySelectorAll('.show');
@@ -134,9 +134,9 @@ addEventListenerClick(exitCommentButton, exitComment);
 addEventListenerClick(showPosterInCollection, showOwnerComment);
 // addEventListener(saveShow, chooseThisShow);
 // addEventListener(addFriends, searchFriends);
-addEventListener(acceptRequest, acceptFriendRequest);
-addEventListener(removeForms, removeShow);
-addEventListener(denyRequest, denyFriendRequest);
+// addEventListener(acceptRequest, acceptFriendRequest);
+// addEventListener(removeForms, removeShow);
+// addEventListener(denyRequest, denyFriendRequest);
 posterBGImage(friendShowPoster);
 posterBGImage(showPoster);
 posterBGImage(showPosterInCollection);
@@ -155,8 +155,8 @@ export default {
     backdropBGImage,
     typeSearch,
     posterBGImage,
-    removeShow,
+    // removeShow,
     // searchFriends,
-    acceptFriendRequest,
-    denyFriendRequest,
+    // acceptFriendRequest,
+    // denyFriendRequest,
 };

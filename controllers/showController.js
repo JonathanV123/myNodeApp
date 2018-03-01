@@ -106,28 +106,27 @@ exports.removeShow = async (req, res) => {
     // change queryName directly in a single findByIdAndUpdate?
     // ask on stackoverflow
     const showID = parseInt(req.params.id);
-    let queryName = req.body.category;
+    let queryName = req.params.category;
     if(queryName === "Watching Now"){
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.watchingNow" : {id: showID}}},
             { new: true }
         )
-            res.json(user);
     } else if (queryName === "Recommendations")
     {
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.recommendations" : {id: showID}}},
             { new: true }
         )
-            res.json(user);    
     }
     else if (queryName = 'Must Watch') {
         const user = await User.findByIdAndUpdate(req.user._id,
             { $pull: { "myShows.mustWatch" : {id: showID}}},
             { new: true }
         )
-            res.json(user); 
     }
+    req.flash('success', "Successfully removed the show");
+    res.redirect('/userHome');
 };
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Creation and Deletion ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

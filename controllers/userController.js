@@ -134,7 +134,8 @@ exports.acceptFriendRequest = async (req , res) =>{
         {_id: userId},
         { $addToSet: { "friendsStorage.friends" : friendObj }}
     )
-    res.send('Added Friend');
+    req.flash('Success', "Friend Request Accepted");
+    res.redirect('/friends');
 };
 
 exports.denyFriendRequest = async (req, res) => {
@@ -154,7 +155,8 @@ exports.denyFriendRequest = async (req, res) => {
        { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
        { new: true }
     );
-    res.send('Request denied')
+    req.flash('Success', "Denied Friend Request");
+    res.redirect('/friends');
 };
 
 exports.displayFriends = async (req, res) => {

@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(3);
-var isBuffer = __webpack_require__(13);
+var isBuffer = __webpack_require__(14);
 
 /*global toString:true*/
 
@@ -377,17 +377,11 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(15);
+var normalizeHeaderName = __webpack_require__(16);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -478,6 +472,12 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(13);
 
 /***/ }),
 /* 3 */
@@ -695,12 +695,12 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(16);
-var buildURL = __webpack_require__(18);
-var parseHeaders = __webpack_require__(19);
-var isURLSameOrigin = __webpack_require__(20);
+var settle = __webpack_require__(17);
+var buildURL = __webpack_require__(19);
+var parseHeaders = __webpack_require__(20);
+var isURLSameOrigin = __webpack_require__(21);
 var createError = __webpack_require__(6);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(21);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(22);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -797,7 +797,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(22);
+      var cookies = __webpack_require__(23);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -882,7 +882,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(17);
+var enhanceError = __webpack_require__(18);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -11315,22 +11315,19 @@ return jQuery;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_posterBG__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_backDropBG__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_showOwnerComment__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_exitComment__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_darken__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_jquery__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_slick_carousel__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_slick_carousel__);
-
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_posterBG__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_typeSearch__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_backDropBG__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_showOwnerComment__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_exitComment__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_darken__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_slick_carousel__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_slick_carousel__);
+// import removeShow from './modules/removeShow';
+// import acceptFriendRequest from './modules/acceptFriendRequest';
+// import denyFriendRequest from './modules/denyFriendRequest';
 // import searchFriends from './modules/searchFriends';
 
 // import chooseThisShow from './modules/chooseThisShow';
@@ -11344,10 +11341,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-const removeForms = document.querySelectorAll('form.remove');
+// const removeForms = document.querySelectorAll('form.remove');
 // const addFriends = document.querySelectorAll('form.friends');
-const acceptRequest = document.querySelectorAll('form.acceptFriend');
-const denyRequest = document.querySelectorAll('form.denyRequest');
+// const acceptRequest = document.querySelectorAll('form.acceptFriend');
+// const denyRequest = document.querySelectorAll('form.denyRequest');
 // const saveShow = document.querySelectorAll('form.saveShow');
 const friendShowPoster = document.querySelectorAll('.friendShowPoster');
 const showPoster = document.querySelectorAll('.show');
@@ -11364,7 +11361,7 @@ const showPosterInCollection = document.querySelectorAll('.friendShowPosterPriva
 const exitCommentButton = document.querySelectorAll('#exitComment');
 const nightModeSwitch = document.querySelectorAll(".nightMode");
 
-__WEBPACK_IMPORTED_MODULE_9_jquery___default()('.carousel').slick({
+__WEBPACK_IMPORTED_MODULE_6_jquery___default()('.carousel').slick({
     dots: false,
     infinite: false,
     speed: 300,
@@ -11459,19 +11456,19 @@ function responsiveMenuClose() {
 
 checkIfResponsive();
 
-addEventListenerClick(nightModeSwitch, __WEBPACK_IMPORTED_MODULE_8__modules_darken__["a" /* default */]);
-addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_7__modules_exitComment__["a" /* default */]);
-addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_6__modules_showOwnerComment__["a" /* default */]);
+addEventListenerClick(nightModeSwitch, __WEBPACK_IMPORTED_MODULE_5__modules_darken__["a" /* default */]);
+addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_4__modules_exitComment__["a" /* default */]);
+addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_3__modules_showOwnerComment__["a" /* default */]);
 // addEventListener(saveShow, chooseThisShow);
 // addEventListener(addFriends, searchFriends);
-addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
-addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
-addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
-Object(__WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */])(friendShowPoster);
-Object(__WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */])(showPoster);
-Object(__WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */])(showPosterInCollection);
-Object(__WEBPACK_IMPORTED_MODULE_5__modules_backDropBG__["a" /* default */])(backdrop);
-Object(__WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__["a" /* default */])(searchBar);
+// addEventListener(acceptRequest, acceptFriendRequest);
+// addEventListener(removeForms, removeShow);
+// addEventListener(denyRequest, denyFriendRequest);
+Object(__WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */])(friendShowPoster);
+Object(__WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */])(showPoster);
+Object(__WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */])(showPosterInCollection);
+Object(__WEBPACK_IMPORTED_MODULE_2__modules_backDropBG__["a" /* default */])(backdrop);
+Object(__WEBPACK_IMPORTED_MODULE_1__modules_typeSearch__["a" /* default */])(searchBar);
 
 
 
@@ -11479,16 +11476,16 @@ Object(__WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__["a" /* default */])(sea
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     // chooseThisShow,
-    darken: __WEBPACK_IMPORTED_MODULE_8__modules_darken__["a" /* default */],
-    exitComment: __WEBPACK_IMPORTED_MODULE_7__modules_exitComment__["a" /* default */],
-    showOwnerComment: __WEBPACK_IMPORTED_MODULE_6__modules_showOwnerComment__["a" /* default */],
-    backdropBGImage: __WEBPACK_IMPORTED_MODULE_5__modules_backDropBG__["a" /* default */],
-    typeSearch: __WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__["a" /* default */],
-    posterBGImage: __WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */],
-    removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */],
+    darken: __WEBPACK_IMPORTED_MODULE_5__modules_darken__["a" /* default */],
+    exitComment: __WEBPACK_IMPORTED_MODULE_4__modules_exitComment__["a" /* default */],
+    showOwnerComment: __WEBPACK_IMPORTED_MODULE_3__modules_showOwnerComment__["a" /* default */],
+    backdropBGImage: __WEBPACK_IMPORTED_MODULE_2__modules_backDropBG__["a" /* default */],
+    typeSearch: __WEBPACK_IMPORTED_MODULE_1__modules_typeSearch__["a" /* default */],
+    posterBGImage: __WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */],
+    // removeShow,
     // searchFriends,
-    acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */],
-    denyFriendRequest: __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */],
+    // acceptFriendRequest,
+    // denyFriendRequest,
 });
 
 
@@ -11497,31 +11494,80 @@ Object(__WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__["a" /* default */])(sea
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+function posterBGImage(element) {
+    if (element.length == 0) return;
+    element.forEach((show) => {
+        const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.dataset.poster}`;
+        checkURL(imageURL, show);
+    });
 
-
-function removeShow(e) {
-    e.preventDefault();
-    const id = this.dataset.identity
-    const show = document.getElementById(id);
-    const showCategory = this.dataset.category;
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action, {category: showCategory})
-        .then(res => { 
-            // Remove from DOM
-            show.remove();
-        }).catch(err =>{
-            console.log(error);
-        });
+};
+let checkURL = function (url, show) {
+    // Check if url ends with jpg, jpeg, gif, png
+    if ((url.match(/\.(jpeg|jpg|gif|png)$/) != null)) {
+        show.style.backgroundImage = url;
+        // If it doesn't there is no poster image
+    } else {
+        show.style.backgroundImage = "url(../assets/images/noPosterAvailable.jpg)"
+    }
 }
-
-
-/* harmony default export */ __webpack_exports__["a"] = (removeShow);
-
+/* harmony default export */ __webpack_exports__["a"] = (posterBGImage);
 
 /***/ }),
 /* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_dompurify__);
+
+
+
+function searchResultsToHTML(shows){
+    console.log(shows);
+    return shows.map(show => {
+        return `<a href="/selectShow/${show.id}" class="searchResult">
+            <span><strong>${show.name}</strong><span>
+            (${show.first_air_date.slice(0, 4)})
+        `;
+    }).join('');
+};
+function typeSearch(search) {
+    if(!search) return;
+    const searchInput = search.querySelector('input[name="name"]');
+    const searchResults = document.querySelector('.searchResults');
+    searchInput.addEventListener('input', function(){
+        if(!this.value){
+            searchResults.style.display = "none";
+            return; //stop
+        }
+        searchResults.style.display = 'block';
+        searchResults.innerHTML = '';
+        // Find alternative to API key. Exposing client side is not a good idea. Possible AJAX call or Webpack Fix
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`https://api.themoviedb.org/3/search/tv?api_key=a0bab1433b22d4b59bf466484c131da6&query=${this.value}`)
+        .then(res => {
+        // Check if there is data to show
+        if(res.data.results.length >= 1){
+            searchResults.innerHTML = __WEBPACK_IMPORTED_MODULE_1_dompurify___default.a.sanitize(
+                searchResultsToHTML(res.data.results));
+        } else {
+         // Notify nothing came back
+        searchResults.innerHTML = __WEBPACK_IMPORTED_MODULE_1_dompurify___default.a.sanitize(`<div class="searchResult">
+        No results for ${this.value} found! </div>`);
+        }
+
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (typeSearch);
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11529,8 +11575,8 @@ function removeShow(e) {
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(3);
-var Axios = __webpack_require__(14);
-var defaults = __webpack_require__(2);
+var Axios = __webpack_require__(15);
+var defaults = __webpack_require__(1);
 
 /**
  * Create an instance of Axios
@@ -11564,14 +11610,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(8);
-axios.CancelToken = __webpack_require__(28);
+axios.CancelToken = __webpack_require__(29);
 axios.isCancel = __webpack_require__(7);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(29);
+axios.spread = __webpack_require__(30);
 
 module.exports = axios;
 
@@ -11580,7 +11626,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /*!
@@ -11607,16 +11653,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(1);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(23);
-var dispatchRequest = __webpack_require__(24);
+var InterceptorManager = __webpack_require__(24);
+var dispatchRequest = __webpack_require__(25);
 
 /**
  * Create a new instance of Axios
@@ -11693,7 +11739,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11712,7 +11758,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11745,7 +11791,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11773,7 +11819,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11848,7 +11894,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11908,7 +11954,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11983,7 +12029,7 @@ module.exports = (
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12026,7 +12072,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12086,7 +12132,7 @@ module.exports = (
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12145,18 +12191,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(25);
+var transformData = __webpack_require__(26);
 var isCancel = __webpack_require__(7);
-var defaults = __webpack_require__(2);
-var isAbsoluteURL = __webpack_require__(26);
-var combineURLs = __webpack_require__(27);
+var defaults = __webpack_require__(1);
+var isAbsoluteURL = __webpack_require__(27);
+var combineURLs = __webpack_require__(28);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -12238,7 +12284,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12265,7 +12311,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12286,7 +12332,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12307,7 +12353,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12371,7 +12417,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12405,130 +12451,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-function acceptFriendRequest(e) {
-    e.preventDefault();
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action)
-        .then(res => { 
-           console.log(res.data);
-        }).catch(err =>{
-            console.log(error);
-        });
-}
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = (acceptFriendRequest);
-
-/***/ }),
 /* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-function denyFriendRequest(e) {
-    e.preventDefault();
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action)
-        .then(res => { 
-           console.log(res.data);
-        }).catch(err =>{
-            console.log(error);
-        });
-}
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = (denyFriendRequest);
-
-/***/ }),
-/* 32 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function posterBGImage(element) {
-    if (element.length == 0) return;
-    element.forEach((show) => {
-        const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.dataset.poster}`;
-        checkURL(imageURL, show);
-    });
-
-};
-let checkURL = function (url, show) {
-    // Check if url ends with jpg, jpeg, gif, png
-    if ((url.match(/\.(jpeg|jpg|gif|png)$/) != null)) {
-        show.style.backgroundImage = url;
-        // If it doesn't there is no poster image
-    } else {
-        show.style.backgroundImage = "url(../assets/images/noPosterAvailable.jpg)"
-    }
-}
-/* harmony default export */ __webpack_exports__["a"] = (posterBGImage);
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_dompurify__);
-
-
-
-function searchResultsToHTML(shows){
-    console.log(shows);
-    return shows.map(show => {
-        return `<a href="/selectShow/${show.id}" class="searchResult">
-            <span><strong>${show.name}</strong><span>
-            (${show.first_air_date.slice(0, 4)})
-        `;
-    }).join('');
-};
-function typeSearch(search) {
-    if(!search) return;
-    const searchInput = search.querySelector('input[name="name"]');
-    const searchResults = document.querySelector('.searchResults');
-    searchInput.addEventListener('input', function(){
-        if(!this.value){
-            searchResults.style.display = "none";
-            return; //stop
-        }
-        searchResults.style.display = 'block';
-        searchResults.innerHTML = '';
-        // Find alternative to API key. Exposing client side is not a good idea. Possible AJAX call or Webpack Fix
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`https://api.themoviedb.org/3/search/tv?api_key=a0bab1433b22d4b59bf466484c131da6&query=${this.value}`)
-        .then(res => {
-        // Check if there is data to show
-        if(res.data.results.length >= 1){
-            searchResults.innerHTML = __WEBPACK_IMPORTED_MODULE_1_dompurify___default.a.sanitize(
-                searchResultsToHTML(res.data.results));
-        } else {
-         // Notify nothing came back
-        searchResults.innerHTML = __WEBPACK_IMPORTED_MODULE_1_dompurify___default.a.sanitize(`<div class="searchResult">
-        No results for ${this.value} found! </div>`);
-        }
-
-        }).catch(err => {
-            console.log(err);
-        });
-    });
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (typeSearch);
-
-/***/ }),
-/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
@@ -13494,7 +13417,7 @@ return purify;
 
 
 /***/ }),
-/* 35 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13517,7 +13440,7 @@ let checkURL = function (url, show) {
 /* harmony default export */ __webpack_exports__["a"] = (backdropBGImage);
 
 /***/ }),
-/* 36 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13532,7 +13455,7 @@ function showOwnerComment(e) {
 /* harmony default export */ __webpack_exports__["a"] = (showOwnerComment);
 
 /***/ }),
-/* 37 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13547,11 +13470,11 @@ function exitComment(e) {
 /* harmony default export */ __webpack_exports__["a"] = (exitComment);
 
 /***/ }),
-/* 38 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 
@@ -13582,7 +13505,7 @@ function darken(e) {
 /* harmony default export */ __webpack_exports__["a"] = (darken);
 
 /***/ }),
-/* 39 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*

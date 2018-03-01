@@ -63,7 +63,7 @@ router.get('/manageShows',
     showController.manageShows
 );
 
-router.post('/api/removeShow/:id',
+router.post('/api/removeShow/:id/:category',
     authenticationController.checkIfLoggedIn,
     showController.removeShow,
 );
@@ -90,15 +90,16 @@ router.post('/friends',
     catchErrors(userController.addFriend)
 );
 
-router.post('/api/acceptFriendRequest/:id',
+router.post('/friends/accept/:id',
     authenticationController.checkIfLoggedIn,
     userController.acceptFriendRequest
 );
 
-router.post('/api/denyFriendRequest/:id',
+router.post('/friends/deny/:id',
     authenticationController.checkIfLoggedIn,
     userController.denyFriendRequest
 );
+
 router.get('/displayFriends',
     authenticationController.checkIfLoggedIn,
     catchErrors(userController.displayFriends)

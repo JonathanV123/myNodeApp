@@ -2,7 +2,7 @@ mixin friendRequest(friend = {})
     div
         .friendRequest
             h2 Friend Request From : #{friend.name}
-            form.acceptFriend(method="POST" action=`/api/acceptFriendRequest/${friend._id}`) 
+            form.acceptFriend(method="POST" action=`/friends/accept/${friend._id}`) 
                 button(class="buttonStylingYellowBG" type="submit" name="acceptFriend") Accept
-            form.denyFriend(method="POST" action=`/api/denyFriendRequest/${friend._id}`) 
+            form.denyFriend(method="POST"  action=`/friends/deny/${friend._id}`) 
                 button(class="buttonStylingYellowBG" type="submit" name="denyFriend") Deny

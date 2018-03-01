@@ -8,9 +8,7 @@ mixin friendRec(friend = {})
     else 
         div.carousel
             each show in watchingNow
-                div.friendShowPoster(id = `${show.poster_path}`)
-                    //- div.friendShowPoster(id = `${show.poster_path}`)
-                    //- p= show.overview
+                div.friendShowPoster(id = `${show.id}` data-poster=`${show.poster_path}` )
                     p.posterTitleOverlay #{show.name}
     a(class="navLinkButtonTrimmed" href=`/displayFriend/${friend._id}`) 
         span.viewProfileTab Click Here To View #{friend.name.concat(apostrophe)} Must Watch Shows and Recommendations
