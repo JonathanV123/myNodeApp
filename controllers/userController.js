@@ -70,10 +70,11 @@ exports.friends = (req, res) => {
 };
 
 exports.addFriend = async (req, res) => {
-    const emailToSearch = req.body.name;
+    const recipientEmail = req.body.email
+    console.log(recipientEmail);
     // Get friend you are searching for
     const friend = await User.find(
-        {email: emailToSearch},
+        {email: recipientEmail},
     );
     // If no friend notify user
     if(friend.length == 0){
@@ -90,7 +91,8 @@ exports.addFriend = async (req, res) => {
         {_id: friendId},
         { $addToSet: { "friendsStorage.pending" : user }}
     );
-    res.send('Friend Request Sent');
+    req.flash('Success', "Friend Request Sent");
+    res.redirect('back');
 };
 
 exports.acceptFriendRequest = async (req , res) =>{

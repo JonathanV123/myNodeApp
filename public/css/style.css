@@ -144,12 +144,24 @@ body {
     background-color: transparent;
 }
 
-.menuLinkButton:hover {
-    cursor: pointer;
+.flashMessage{
+    width: 200px;
+    height: 150px;
+    background-color: red;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .responsiveMenuButton:hover {
     cursor: pointer;
+    color: #fbbd0e;
+
+}
+
+.menuLinkButton:hover {
+    cursor: pointer;
+    color: #fbbd0e;
 }
 
 @font-face {
@@ -216,7 +228,6 @@ h3 {
 
 .buttonStylingBlueWhite {
     background-color: #0370d9;
-    ;
     font-family: 'Open Sans', sans-serif;
     border-radius: 50px;
     color: white;
@@ -327,6 +338,11 @@ h3 {
 .sunOut{
     -webkit-transform: rotate(218deg);
     transform: rotate(218deg);
+}
+
+.menuLinkButton:hover {
+    cursor: pointer;
+    color: #fbbd0e;
 }
 
 @-webkit-keyframes activateNightMode {
@@ -538,6 +554,20 @@ h3 {
     font-family: 'Open Sans', sans-serif;
 }
 
+.showCategoryContainer{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
 .showInfo {
     display: block;
     margin-bottom: 5px;
@@ -689,6 +719,7 @@ span {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     position: relative;
     overflow: hidden;
@@ -734,6 +765,7 @@ span {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 
@@ -804,6 +836,7 @@ span {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     position: relative;
     -webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, .3);

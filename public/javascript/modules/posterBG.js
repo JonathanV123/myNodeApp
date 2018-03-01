@@ -1,7 +1,7 @@
 function posterBGImage(element) {
     if (element.length == 0) return;
     element.forEach((show) => {
-        const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.id}`;
+        const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.dataset.poster}`;
         checkURL(imageURL, show);
     });
 

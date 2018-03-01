@@ -11318,24 +11318,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_posterBG__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_darken__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_jquery__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_slick_carousel__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_slick_carousel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_posterBG__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_backDropBG__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_showOwnerComment__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_exitComment__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_darken__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_jquery__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_slick_carousel__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_slick_carousel__);
 
 
 
+// import searchFriends from './modules/searchFriends';
 
-
-
+// import chooseThisShow from './modules/chooseThisShow';
 
 
 
@@ -11347,10 +11345,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const removeForms = document.querySelectorAll('form.remove');
-const addFriends = document.querySelectorAll('form.friends');
+// const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
-const chooseShow = document.querySelectorAll('form.chooseShow');
+// const saveShow = document.querySelectorAll('form.saveShow');
 const friendShowPoster = document.querySelectorAll('.friendShowPoster');
 const showPoster = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
@@ -11366,7 +11364,7 @@ const showPosterInCollection = document.querySelectorAll('.friendShowPosterPriva
 const exitCommentButton = document.querySelectorAll('#exitComment');
 const nightModeSwitch = document.querySelectorAll(".nightMode");
 
-__WEBPACK_IMPORTED_MODULE_11_jquery___default()('.carousel').slick({
+__WEBPACK_IMPORTED_MODULE_9_jquery___default()('.carousel').slick({
     dots: false,
     infinite: false,
     speed: 300,
@@ -11461,34 +11459,34 @@ function responsiveMenuClose() {
 
 checkIfResponsive();
 
-addEventListenerClick(nightModeSwitch, __WEBPACK_IMPORTED_MODULE_10__modules_darken__["a" /* default */]);
-addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__["a" /* default */]);
-addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__["a" /* default */]);
-addEventListener(chooseShow, __WEBPACK_IMPORTED_MODULE_5__modules_chooseThisShow__["a" /* default */]);
-addEventListener(addFriends, __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */]);
+addEventListenerClick(nightModeSwitch, __WEBPACK_IMPORTED_MODULE_8__modules_darken__["a" /* default */]);
+addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_7__modules_exitComment__["a" /* default */]);
+addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_6__modules_showOwnerComment__["a" /* default */]);
+// addEventListener(saveShow, chooseThisShow);
+// addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */]);
 addEventListener(removeForms, __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */]);
 addEventListener(denyRequest, __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */]);
-Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(friendShowPoster);
-Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPoster);
-Object(__WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */])(showPosterInCollection);
-Object(__WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__["a" /* default */])(backdrop);
-Object(__WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */])(searchBar);
+Object(__WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */])(friendShowPoster);
+Object(__WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */])(showPoster);
+Object(__WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */])(showPosterInCollection);
+Object(__WEBPACK_IMPORTED_MODULE_5__modules_backDropBG__["a" /* default */])(backdrop);
+Object(__WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__["a" /* default */])(searchBar);
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    darken: __WEBPACK_IMPORTED_MODULE_10__modules_darken__["a" /* default */],
-    exitComment: __WEBPACK_IMPORTED_MODULE_9__modules_exitComment__["a" /* default */],
-    showOwnerComment: __WEBPACK_IMPORTED_MODULE_8__modules_showOwnerComment__["a" /* default */],
-    backdropBGImage: __WEBPACK_IMPORTED_MODULE_7__modules_backDropBG__["a" /* default */],
-    typeSearch: __WEBPACK_IMPORTED_MODULE_6__modules_typeSearch__["a" /* default */],
-    chooseShow,
-    posterBGImage: __WEBPACK_IMPORTED_MODULE_4__modules_posterBG__["a" /* default */],
+    // chooseThisShow,
+    darken: __WEBPACK_IMPORTED_MODULE_8__modules_darken__["a" /* default */],
+    exitComment: __WEBPACK_IMPORTED_MODULE_7__modules_exitComment__["a" /* default */],
+    showOwnerComment: __WEBPACK_IMPORTED_MODULE_6__modules_showOwnerComment__["a" /* default */],
+    backdropBGImage: __WEBPACK_IMPORTED_MODULE_5__modules_backDropBG__["a" /* default */],
+    typeSearch: __WEBPACK_IMPORTED_MODULE_4__modules_typeSearch__["a" /* default */],
+    posterBGImage: __WEBPACK_IMPORTED_MODULE_3__modules_posterBG__["a" /* default */],
     removeShow: __WEBPACK_IMPORTED_MODULE_0__modules_removeShow__["a" /* default */],
-    searchFriends: __WEBPACK_IMPORTED_MODULE_3__modules_searchFriends__["a" /* default */],
+    // searchFriends,
     acceptFriendRequest: __WEBPACK_IMPORTED_MODULE_1__modules_acceptFriendRequest__["a" /* default */],
     denyFriendRequest: __WEBPACK_IMPORTED_MODULE_2__modules_denyFriendRequest__["a" /* default */],
 });
@@ -12457,36 +12455,10 @@ function denyFriendRequest(e) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-function searchFriends(e) {
-    e.preventDefault();
-    console.log(this.action);
-    console.log(this.name.value);
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action, {name: this.name.value})
-        .then(res => { 
-            // Remove from DOM
-            console.log(res.data);
-        }).catch(err =>{
-            console.log(error);
-        });
-}
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = (searchFriends);
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 function posterBGImage(element) {
     if (element.length == 0) return;
     element.forEach((show) => {
-        const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.id}`;
+        const imageURL = `url(http://image.tmdb.org/t/p/w342//${show.dataset.poster}`;
         checkURL(imageURL, show);
     });
 
@@ -12503,45 +12475,13 @@ let checkURL = function (url, show) {
 /* harmony default export */ __webpack_exports__["a"] = (posterBGImage);
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-
-function chooseThisShow(e) {
-    e.preventDefault();
-    const radioCategory =  document.querySelector('input[name=showCategory]:checked').value
-    const comment =  document.querySelector('#userComment').value
-    const show = this.id;
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a
-        .post(this.action, {
-            showId: show, 
-            radioValCategory: radioCategory,
-            userComment: comment
-        })
-        .then(res => { 
-            console.log(res.data);
-            // window.location.pathname = "/manageShows"
-        }).catch(err =>{
-            console.log(error);
-        });
-}
-
-
-/* harmony default export */ __webpack_exports__["a"] = (chooseThisShow);
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dompurify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_dompurify__);
 
 
@@ -12549,7 +12489,7 @@ function chooseThisShow(e) {
 function searchResultsToHTML(shows){
     console.log(shows);
     return shows.map(show => {
-        return `<a href="/createShow/${show.id}" class="searchResult">
+        return `<a href="/selectShow/${show.id}" class="searchResult">
             <span><strong>${show.name}</strong><span>
             (${show.first_air_date.slice(0, 4)})
         `;
@@ -12588,7 +12528,7 @@ function typeSearch(search) {
 /* harmony default export */ __webpack_exports__["a"] = (typeSearch);
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
@@ -13554,7 +13494,7 @@ return purify;
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13577,7 +13517,7 @@ let checkURL = function (url, show) {
 /* harmony default export */ __webpack_exports__["a"] = (backdropBGImage);
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13592,7 +13532,7 @@ function showOwnerComment(e) {
 /* harmony default export */ __webpack_exports__["a"] = (showOwnerComment);
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13607,7 +13547,7 @@ function exitComment(e) {
 /* harmony default export */ __webpack_exports__["a"] = (exitComment);
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13642,7 +13582,7 @@ function darken(e) {
 /* harmony default export */ __webpack_exports__["a"] = (darken);
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*

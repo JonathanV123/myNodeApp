@@ -62,6 +62,7 @@ html
                                     a(class="navLinkButton" href="/register") Register
                                 .navButtonContainer
                                     a(class="navLinkButton" href="/login") Log In                  
+                block flashes
                 block content
                 block scripts
                     script(type="module" src="/dist/locals-app.bundle.js")
@@ -123,7 +124,8 @@ html
                                     a(class="navLinkButton" href="/register") Register
                                 .navButtonContainer
                                     a(class="navLinkButton" href="/login") Log In                  
-                block content
+                block flashes
+                block content   
                 block scripts
                     script(type="module" src="/dist/locals-app.bundle.js")            
 

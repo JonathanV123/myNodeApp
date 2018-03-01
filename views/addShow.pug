@@ -1,9 +1,9 @@
 extends layout
-include mixins/createShowForm
+include mixins/searchForShowsForm
 
 block content  
     .recForm
-        +createShowForm(show)
+        +searchForShowsForm(show)
     if user && user.nightMode === true
         img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
     else

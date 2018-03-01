@@ -47,8 +47,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+
+// Pass variables to our templates + all requests
 app.use((req, res, next) => {
     res.locals.helpers = helpers;
+    res.locals.flashes = req.flash();
     // req.user available because of passport
     res.locals.user = req.user || null;
     res.locals.currentPath = req.path;

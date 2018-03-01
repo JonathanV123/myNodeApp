@@ -6,10 +6,10 @@ const promisify = require('es6-promisify');
 const mail = require('../mail');
 
 exports.login = passport.authenticate('local',{
-    failureRedirct: '/login',
-    // failureFlash: 'Failed Login',
+    failureRedirect: '/login',
+    failureFlash: 'Account Does Not Exist',
     successRedirect: '/userHome',
-    // successFlash: 'You are now logged in'
+    successFlash: 'You are now logged in'
 });
 
 exports.logout = (req, res) => {

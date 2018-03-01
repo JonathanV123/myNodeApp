@@ -1,9 +1,19 @@
 extend layout  
 include mixins/friendRec
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
     -const friendInfo = friendInformation
     h2  Welcome #{user.name}
     .welcomeContainer
+        a(class="buttonStylingYellowBGSquare" href=`/addShow`) Add to your shows collection
+            img.icon(src="../assets/images/add.png" alt="TV Screen")
         a(class="buttonStylingYellowBGSquare" href=`/manageShows`) Manage Your Shows
             img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
         if user.friendsStorage.friends.length < 1    

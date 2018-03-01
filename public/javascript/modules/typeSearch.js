@@ -4,7 +4,7 @@ import dompurify from 'dompurify';
 function searchResultsToHTML(shows){
     console.log(shows);
     return shows.map(show => {
-        return `<a href="/createShow/${show.id}" class="searchResult">
+        return `<a href="/selectShow/${show.id}" class="searchResult">
             <span><strong>${show.name}</strong><span>
             (${show.first_air_date.slice(0, 4)})
         `;

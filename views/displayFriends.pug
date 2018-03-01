@@ -3,21 +3,20 @@ include mixins/friendRec
 block content
     h2  Your Friends:
     .welcomeContainer
-        a(class="buttonStylingYellowBGSquare" href=`/manageShows`) Manage Your Shows
-            img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
-
-        a(class="buttonStylingYellowBGSquare" href=`/displayFriends`) View Friends
-            img.icon(src="../assets/images/users.png" alt="Two People")
-    .friendsList
-        if user && user.nightMode === true
-            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
-        else
-            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
-        each friend in friendInformation
-            .friendProfile
-                h2= friend.name   
-                img.profilePic(alt="Profile Image")
-                a(class="buttonStylingYellowBGSquare" href=`/displayFriend/${friend._id}`) View #{friend.name} Collection
+        if friendInformation.length < 1
+            a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends
+                img.icon(src="../assets/images/users.png" alt="Two People")
+            h2 You have no friends add some friends above!
+        .friendsList
+            if user && user.nightMode === true
+                img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+            else
+                img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
+            each friend in friendInformation
+                .friendProfile
+                    h2= friend.name   
+                    img.profilePic(alt="Profile Image")
+                    a(class="buttonStylingYellowBGSquare" href=`/displayFriend/${friend._id}`) View #{friend.name} Collection
 
 
 

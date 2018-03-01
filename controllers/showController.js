@@ -28,7 +28,7 @@ exports.userHome = async (req, res) => {
 }
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-exports.createShow = async (req, res) => {
+exports.selectShow = async (req, res) => {
     const showID = req.params.id;
     const comment = req.body.comment;
     var userModel = User;
@@ -62,9 +62,9 @@ exports.createShow = async (req, res) => {
 
 exports.saveShow = async (req, res) => {
     // Refactor possible
-        const showID = parseInt(req.body.showId);
-        const comment = req.body.userComment;
-        const category = req.body.radioValCategory;
+        const showID = parseInt(req.params.id);
+        const comment = req.body.comment;
+        const category = req.body.showCategory;
         const userShowsArr = req.user.myShows.showChoices;
         const result = userShowsArr.filter(show => show.id === showID);
         // Add user comment and category
@@ -88,17 +88,16 @@ exports.saveShow = async (req, res) => {
                 { $addToSet: { "myShows.recommendations": result[0] }}
             );  
         }
-        await User.update(
+        const update = await User.update(
             { _id: req.user.id },
             { $set: {"myShows.showChoices": [] } }
         )
-      res.send("Saved the show!")
-    };
+        req.flash('success', "Saved the show");
+        res.redirect('/userHome');
+};
 
-exports.submitShow = (req, res) => { 
-    res.render('addShow', {
-        title: 'Add A Show'
-    })
+exports.addShow = (req, res) => { 
+    res.render('addShow')
 };
 
 
@@ -143,7 +142,7 @@ exports.manageShows = async (req, res) => {
     );
     const watchingNowArr = data[0].myShows.watchingNow;
     const recommendationsArr = data[0].myShows.recommendations;
-    const mustWatchArr = data[0].myShows.mustWatch
+    const mustWatchArr = data[0].myShows.mustWatch;
     res.render(`showCollectionSelection`, {user: req.user , recommendationsArr, watchingNowArr, mustWatchArr});
 };
 

@@ -1,9 +1,9 @@
 import removeShow from './modules/removeShow';
 import acceptFriendRequest from './modules/acceptFriendRequest';
 import denyFriendRequest from './modules/denyFriendRequest';
-import searchFriends from './modules/searchFriends';
+// import searchFriends from './modules/searchFriends';
 import posterBGImage from './modules/posterBG';
-import chooseThisShow from './modules/chooseThisShow';
+// import chooseThisShow from './modules/chooseThisShow';
 import typeSearch from './modules/typeSearch';
 import backdropBGImage from './modules/backDropBG';
 import showOwnerComment from './modules/showOwnerComment';
@@ -15,10 +15,10 @@ import $ from 'jquery';
 import 'slick-carousel';
 
 const removeForms = document.querySelectorAll('form.remove');
-const addFriends = document.querySelectorAll('form.friends');
+// const addFriends = document.querySelectorAll('form.friends');
 const acceptRequest = document.querySelectorAll('form.acceptFriend');
 const denyRequest = document.querySelectorAll('form.denyRequest');
-const chooseShow = document.querySelectorAll('form.chooseShow');
+// const saveShow = document.querySelectorAll('form.saveShow');
 const friendShowPoster = document.querySelectorAll('.friendShowPoster');
 const showPoster = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
@@ -132,8 +132,8 @@ checkIfResponsive();
 addEventListenerClick(nightModeSwitch, darken);
 addEventListenerClick(exitCommentButton, exitComment);
 addEventListenerClick(showPosterInCollection, showOwnerComment);
-addEventListener(chooseShow, chooseThisShow);
-addEventListener(addFriends, searchFriends);
+// addEventListener(saveShow, chooseThisShow);
+// addEventListener(addFriends, searchFriends);
 addEventListener(acceptRequest, acceptFriendRequest);
 addEventListener(removeForms, removeShow);
 addEventListener(denyRequest, denyFriendRequest);
@@ -148,15 +148,15 @@ typeSearch(searchBar);
 
 
 export default {
+    // chooseThisShow,
     darken,
     exitComment,
     showOwnerComment,
     backdropBGImage,
     typeSearch,
-    chooseShow,
     posterBGImage,
     removeShow,
-    searchFriends,
+    // searchFriends,
     acceptFriendRequest,
     denyFriendRequest,
 };

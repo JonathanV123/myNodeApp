@@ -13,15 +13,20 @@ router.get('/userHome',
 );
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-router.get('/createShow/:id',
+router.get('/addShow',
     authenticationController.checkIfLoggedIn,
-    catchErrors(showController.createShow)
+    showController.addShow
+);
+router.get('/selectShow/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.selectShow)
 );
 
-router.get('/createShow',
+router.post('/saveShow/:id',
     authenticationController.checkIfLoggedIn,
-    showController.submitShow
+    showController.saveShow,
 );
+
 
 // Want to refactor these 3 into a single route.
 router.get('/manageMustWatch',
@@ -63,10 +68,7 @@ router.post('/api/removeShow/:id',
     showController.removeShow,
 );
 
-router.post('/saveShow',
-    authenticationController.checkIfLoggedIn,
-    showController.saveShow,
-);
+
 
 
 router.get('/show/:slug', catchErrors(showController.getShowBySlug));
@@ -80,11 +82,12 @@ router.get('/tags/:tag', catchErrors(showController.getShowByTag));
 
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  Friend Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-router.get('/friends', userController.friends);
-
-router.post('/api/addFriend',
+router.get('/friends',     
     authenticationController.checkIfLoggedIn,
-    userController.addFriend
+    userController.friends);
+
+router.post('/friends',
+    catchErrors(userController.addFriend)
 );
 
 router.post('/api/acceptFriendRequest/:id',
