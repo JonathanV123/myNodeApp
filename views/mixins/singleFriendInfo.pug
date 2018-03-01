@@ -10,7 +10,7 @@ mixin singleFriendInfo(friendInfoShowInfo = {})
     else 
         div.friendCollection
             each show in watchingNow
-                div.friendShowPosterPrivate(id = `${show.poster_path}`)
+                div.friendShowPosterPrivate(id = `${show.id}` data-poster=`${show.poster_path}`)
                     p.posterTitleOverlay #{show.name}
                 div.ownerDescription.hidden 
                     h2.ownerComments #{show.name}  
@@ -24,7 +24,7 @@ mixin singleFriendInfo(friendInfoShowInfo = {})
     else 
         div.friendCollection
             each show in recommendations
-                div.friendShowPosterPrivate(id = `${show.poster_path}`)
+                div.friendShowPosterPrivate(id = `${show.id}` data-poster=`${show.poster_path}`)
                     p.posterTitleOverlay #{show.name} 
                 div.ownerDescription.hidden 
                     h2.posterTitleOverlay #{show.name}  
@@ -38,7 +38,7 @@ mixin singleFriendInfo(friendInfoShowInfo = {})
     else 
         div.friendCollection
             each show in mustWatch
-                div.friendShowPosterPrivate(id = `${show.poster_path}`)
+                div.friendShowPosterPrivate(id = `${show.id}` data-poster=`${show.poster_path}`)
                     p.posterTitleOverlay #{show.name}  
                 div.ownerDescription.hidden 
                     h2.posterTitleOverlay #{show.name}  

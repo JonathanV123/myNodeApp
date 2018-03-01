@@ -17,7 +17,7 @@ block content
         .addFriendContainer
             form.friends(method="POST" action=`/friends`)
                 label(for="email" class="email") Enter friends email
-                input(class= "friendsInput" type="email" name="email" placeholder="Enter Friends Email Address")  
+                input(class= "friendsInput" type="email" name="email" placeholder="Enter Friends Email Address" required)  
                 button(class="buttonStylingYellowBG" type="submit" name="addFriend") Send
         .friendRequestContainer
             if user.friendsStorage.pending.length >= 1 

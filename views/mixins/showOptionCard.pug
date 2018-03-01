@@ -20,7 +20,7 @@ mixin showOptionCard(showSelection = {})
             ul.tagsCategory
                 each option in showCategoryOptions 
                     .tagChoicesReview
-                        input(class="radioButton"  type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)))
+                        input(class="radioButton"  type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)) required)
                         label(for=option) #{option}  
             h3 Quick Show Description
             textarea(class= "textArea" id="userComment" method="POST" name="comment" placeholder="Enter comments about the show. Funny, Scary, Happy Ect..") 
