@@ -7,17 +7,6 @@ exports.landingPage = (req, res) => {
     res.render('landing')
 };
 exports.userHome = async (req, res) => {
-    // const data = await User.find( 
-    //     {_id: req.user._id},
-    //     { "friendsStorage.friends" : 1 },
-    // );
-    // req.user.friendsStorage.friends.forEach((friend) => {
-    //     await User.find( 
-    //         {email: friend.email},
-    //         { "friendsStorage.myShows" : 1 },
-    //     );
-    // });
-    // 1. Get Friends Array
     const friendsArr = req.user.friendsStorage.friends;
     const arr = [];
     // 2. Store Each Friend Email in Result

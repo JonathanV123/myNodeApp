@@ -9,7 +9,7 @@ exports.login = passport.authenticate('local',{
     failureRedirect: '/login',
     failureFlash: 'Account Does Not Exist',
     successRedirect: '/userHome',
-    successFlash: 'You are now logged in'
+    // successFlash: 'You are now logged in'
 });
 
 exports.logout = (req, res) => {

@@ -2,7 +2,6 @@ import axios from 'axios';
 import dompurify from 'dompurify';
 
 function searchResultsToHTML(shows){
-    console.log(shows);
     return shows.map(show => {
         return `<a href="/selectShow/${show.id}" class="searchResult">
             <span><strong>${show.name}</strong><span>

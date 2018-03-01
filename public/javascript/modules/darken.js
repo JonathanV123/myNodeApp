@@ -17,10 +17,8 @@ function darken(e) {
     axios
         .post("/nightMode")
         .then(res => {
-            console.log(res.data);
-            // window.location.pathname = "/manageShows"
         }).catch(err => {
-            console.log(error);
+            console.log("Night Mode Failed");
         });
 }
 

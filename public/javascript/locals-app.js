@@ -88,9 +88,7 @@ $('.carousel').slick({
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
     if (element.length == 0) return;
-    console.log('running add event listener func');
     Array.prototype.forEach.call(element, function (html) {
-        console.log(element);
         html.addEventListener('submit', func)
     });
 }
@@ -98,7 +96,6 @@ function addEventListener(element, func) {
 function addEventListenerClick(element, func) {
     // Don't run if there is no corresponding element on page
     if (element.length == 0) return;
-    console.log('running add event listener func');
     Array.prototype.forEach.call(element, function (html) {
         html.addEventListener('click', func)
     });

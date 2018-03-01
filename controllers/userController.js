@@ -71,16 +71,14 @@ exports.friends = (req, res) => {
 
 exports.addFriend = async (req, res) => {
     const recipientEmail = req.body.email
-    console.log(recipientEmail);
     // Get friend you are searching for
     const friend = await User.find(
         {email: recipientEmail},
     );
     // If no friend notify user
     if(friend.length == 0){
-        res.send('No users match');
-        // quit if no user
-        return;
+        req.flash('Failure', "No People Found With That Email. Please Try Again");
+        return res.redirect('back'); // Quit
     } 
     // Save friend ID
     const friendId = friend[0]._id;
@@ -224,7 +222,6 @@ exports.nightMode = async (req, res) => {
             {$set: { nightMode: false } }    
         )
     }
-    res.send("Night Mode Active!");
 };
 
 // Keeping these as an option for this project. I might still incorporate this

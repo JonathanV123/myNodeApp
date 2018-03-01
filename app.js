@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const helpers = require('./helpers');
 const flash = require('connect-flash');
@@ -9,6 +11,7 @@ const expressValidator = require('express-validator');
 const promisify = require('es6-promisify');
 const cookieParser = require('cookie-parser')
 const routes = require('./routes/index');
+const errorHandlers = require('./errorHandler/errorHandling');
 require('./passport');
 
 const app = express();
@@ -40,6 +43,7 @@ app.use(session({
      resave: false,
      // If true
      saveUninitialized: false,
+     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 // Client will only store session id
@@ -62,4 +66,16 @@ app.use((req, res, next) => {
 
 app.use('/', routes);
 
+app.use(errorHandlers.notFound);
+
+
+
+// Otherwise this was a really bad error we didn't expect! Shoot eh
+if (app.get('env') === 'development') {
+  /* Development Error Handler - Prints stack trace */
+  app.use(errorHandlers.developmentErrors);
+}
+
+// production error handler
+app.use(errorHandlers.productionErrors);
 module.exports = app;

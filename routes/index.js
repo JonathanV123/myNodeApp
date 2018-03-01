@@ -9,7 +9,7 @@ router.get('/', showController.landingPage);
 
 router.get('/userHome',
     authenticationController.checkIfLoggedIn,
-    showController.userHome
+    catchErrors(showController.userHome)
 );
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -24,7 +24,7 @@ router.get('/selectShow/:id',
 
 router.post('/saveShow/:id',
     authenticationController.checkIfLoggedIn,
-    showController.saveShow,
+    catchErrors(showController.saveShow)
 );
 
 
@@ -42,49 +42,23 @@ router.get('/manageWatchingNow',
     catchErrors(showController.watchingNow)
 )
 
-// router.post('/createShow', 
-// //     showController.upload,
-// //     catchErrors(showController.resize),
-//     authenticationController.checkIfLoggedIn,
-//     catchErrors(showController.createShow),
-// );
-// router.get('/showOptions',
-//      authenticationController.checkIfLoggedIn,
-//      showController.showOptions
-// );
-// router.post('/createShow/:id', 
-//     // showController.upload,
-//     // catchErrors(showController.resize),
-//     catchErrors(showController.updateShow)
-// );
-
 router.get('/manageShows',
     authenticationController.checkIfLoggedIn,
-    showController.manageShows
+    catchErrors(showController.manageShows)
 );
 
-router.post('/api/removeShow/:id/:category',
+router.post('/removeShow/:id/:category',
     authenticationController.checkIfLoggedIn,
-    showController.removeShow,
+    catchErrors(showController.removeShow)
 );
 
-
-
-
-router.get('/show/:slug', catchErrors(showController.getShowBySlug));
-
-router.get('/tags', catchErrors(showController.getShowByTag));
-router.get('/tags/:tag', catchErrors(showController.getShowByTag));
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Show Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
-
-
-
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  Friend Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/friends',     
     authenticationController.checkIfLoggedIn,
-    userController.friends);
+    userController.friends
+);
 
 router.post('/friends',
     catchErrors(userController.addFriend)
@@ -92,35 +66,29 @@ router.post('/friends',
 
 router.post('/friends/accept/:id',
     authenticationController.checkIfLoggedIn,
-    userController.acceptFriendRequest
+    catchErrors(userController.acceptFriendRequest)
 );
 
 router.post('/friends/deny/:id',
     authenticationController.checkIfLoggedIn,
-    userController.denyFriendRequest
+    catchErrors(userController.denyFriendRequest)
 );
 
 router.post('/removeFriend/:id',
     authenticationController.checkIfLoggedIn,
-    userController.removeFriend
+    catchErrors(userController.removeFriend)
 );
 
 router.get('/displayFriends',
     authenticationController.checkIfLoggedIn,
     catchErrors(userController.displayFriends)
-)
+);
 
 router.get('/displayFriend/:id',
     authenticationController.checkIfLoggedIn,
     catchErrors(userController.displayFriend)
-)
+);
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Friend Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
-
-
-
-
-
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Account and Login Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/login', userController.loginForm);
@@ -155,14 +123,11 @@ router.post('/account/reset/:token',
     catchErrors(authenticationController.update)
 );
 
-router.post('/nightMode',
-    authenticationController.checkIfLoggedIn,
-    userController.nightMode,
-);
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Account and Login Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-
-// // API
-// router.get('/api/search', catchErrors(showController.searchShows));
+router.post('/nightMode',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.nightMode),
+);
 
 module.exports = router;

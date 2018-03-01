@@ -11415,9 +11415,7 @@ __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.carousel').slick({
 function addEventListener(element, func) {
     // Don't run if there is no corresponding element on page
     if (element.length == 0) return;
-    console.log('running add event listener func');
     Array.prototype.forEach.call(element, function (html) {
-        console.log(element);
         html.addEventListener('submit', func)
     });
 }
@@ -11425,7 +11423,6 @@ function addEventListener(element, func) {
 function addEventListenerClick(element, func) {
     // Don't run if there is no corresponding element on page
     if (element.length == 0) return;
-    console.log('running add event listener func');
     Array.prototype.forEach.call(element, function (html) {
         html.addEventListener('click', func)
     });
@@ -11526,7 +11523,6 @@ let checkURL = function (url, show) {
 
 
 function searchResultsToHTML(shows){
-    console.log(shows);
     return shows.map(show => {
         return `<a href="/selectShow/${show.id}" class="searchResult">
             <span><strong>${show.name}</strong><span>
@@ -13495,10 +13491,8 @@ function darken(e) {
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a
         .post("/nightMode")
         .then(res => {
-            console.log(res.data);
-            // window.location.pathname = "/manageShows"
         }).catch(err => {
-            console.log(error);
+            console.log("Night Mode Failed");
         });
 }
 
