@@ -100,6 +100,11 @@ router.post('/friends/deny/:id',
     userController.denyFriendRequest
 );
 
+router.post('/removeFriend/:id',
+    authenticationController.checkIfLoggedIn,
+    userController.removeFriend
+);
+
 router.get('/displayFriends',
     authenticationController.checkIfLoggedIn,
     catchErrors(userController.displayFriends)

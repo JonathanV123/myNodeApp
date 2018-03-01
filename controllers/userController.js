@@ -180,6 +180,32 @@ exports.displayFriend = async (req, res) => {
     res.render(`displayFriend`, {friendInformation: friendsInfo[0]});
 };
 
+exports.removeFriend = async (req, res) => {
+    // Current user
+    const userID = req.user._id;
+    const userEmail = req.user.email;
+    // Friend to remove _id
+    const friendNoMore = req.params.id;
+    // Get friend info so we can query by name
+    const friendsInfo = await User.find({_id: friendNoMore })
+    const friendEmail = friendsInfo[0].email;
+   
+    const removeFromCurrentUser = await User.findOneAndUpdate(
+        { _id: userID },
+        { $pull: { "friendsStorage.friends" : { email: friendEmail }}},
+        { new: true }
+     );
+
+    const removeFromFriends = await User.findOneAndUpdate(
+        { email: friendEmail },
+        { $pull: { "friendsStorage.friends" : { email: userEmail }}},
+        { new: true }
+     );
+
+     req.flash("Success", "Friend Removed");
+     res.redirect('/displayFriends')
+};
+
 exports.nightMode = async (req, res) => {
     const user = await User.find(
         { _id: req.user._id }    

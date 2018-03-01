@@ -1,5 +1,13 @@
 extend layout  
 include mixins/friendRec
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
     h2  Your Friends:
     .welcomeContainer
@@ -17,6 +25,9 @@ block content
                     h2= friend.name   
                     img.profilePic(alt="Profile Image")
                     a(class="buttonStylingYellowBGSquare" href=`/displayFriend/${friend._id}`) View #{friend.name} Collection
+                    .removeFriendForm
+                        form.remove(method="POST" action=`/removeFriend/${friend._id}`)
+                            button(class="buttonStylingYellowBG" type= "submit" name="removeFriend") Remove
 
 
 
