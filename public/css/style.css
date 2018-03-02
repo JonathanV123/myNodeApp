@@ -125,6 +125,18 @@ body {
     margin-right: 15px;
 }
 
+.friendsList{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
 .navButtonContainer {
     border: 2px solid white;
     border-radius: 50px;
@@ -228,6 +240,12 @@ h3 {
     background: #ff7857;
     background: -webkit-linear-gradient(45deg, #ff515b 0%, #ff7857 100%);
     background: linear-gradient(45deg, #ff515b 0%, #ff7857 100%);
+}
+
+.buttonStylingYellowBG:hover{
+    cursor: pointer;
+    background: white;
+    color: blue;
 }
 
 .buttonStylingBlueWhite {
@@ -487,15 +505,9 @@ h3 {
 }
 
 .acctInfoContainer {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-flex-direction: column;
-    flex-direction: column;
+    text-align: center;
+    padding: 5px;
+    margin: 20px 10px 10px 10px
 }
 
 .introContainer {
@@ -508,8 +520,12 @@ h3 {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
+}
+
+.introContainer p{
+    font-size: 1.7em;
 }
 
 .friendRequest {
@@ -628,6 +644,16 @@ h3 {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+}
+
+.myCollectionContainer{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
 }
@@ -844,6 +870,12 @@ span {
     flex-direction: column;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
+}
+
+.friendInfoContainer h2{
+    margin: 8px;
+    padding: 5px;
+    
 }
 
 .friendContainer {
@@ -1217,12 +1249,21 @@ span {
     .viewProfileTab{
         font-size: 1em;
     }
+    .introContainer p{
+        font-size: 1.5em;
+    }
 }
 
 @media only screen and (max-width: 350px) {
     .friendShowPoster {
         height: 230px;
         background-size: 100% 100%;
+    }
+    .logoContainer{
+        font-size: 2em;
+    }
+    .introContainer p{
+        font-size: 1.3em;
     }
 }
 
@@ -1237,6 +1278,9 @@ span {
     .friendShowPoster {
         height: 180px;
         background-size: 100% 100%;
+    }
+    .navButtonContainer{
+        font-size: 1.1em;
     }
 }
 

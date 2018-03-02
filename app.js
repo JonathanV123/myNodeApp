@@ -30,18 +30,13 @@ app.use(expressValidator());
 // The flash middleware let's us use req.flash
 // app.use(flash());
 
-// promisify some callback based APIs
-app.use((req, res, next) => {
-    req.login = promisify(req.login, req);
-    next();
-  });
-
 app.use(cookieParser()) // required before session.
+
 app.use(session({
      secret: 'dogsRule',
+     key: process.env.KEY,
      // Only save session after each request when something changes
      resave: false,
-     // If true
      saveUninitialized: false,
      store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
@@ -63,6 +58,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// promisify some callback based APIs
+app.use((req, res, next) => {
+  req.login = promisify(req.login, req);
+  next();
+});
 
 app.use('/', routes);
 

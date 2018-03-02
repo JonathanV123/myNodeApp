@@ -11433,7 +11433,9 @@ function checkIfResponsive() {
     if (navResponsive.style.display === "none") return;
     menuButton.addEventListener("click", function () {
         responsiveMenu.style.display = "flex";
-        carouselContainer.style.display = "none";
+        if(carouselContainer != null){
+            carouselContainer.style.display = "none";
+        }
         menuButtonNormal.style.display = "none";
         responsiveMenuClose();
     })
@@ -11443,7 +11445,9 @@ function responsiveMenuClose() {
     if (responsiveMenu.style.display === "flex") {
         responsiveMenuButton.addEventListener("click", function () {
             responsiveMenu.style.display = "none";
-            carouselContainer.style.display = "flex";
+            if(carouselContainer != null){
+                carouselContainer.style.display = "none";
+            }
             menuButtonNormal.style.display = "initial";
         })
     } else {

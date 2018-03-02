@@ -24,8 +24,8 @@ exports.checkIfLoggedIn = (req, res, next) => {
         next();
         return
     }
-    // TO DO notification of login in or register
-    res.redirect('/');
+    req.flash('error', 'You must be logged in to do that!');
+    res.redirect('/login');
 };
 
 exports.forgotPassword = async (req, res) => {

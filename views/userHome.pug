@@ -15,9 +15,6 @@ block content
         if user.friendsStorage.pending.length >= 1 
             .navButtonContainer
                 a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
-        else
-            .navButtonContainer
-                a(class="navLinkButton" href="/displayFriends") Friends
         .userHomeOptions
             a(class="buttonStylingYellowBGSquare" href=`/addShow`) Add to your shows collection
                 img.icon(src="../assets/images/add.png" alt="TV Screen")

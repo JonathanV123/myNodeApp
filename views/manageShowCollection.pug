@@ -8,37 +8,40 @@ block content
             else
                 img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
             h2 What I'm Watching Now
-            if showInfo[0].myShows.watchingNow.length >= 1
-                -const arrangeArray = showInfo[0].myShows.watchingNow.reverse()
-                each show in arrangeArray
-                    +showCard(show)
-            else
-                h2 You have no shows!
-                a(class="buttonStylingYellowBG" href="/addShow") Add Shows To Your Collection                                 
+            .myCollectionContainer
+                if showInfo[0].myShows.watchingNow.length >= 1
+                    -const arrangeArray = showInfo[0].myShows.watchingNow.reverse()
+                    each show in arrangeArray
+                        +showCard(show)
+                else
+                    h2 You have no shows!
+                    a(class="buttonStylingYellowBG" href="/addShow") Add Shows To Your Collection                                 
         if showCategory === "recommendations"
             if user && user.nightMode === true
                 img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
             else
                 img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
             h2 My Recommendations
-            if showInfo[0].myShows.recommendations.length >= 1
-                -const arrangeArray = showInfo[0].myShows.recommendations.reverse()
-                each show in arrangeArray
-                    +showCard(show)
-            else
-                h2 You have no shows!
-                a(class="buttonStylingYellowBG" href="/addShow") Add Shows To Your Collection    
+            .myCollectionContainer
+                if showInfo[0].myShows.recommendations.length >= 1
+                    -const arrangeArray = showInfo[0].myShows.recommendations.reverse()
+                    each show in arrangeArray
+                        +showCard(show)
+                else
+                    h2 You have no shows!
+                    a(class="buttonStylingYellowBG" href="/addShow") Add Shows To Your Collection    
         if showCategory === "mustWatch"
             if user && user.nightMode === true
                 img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
             else
                 img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
             h2 My Must Watch Shows
-            if showInfo[0].myShows.mustWatch.length >= 1
-                -const arrangeArray = showInfo[0].myShows.mustWatch.reverse()
-                each show in arrangeArray
-                    +showCard(show)
-            else
-                h2 You have no shows!
-                a(class="buttonStylingYellowBG" href="/addShow") Add Shows To Your Collection    
+            .myCollectionContainer
+                if showInfo[0].myShows.mustWatch.length >= 1
+                    -const arrangeArray = showInfo[0].myShows.mustWatch.reverse()
+                    each show in arrangeArray
+                        +showCard(show)
+                else
+                    h2 You have no shows!
+                    a(class="buttonStylingYellowBG" href="/addShow") Add Shows To Your Collection    
 

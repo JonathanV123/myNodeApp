@@ -4,7 +4,7 @@ const promisify = require('es6-promisify');
 // const multer = require('multer');
 // const jimp = require('jimp');
 // const uuid = require('uuid');
-promisify.Promise = require("bluebird");
+// promisify.Promise = require("bluebird");
 
 
 exports.loginForm = (req, res) => {
@@ -62,7 +62,9 @@ exports.updateAccount = async (req, res) => {
         // Return new user, run validation steps, query is required to do it properly 
         { new: true, runValidators: true, context: 'query'}
     );
-    res.redirect('back');
+    await req.login(user);
+    req.flash('success', "Successfully Updated Account Settings");
+    res.redirect('/account');
 };
 
 exports.friends = (req, res) => {

@@ -1,12 +1,23 @@
 extends layout
-
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
+    if user && user.nightMode === true
+        img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+    else
+        img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
     h2= title
-    form(action="/account" method="POST")
+    form.form(action="/account" method="POST")
         label(for="name") Name
         input(type="text" name="name" value=user.name) 
         label(for="email") Name
         input(type="email" name="email" value=user.email) 
-        input.button(type="submit" value="Update Account Information") 
+        input.button(class="buttonStylingYellowBG" type="submit" value="Update Account Information") 
 
 
