@@ -10,21 +10,28 @@ block flashes
                     button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
     -const friendInfo = friendInformation
-    h2  Welcome #{user.name}
     .welcomeContainer
-        a(class="buttonStylingYellowBGSquare" href=`/addShow`) Add to your shows collection
-            img.icon(src="../assets/images/add.png" alt="TV Screen")
-        a(class="buttonStylingYellowBGSquare" href=`/manageShows`) Manage Your Shows
-            img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
-        if user.friendsStorage.friends.length < 1    
-            a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends
-                img.icon(src="../assets/images/users.png" alt="Two People")
+        h2  Welcome #{user.name}
+        if user.friendsStorage.pending.length >= 1 
+            .navButtonContainer
+                a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
         else
-        a(class="buttonStylingYellowBGSquare" href=`/displayFriends`) View Friends
-                img.icon(src="../assets/images/groupFriends.png" alt="Group Of Friends")
+            .navButtonContainer
+                a(class="navLinkButton" href="/displayFriends") Friends
+        .userHomeOptions
+            a(class="buttonStylingYellowBGSquare" href=`/addShow`) Add to your shows collection
+                img.icon(src="../assets/images/add.png" alt="TV Screen")
+            a(class="buttonStylingYellowBGSquare" href=`/manageShows`) Manage Your Shows
+                img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
+            if user.friendsStorage.friends.length < 1    
+                a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends
+                    img.icon(src="../assets/images/users.png" alt="Two People")
+            else
+            a(class="buttonStylingYellowBGSquare" href=`/displayFriends`) View Friends
+                    img.icon(src="../assets/images/groupFriends.png" alt="Group Of Friends")
         .recOptions
             .recControls
-                span Swipe Left or Right to View Recommendations
+                span Swipe left or right below to view what you friends are watching now
                 img.icon(src="../assets/images/swipeLeftRight.png" alt="Finger Swiping Left and Right")
                 span Or
                 img.icon(src="../assets/images/mouseClick.png" alt="Mouse Click")

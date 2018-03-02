@@ -89,7 +89,7 @@ exports.addFriend = async (req, res) => {
         {_id: friendId},
         { $addToSet: { "friendsStorage.pending" : user }}
     );
-    req.flash('Success', "Friend Request Sent");
+    req.flash('success', "Friend Request Sent");
     res.redirect('back');
 };
 
@@ -132,7 +132,7 @@ exports.acceptFriendRequest = async (req , res) =>{
         {_id: userId},
         { $addToSet: { "friendsStorage.friends" : friendObj }}
     )
-    req.flash('Success', "Friend Request Accepted");
+    req.flash('success', "Friend Request Accepted");
     res.redirect('/friends');
 };
 
@@ -153,7 +153,7 @@ exports.denyFriendRequest = async (req, res) => {
        { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
        { new: true }
     );
-    req.flash('Success', "Denied Friend Request");
+    req.flash('success', "Denied Friend Request");
     res.redirect('/friends');
 };
 
@@ -200,7 +200,7 @@ exports.removeFriend = async (req, res) => {
         { new: true }
      );
 
-     req.flash("Success", "Friend Removed");
+     req.flash("success", "Friend Removed");
      res.redirect('/displayFriends')
 };
 
@@ -248,7 +248,7 @@ exports.nightMode = async (req, res) => {
 //         next(); // skip to next middleware
 //     }
 //     const fileExtension = req.file.mimetype.split('/')[1];
-//     // pass info to req.body gathering saved to req.body
+//     // pass info to req.body show saved to req.body
 //     req.body.photo = `${uuid.v4()}.${fileExtension}`; 
 //     // resize
 //     const photo = await jimp.read(req.file.buffer);

@@ -81,7 +81,7 @@ exports.saveShow = async (req, res) => {
             { _id: req.user.id },
             { $set: {"myShows.showChoices": [] } }
         )
-        req.flash('success', "Saved the show");
+        req.flash('success', "Successfully saved the show");
         res.redirect('/userHome');
 };
 
@@ -140,14 +140,14 @@ exports.getShows = async (req, res) => {
     res.render('shows', { title: 'Shows', shows: shows});
 }
 
-exports.editShow = async (req, res) => {
-    // 1. Find the show given the ID
-    const show = await Shows.findOne({ _id: req.params.id});
-    // 2. Confirm they are show owner
-    // confirmOwner(show, req.user); 
-    // 3. Render edit form 
-    res.render('editshow', {title: `Edit ${show.name}`, show: show})
-}
+// exports.editShow = async (req, res) => {
+//     // 1. Find the show given the ID
+//     const show = await Shows.findOne({ _id: req.params.id});
+//     // 2. Confirm they are show owner
+//     // confirmOwner(show, req.user); 
+//     // 3. Render edit form 
+//     res.render('editshow', {title: `Edit ${show.name}`, show: show})
+// }
 
 // Not a fan of these three routes. Should be one single route.
 exports.manageMustWatch = async (req, res) => {
@@ -177,8 +177,6 @@ exports.watchingNow = async (req, res) => {
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Editing / Updating ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
-
-
 // const confirmOwner = (show, user) => {
 //     console.log(user);
 //     // Must use MongoDb .equals to compare unique ._id to string id
@@ -189,46 +187,8 @@ exports.watchingNow = async (req, res) => {
 
 
 
-exports.getShowBySlug = async (req, res, next) => {
-    // check params
-    // res.json(req.params);
-    const show = await Shows.findOne({ slug: req.params.slug })
-    .populate('author');
-    // all data of show (check if query is working)
-    // res.json(gathering);
-    // --------------------
-    // if a query in mongoDB doesn't find anything, not an error will just return null
-    // if no gathering add 404 TODO
-    if( !show ){
-        return next();
-    }
-    res.render('show', {show, title: show.name});
-};
-
-exports.getShowsByTag = async (req, res) => {
-    const tag = req.params.tag;
-    const tagQuery = tag || { $exists: true }
-    const tagsPromise = Shows.getTags();
-    const ShowsPromise = Shows.find({ tags: tagQuery });
-    const [tags, Shows] = await Promise.all([tagsPromise, ShowsPromise]);
-    res.render('tags', { tags, title: 'Tags', tag, Shows });
-};
 
 
-// exports.searchShows = async (req, res) => {
-    // // 1. Find Recomendations
-    // const shows = await Shows.find({
-    //     $text: {
-    //         $search: req.query.q
-    //     }
-    // }, {
-    //     // Project Score 
-    //     score: { $meta: 'textScore' }
-    // })
-    // // Sort it
-    // .sort({
-    //     score: { $meta: 'textScore'}
-    // }).limit(5);
-    // res.json(Shows);
-// };
+
+
 

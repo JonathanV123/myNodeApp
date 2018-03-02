@@ -3,6 +3,7 @@ mixin singleFriendInfo(friendInfoShowInfo = {})
     -const recommendations = friendInfoShowInfo.myShows.recommendations
     -const mustWatch = friendInfoShowInfo.myShows.mustWatch
     -const apostrophe = "'s"
+    h2 Click on a show poster to view #{friendInfoShowInfo.name.concat(apostrophe)} comment about the show
     span.categoryTab #{friendInfoShowInfo.name.concat(apostrophe)} Currently Watching
     if watchingNow.length < 1
         div.noShowContainer

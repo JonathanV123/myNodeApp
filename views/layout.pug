@@ -20,15 +20,9 @@ html
                         .responsiveMenuContent
                             if user
                                 .navButtonContainer    
-                                    a(class="navLinkButton" href="/account") Account
+                                    a(class="navLinkButton" href="/logout") Log Out
                                 .navButtonContainer
-                                    a(class="navLinkButton" href="/logout") Log Out   
-                                if user.friendsStorage.pending.length >= 1 
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
-                                else
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/displayFriends") Friends               
+                                    a(class="navLinkButton" href="/account") Account                 
                             else
                                 .navButtonContainer
                                     a(class="navLinkButton" href="/register") Register
@@ -48,15 +42,9 @@ html
                                 a(class="navLinkButton" href="/userHome") Home
                             if user
                                 .navButtonContainer
-                                    a(class="navLinkButton" href="/logout") Log Out    
+                                    a(class="navLinkButton" href="/account") Account    
                                 .navButtonContainer    
-                                    a(class="navLinkButton" href="/account") Account
-                                if user.friendsStorage.pending.length >= 1 
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
-                                else
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/displayFriends") Friends               
+                                    a(class="navLinkButton" href="/logout") Log Out              
                             else
                                 .navButtonContainer
                                     a(class="navLinkButton" href="/register") Register
@@ -82,15 +70,9 @@ html
                         .responsiveMenuContent
                             if user
                                 .navButtonContainer    
-                                    a(class="navLinkButton" href="/account") Account
+                                    a(class="navLinkButton" href="/logout") Log Out
                                 .navButtonContainer
-                                    a(class="navLinkButton" href="/logout") Log Out   
-                                if user.friendsStorage.pending.length >= 1 
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
-                                else
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/displayFriends") Friends               
+                                    a(class="navLinkButton" href="/account") Account               
                             else
                                 .navButtonContainer
                                     a(class="navLinkButton" href="/register") Register
@@ -110,15 +92,10 @@ html
                                 a(class="navLinkButton" href="/userHome") Home
                             if user
                                 .navButtonContainer
-                                    a(class="navLinkButton" href="/logout") Log Out    
-                                .navButtonContainer    
-                                    a(class="navLinkButton" href="/account") Account
-                                if user.friendsStorage.pending.length >= 1 
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
-                                else
-                                    .navButtonContainer
-                                        a(class="navLinkButton" href="/displayFriends") Friends               
+                                    a(class="navLinkButton" href="/account") Account              
+                                .navButtonContainer   
+                                    a(class="navLinkButton" href="/logout") Log Out              
+ 
                             else
                                 .navButtonContainer
                                     a(class="navLinkButton" href="/register") Register

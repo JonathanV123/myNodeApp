@@ -16,6 +16,9 @@ body {
  -webkit-flex-direction: column;
  flex-direction: column; */
 
+ .recOptions{
+     margin: 15px 0 15px 0;
+ }
 .containerLanding {
     width: 100%;
     position: relative;
@@ -151,6 +154,7 @@ body {
     color: white;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .responsiveMenuButton:hover {
@@ -545,6 +549,7 @@ h3 {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+   
 }
 
 .showDescription {
@@ -552,6 +557,65 @@ h3 {
     font-size: 1.1em;
     color: white;
     font-family: 'Open Sans', sans-serif;
+    margin: 5px;
+    padding: 5px;
+}
+
+.saveShow{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    margin: 2px;
+    padding: 4px; 
+}
+
+.flash_success{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    background: white;
+    color: black;
+    border: 7px solid greenyellow;
+}
+.flash_error{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    background: white;
+    color: black;
+    border: 7px solid red;
+}
+
+.exit_flash{
+    font-size: 2em;
+    color: black;
+    font-weight: bold;
+    width: 50px;
+    background: transparent;
+    border: 3px solid greenyellow;
+}
+
+.exit_flash:hover{
+   background: lightgreen;
+   cursor: pointer;
 }
 
 .showCategoryContainer{
@@ -668,6 +732,8 @@ input[type="radio"]:checked {
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 10, .7);
     border-bottom: 4px solid #fff;
     border-top: 4px solid #fff;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .showSelectionUserInput {
@@ -707,7 +773,18 @@ span {
     -webkit-flex-direction: column;
     flex-direction: column;
 }
-
+.userHomeOptions{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    text-align: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
 .friendsContentContainer {
     width: 100%;
     display: -webkit-box;
@@ -784,7 +861,11 @@ span {
     align-items: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
 }
+
 
 .textCenter {
     text-align: center;
@@ -1003,24 +1084,8 @@ span {
     padding: 2px;
 }
 
-@media only screen and (max-width: 745px) {
-    .navResponsive {
-        width: 95%;
-        height: 100%;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-align-items: flex-end;
-        align-items: flex-end;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-    }
-    .nav {
-        display: none;
-    }
-}
+
+
 
 @media only screen and (max-width: 1600px) {
     .friendShowPoster {
@@ -1062,11 +1127,18 @@ span {
     .friendShowPoster {
         height: 235px;
     }
+    .viewProfileTab{
+        font-size: 1.2em;
+    }
 }
 
 @media only screen and (max-width: 910px) {
     .friendShowPoster {
         height: 210px;
+    }
+    .viewProfileTab{
+       display:block;
+       text-align: center;
     }
 }
 
@@ -1079,6 +1151,25 @@ span {
 @media only screen and (max-width: 770px) {
     .friendShowPoster {
         height: 230px;
+    }
+}
+
+@media only screen and (max-width: 745px) {
+    .navResponsive {
+        width: 95%;
+        height: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: flex-end;
+        align-items: flex-end;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+    .nav {
+        display: none;
     }
 }
 
@@ -1122,6 +1213,9 @@ span {
     .friendShowPoster {
         height: 260px;
         background-size: 100% 100%;
+    }
+    .viewProfileTab{
+        font-size: 1em;
     }
 }
 
