@@ -1,0 +1,33 @@
+extend layout  
+include mixins/friendRec
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
+block content
+    h2  Your Friends:
+    .welcomeContainer
+        if friendInformation.length < 1
+            a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends
+                img.icon(src="../assets/images/users.png" alt="Two People")
+            h2 You have no friends add some friends above!
+        .friendsList
+            if user && user.nightMode === true
+                img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+            else
+                img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
+            each friend in friendInformation
+                .friendProfile
+                    h2= friend.name   
+                    img.profilePic(alt="Profile Image")
+                    a(class="buttonStylingYellowBGSquare" href=`/displayFriend/${friend._id}`) View #{friend.name} Collection
+                    .removeFriendForm
+                        form.remove(method="POST" action=`/removeFriend/${friend._id}`)
+                            button(class="buttonStylingYellowBG" type= "submit" name="removeFriend") Remove
+
+
+

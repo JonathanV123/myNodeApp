@@ -3,11 +3,11 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
-const mail = require('../mail');
+const sgMail = require('@sendgrid/mail');
 
 exports.login = passport.authenticate('local',{
-    failureRedirct: '/login',
-    // failureFlash: 'Failed Login',
+    failureRedirect: '/login',
+    failureFlash: 'Account Does Not Exist',
     successRedirect: '/userHome',
     // successFlash: 'You are now logged in'
 });
@@ -24,8 +24,8 @@ exports.checkIfLoggedIn = (req, res, next) => {
         next();
         return
     }
-    // TO DO notification of login in or register
-    res.redirect('/');
+    req.flash('error', 'You must be logged in to do that!');
+    res.redirect('/login');
 };
 
 exports.forgotPassword = async (req, res) => {
@@ -41,15 +41,19 @@ exports.forgotPassword = async (req, res) => {
     await user.save();
     // 3. Send an email  local host now but when deployed, domain name
     const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
-    await mail.send({
-        user,
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+        to: `${user.email}.com`,
+        from: 'watchy@example.com',
         subject: 'Password Reset',
-        resetURL,
-        // We we render html it will look for password-reset.pug
-        filename: 'password-reset',
-    })
+        text: 'Texting what this text thing does',
+        html: `<strong>Click the link or copy and paste it to your address bar to reset your password</strong> <p>${resetURL}</p>`,
+    };
     // 4. Redirect to reset
-    res.render('login');
+    sgMail.send(msg)
+    req.flash('success', "Password reset has been sent")
+    res.redirect('/login');
 };
 
 exports.reset = async (req, res) => {
@@ -81,7 +85,7 @@ exports.update = async (req, res) => {
         resetPasswordTokenExpires: { $gt: Date.now() }
     });
     if (!user){
-        console.log('Password has expired');
+        req.flash('error', "Your password had expired. Please try again");
         return res.redirect('/login');
     }
     user.resetPasswordToken = undefined;
@@ -90,5 +94,6 @@ exports.update = async (req, res) => {
     await setPassword(req.body.password);
     const updatedUser = await user.save();
     await req.login(updatedUser);
-    console.log('Password has been reset success');
+    req.flash('success', "Your password has been reset")
+    res.redirect('/login');
 };

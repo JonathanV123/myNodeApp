@@ -1,0 +1,49 @@
+mixin singleFriendInfo(friendInfoShowInfo = {})
+    -const watchingNow = friendInfoShowInfo.myShows.watchingNow
+    -const recommendations = friendInfoShowInfo.myShows.recommendations
+    -const mustWatch = friendInfoShowInfo.myShows.mustWatch
+    -const apostrophe = "'s"
+    h2 Click on a show poster to view #{friendInfoShowInfo.name.concat(apostrophe)} comment about the show
+    span.categoryTab #{friendInfoShowInfo.name.concat(apostrophe)} Currently Watching
+    if watchingNow.length < 1
+        div.noShowContainer
+            span.noShowNotifcation Currently not watching any shows
+    else 
+        div.friendCollection
+            each show in watchingNow
+                div.friendShowPosterPrivate(id = `${show.id}` data-poster=`${show.poster_path}`)
+                    p.posterTitleOverlay #{show.name}
+                div.ownerDescription.hidden 
+                    h2.ownerComments #{show.name}  
+                    p.ownerComments #{friendInfoShowInfo.name.concat(apostrophe)} Comment:
+                    p.ownerComments #{show.ownerComment}  
+                    button(id="exitComment" class="buttonStylingBlueWhite" type="button" name="exitComment") OK
+    span.categoryTab #{friendInfoShowInfo.name.concat(apostrophe)} Recommendations
+    if recommendations.length < 1
+        div.noShowContainer
+            span.noShowNotifcation Currently no show Recommendations
+    else 
+        div.friendCollection
+            each show in recommendations
+                div.friendShowPosterPrivate(id = `${show.id}` data-poster=`${show.poster_path}`)
+                    p.posterTitleOverlay #{show.name} 
+                div.ownerDescription.hidden 
+                    h2.posterTitleOverlay #{show.name}  
+                    h3 #{friendInfoShowInfo.name.concat(apostrophe)} Comment:
+                    p #{show.ownerComment}  
+                    button(id="exitComment" class="buttonStylingBlueWhite" type="button" name="exitComment") OK
+    span.categoryTab #{friendInfoShowInfo.name.concat(apostrophe)} Must Watch Shows
+    if mustWatch.length < 1
+        div.noShowContainer
+            span.noShowNotifcation Currently no Must Watch shows
+    else 
+        div.friendCollection
+            each show in mustWatch
+                div.friendShowPosterPrivate(id = `${show.id}` data-poster=`${show.poster_path}`)
+                    p.posterTitleOverlay #{show.name}  
+                div.ownerDescription.hidden 
+                    h2.posterTitleOverlay #{show.name}  
+                    h3 #{friendInfoShowInfo.name.concat(apostrophe)} Comment:
+                    p #{show.ownerComment}    
+                    button(id="exitComment" class="buttonStylingBlueWhite" type="button" name="exitComment") OK
+             

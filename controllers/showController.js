@@ -1,109 +1,121 @@
 const mongoose = require('mongoose');
-// const Shows = mongoose.model('Media');
 const User = mongoose.model('User');
 const request = require('request');
 const rp = require('request-promise');
 
-
-
 exports.landingPage = (req, res) => {
-    res.render('layout')
+    res.render('landing')
 };
-
 exports.userHome = async (req, res) => {
-    res.render(`userHome`);
+    const friendsArr = req.user.friendsStorage.friends;
+    const arr = [];
+    // 2. Store Each Friend Email in Result
+    const result = friendsArr.forEach(friend => arr.push(friend.email));
+    // Find Each User with email and get all their contents
+    const friendsInfo = await User.find({email: arr })
+    res.render(`userHome`, {friendInformation: friendsInfo});
 }
 
-exports.watchingNow = (req, res) => {
-    res.render('watchingNow');
-};
-
-
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Creation and Deletion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-exports.createRecommendation = async (req, res) => {
-    const show = req.body.name
-    const tag = req.body.tags;
-    const createRecommendationPromise = await User.findOneAndUpdate( 
-        {_id: req.user.id},
-        { $addToSet: { "myShows.recommendations": { name: show, tags: tag }} }
-    );
-    await createRecommendationPromise.save();
-    res.redirect('/userHome');
-};
-
-exports.addWatchingNow = async (req, res) => {
-    const show = req.body.name;
+exports.selectShow = async (req, res) => {
+    const showID = req.params.id;
+    const comment = req.body.comment;
+    var userModel = User;
     var options = {
-        uri: `https://api.themoviedb.org/3/search/tv?api_key=${process.env.MOVIEDB_KEY}&query=${show}`,
+        uri: `https://api.themoviedb.org/3/tv/${showID}?api_key=${process.env.MOVIEDB_KEY}&language=en-US`,
         // qs: {
         //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
         // },
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true // Automatically parses the JSON string in the response
+        json: true,
+        User: userModel,
     };
     rp(options)
-    .then(function (repos) {
-        if(repos.results.length < 1){
-            res.send('No matches');
-        } else {
-            res.json(repos);
+        .then(async function (data) {
+                const showOptionsSaved = await User.update( 
+                    {_id: req.user.id},
+                    { $addToSet: { "myShows.showChoices": data } }
+                );    
+                res.render('showOptions', { 
+                    showSelection : data, 
+                 });                 
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+};
+
+
+
+exports.saveShow = async (req, res) => {
+    // Refactor possible
+        const showID = parseInt(req.params.id);
+        const comment = req.body.comment;
+        const category = req.body.showCategory;
+        const userShowsArr = req.user.myShows.showChoices;
+        const result = userShowsArr.filter(show => show.id === showID);
+        // Add user comment and category
+        result[0].ownerComment = comment;
+        result[0].showCategory = category;
+        if(category === "Must Watch"){
+            const saveShow = await User.update( 
+                {_id: req.user.id},
+                { $addToSet: { "myShows.mustWatch": result[0] }}
+            );  
         }
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
-
-    // const tag = req.body.tags;
-    // const watchingNowPromise = await User.findOneAndUpdate( 
-    //         {_id: req.user.id},
-    //         { $addToSet: { "myShows.watchingNow": { name: show, tags: tag }} }
-    // );
-    // await watchingNowPromise.save();
-    // res.redirect('/userHome');
+        if(category === "Watching Now"){
+            const saveShow = await User.update( 
+                {_id: req.user.id},
+                { $addToSet: { "myShows.watchingNow": result[0] }}
+            );  
+        }
+        if(category === "Recommendations"){
+            const saveShow = await User.update( 
+                {_id: req.user.id},
+                { $addToSet: { "myShows.recommendations": result[0] }}
+            );  
+        }
+        const update = await User.update(
+            { _id: req.user.id },
+            { $set: {"myShows.showChoices": [] } }
+        )
+        req.flash('success', "Successfully saved the show");
+        res.redirect('/userHome');
 };
+
 exports.addShow = (req, res) => { 
-    res.render('addShow', {
-        title: 'Add A Show'
-    })
+    res.render('addShow')
 };
 
-// exports.getWatchingNowById = async (req, res) => {
-//     // const id = req.params.id;
-//     // const show = await User.find(
-//     //     { _id: req.user.id },
-//     //     { watchingNow: { $elemMatch: {_id: id }}}
-//     // )
-//     // res.send(show);
-// };
 
 exports.removeShow = async (req, res) => {
     // This is an ugly if else statement. Why isn't it possible to
     // change queryName directly in a single findByIdAndUpdate?
     // ask on stackoverflow
-    let queryName = req.body.category;
-    if(queryName === "watchingNow"){
+    const showID = parseInt(req.params.id);
+    let queryName = req.params.category;
+    if(queryName === "Watching Now"){
         const user = await User.findByIdAndUpdate(req.user._id,
-            { $pull: { "myShows.watchingNow" : {_id: req.params.id}}},
+            { $pull: { "myShows.watchingNow" : {id: showID}}},
             { new: true }
         )
-            res.json(user);
-    } else if (queryName === "recommendations")
+    } else if (queryName === "Recommendations")
     {
         const user = await User.findByIdAndUpdate(req.user._id,
-            { $pull: { "myShows.recommendations" : {_id: req.params.id}}},
+            { $pull: { "myShows.recommendations" : {id: showID}}},
             { new: true }
         )
-            res.json(user);    
     }
-    else if (queryName = 'topPicks') {
+    else if (queryName = 'Must Watch') {
         const user = await User.findByIdAndUpdate(req.user._id,
-            { $pull: { "myShows.topPicks" : {_id: req.params.id}}},
+            { $pull: { "myShows.mustWatch" : {id: showID}}},
             { new: true }
         )
-            res.json(user); 
     }
+    req.flash('success', "Successfully removed the show");
+    res.redirect('/userHome');
 };
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Creation and Deletion ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
@@ -116,9 +128,10 @@ exports.manageShows = async (req, res) => {
         {_id: req.user._id},
         { myShows : 1 },
     );
-    const watchingNowArr = data[0].myShows.watchingNow
-    const recommendationsArr = data[0].myShows.recommendations
-    res.render(`manageShows`, {user: req.user , recommendationsArr, watchingNowArr});
+    const watchingNowArr = data[0].myShows.watchingNow;
+    const recommendationsArr = data[0].myShows.recommendations;
+    const mustWatchArr = data[0].myShows.mustWatch;
+    res.render(`showCollectionSelection`, {user: req.user , recommendationsArr, watchingNowArr, mustWatchArr});
 };
 
 exports.getShows = async (req, res) => {
@@ -127,27 +140,41 @@ exports.getShows = async (req, res) => {
     res.render('shows', { title: 'Shows', shows: shows});
 }
 
-exports.editShow = async (req, res) => {
-    // 1. Find the show given the ID
-    const show = await Shows.findOne({ _id: req.params.id});
-    // 2. Confirm they are show owner
-    // confirmOwner(show, req.user); 
-    // 3. Render edit form 
-    res.render('editshow', {title: `Edit ${show.name}`, show: show})
-}
+// exports.editShow = async (req, res) => {
+//     // 1. Find the show given the ID
+//     const show = await Shows.findOne({ _id: req.params.id});
+//     // 2. Confirm they are show owner
+//     // confirmOwner(show, req.user); 
+//     // 3. Render edit form 
+//     res.render('editshow', {title: `Edit ${show.name}`, show: show})
+// }
 
-// exports.updateShow = async (req, res) => {
-//     // set the location data to be a point 
-//     const show = await Shows.findOneAndUpdate({ _id: req.params.id}, req.body,
-//         {
-//         new: true, //return the new show instead of old one
-//         runValidators: true,
-//     }).exec();
-//     res.redirect(`/show/${show._id}/edit`);
-// };
+// Not a fan of these three routes. Should be one single route.
+exports.manageMustWatch = async (req, res) => {
+    const category = "mustWatch";
+    const data = await User.find( 
+        {_id: req.user._id},
+        { "myShows.mustWatch" : 1 },
+    );
+    res.render('manageShowCollection', {showInfo: data, showCategory: category })
+};
+exports.manageRecommendations = async (req, res) => {
+    const category = "recommendations";
+    const data = await User.find( 
+        {_id: req.user._id},
+        { "myShows.recommendations" : 1 },
+);
+    res.render('manageShowCollection', {showInfo: data, showCategory: category })
+};
+exports.watchingNow = async (req, res) => {
+    const category = "watchingNow";
+    const data = await User.find( 
+        {_id: req.user._id},
+        { "myShows.watchingNow" : 1 },
+    );
+    res.render('manageShowCollection', {showInfo: data, showCategory: category })
+};
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Editing / Updating ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
-
 
 
 // const confirmOwner = (show, user) => {
@@ -160,46 +187,8 @@ exports.editShow = async (req, res) => {
 
 
 
-exports.getShowBySlug = async (req, res, next) => {
-    // check params
-    // res.json(req.params);
-    const show = await Shows.findOne({ slug: req.params.slug })
-    .populate('author');
-    // all data of show (check if query is working)
-    // res.json(gathering);
-    // --------------------
-    // if a query in mongoDB doesn't find anything, not an error will just return null
-    // if no gathering add 404 TODO
-    if( !show ){
-        return next();
-    }
-    res.render('show', {show, title: show.name});
-};
-
-exports.getShowsByTag = async (req, res) => {
-    const tag = req.params.tag;
-    const tagQuery = tag || { $exists: true }
-    const tagsPromise = Shows.getTags();
-    const ShowsPromise = Shows.find({ tags: tagQuery });
-    const [tags, Shows] = await Promise.all([tagsPromise, ShowsPromise]);
-    res.render('tags', { tags, title: 'Tags', tag, Shows });
-};
 
 
-// exports.searchShows = async (req, res) => {
-    // // 1. Find Recomendations
-    // const shows = await Shows.find({
-    //     $text: {
-    //         $search: req.query.q
-    //     }
-    // }, {
-    //     // Project Score 
-    //     score: { $meta: 'textScore' }
-    // })
-    // // Sort it
-    // .sort({
-    //     score: { $meta: 'textScore'}
-    // }).limit(5);
-    // res.json(Shows);
-// };
+
+
 

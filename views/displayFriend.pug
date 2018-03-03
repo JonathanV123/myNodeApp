@@ -1,0 +1,9 @@
+extend layout  
+include mixins/singleFriendInfo
+block content
+    .friendInfoContainer
+        if user && user.nightMode === true
+            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        else
+            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
+        +singleFriendInfo(friendInformation)

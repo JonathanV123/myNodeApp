@@ -3,95 +3,92 @@ const router = express.Router();
 const showController = require('../controllers/showController');
 const userController = require('../controllers/userController');
 const authenticationController = require('../controllers/authenticationController');
-const { catchErrors } = require('../errorHandler/errorHandling');
+const {catchErrors} = require('../errorHandler/errorHandling');
 
 router.get('/', showController.landingPage);
-router.get('/userHome', 
+
+router.get('/userHome',
     authenticationController.checkIfLoggedIn,
-    showController.userHome 
+    catchErrors(showController.userHome)
 );
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Show Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-router.get('/createShow',
-     authenticationController.checkIfLoggedIn,
-     showController.addShow
+router.get('/addShow',
+    authenticationController.checkIfLoggedIn,
+    showController.addShow
 );
-router.post('/createShow', 
-//     showController.upload,
-//     catchErrors(showController.resize),
-    // authenticationController.checkIfLoggedIn,
-    catchErrors(showController.createRecommendation),
+router.get('/selectShow/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.selectShow)
 );
-// router.get('/showOptions',
-//      authenticationController.checkIfLoggedIn,
-//      showController.showOptions
-// );
-// router.post('/createShow/:id', 
-//     // showController.upload,
-//     // catchErrors(showController.resize),
-//     catchErrors(showController.updateShow)
-// );
+
+router.post('/saveShow/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.saveShow)
+);
+
+
+// Want to refactor these 3 into a single route.
+router.get('/manageMustWatch',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.manageMustWatch)
+)
+router.get('/manageRecommendations',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.manageRecommendations)
+)
+router.get('/manageWatchingNow',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(showController.watchingNow)
+)
 
 router.get('/manageShows',
     authenticationController.checkIfLoggedIn,
-    showController.manageShows
+    catchErrors(showController.manageShows)
 );
 
-router.get('/watchingNow',
+router.post('/removeShow/:id/:category',
     authenticationController.checkIfLoggedIn,
-    showController.watchingNow
+    catchErrors(showController.removeShow)
 );
 
-router.post('/watchingNow',
-    showController.addWatchingNow,
-);
-
-// router.get('/api/watchingNow/:id',   
-//     authenticationController.checkIfLoggedIn, 
-//     showController.getWatchingNowById
-// );
-
-router.post('/api/removeShow/:id', 
-    authenticationController.checkIfLoggedIn,    
-    showController.removeShow,
-);
-
-
-router.get('/show/:slug', catchErrors(showController.getShowBySlug));
-
-router.get('/tags', catchErrors(showController.getShowByTag));
-router.get('/tags/:tag', catchErrors(showController.getShowByTag));
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Show Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
- 
-
-
-
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  Friend Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-router.get('/friends', userController.friends);
-
-router.post('/api/addFriend', 
+router.get('/friends',     
     authenticationController.checkIfLoggedIn,
-    userController.addFriend 
+    userController.friends
 );
 
-router.post('/api/acceptFriendRequest/:id', 
-    authenticationController.checkIfLoggedIn,
-    userController.acceptFriendRequest 
+router.post('/friends',
+    catchErrors(userController.addFriend)
 );
 
-    router.post('/api/denyFriendRequest/:id', 
+router.post('/friends/accept/:id',
     authenticationController.checkIfLoggedIn,
-    userController.denyFriendRequest 
+    catchErrors(userController.acceptFriendRequest)
 );
 
+router.post('/friends/deny/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.denyFriendRequest)
+);
+
+router.post('/removeFriend/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.removeFriend)
+);
+
+router.get('/displayFriends',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.displayFriends)
+);
+
+router.get('/displayFriend/:id',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.displayFriend)
+);
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Friend Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
-
-
-
-
-
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Account and Login Routes ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 router.get('/login', userController.loginForm);
@@ -100,7 +97,7 @@ router.post('/login', authenticationController.login);
 
 router.get('/register', userController.registerForm);
 
-router.post('/register', 
+router.post('/register',
     // 1. Validate registration data
     userController.validateRegistration,
     userController.register,
@@ -108,8 +105,8 @@ router.post('/register',
     authenticationController.login
 );
 
-router.get('/account', 
-    authenticationController.checkIfLoggedIn, 
+router.get('/account',
+    authenticationController.checkIfLoggedIn,
     userController.account
 );
 
@@ -122,13 +119,15 @@ router.post('/account/forgotPassword', catchErrors(authenticationController.forg
 router.get('/account/reset/:token', catchErrors(authenticationController.reset));
 
 router.post('/account/reset/:token',
-    authenticationController.confirmedPasswords, 
+    authenticationController.confirmedPasswords,
     catchErrors(authenticationController.update)
 );
+
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Account and Login Routes ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-
-// // API
-// router.get('/api/search', catchErrors(showController.searchShows));
+router.post('/nightMode',
+    authenticationController.checkIfLoggedIn,
+    catchErrors(userController.nightMode),
+);
 
 module.exports = router;

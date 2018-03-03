@@ -1,12 +1,24 @@
 extends layout
 include mixins/friendRequest
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
     if user
+        if user && user.nightMode === true
+            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        else
+            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
         .addFriendContainer
-            form.friends(method="POST" action=`/api/addFriend`)
-                label(for="name") Name
-                input(type="name" name="name")  
-                button(type="submit" name="addFriend") Search
+            form.friends(method="POST" action=`/friends`)
+                label(for="email" class="email") Enter friends email
+                input(class= "friendsInput" type="email" name="email" placeholder="Enter Friends Email Address" required)  
+                button(class="buttonStylingYellowBG" type="submit" name="addFriend") Send
         .friendRequestContainer
             if user.friendsStorage.pending.length >= 1 
                 each friend in user.friendsStorage.pending

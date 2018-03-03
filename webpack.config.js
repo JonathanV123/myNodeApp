@@ -1,4 +1,5 @@
 const path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -17,7 +18,13 @@ module.exports = {
                 presets: ['env']
             },
             test: /\.css$/,
-            loader: "style-loader!css-loader"
-        }]
-    }
+            loader: "style-loader!css-loader",
+        }],
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
+    ]
 }

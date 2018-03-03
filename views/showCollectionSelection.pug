@@ -1,0 +1,17 @@
+extends layout
+include mixins/showCard
+block content
+    .welcomeContainer
+        h2  Hello! #{user.name}
+        a(class="buttonStylingYellowBGSquare" href=`/addShow`) Add to your shows collection
+            img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
+        a(class="buttonStylingYellowBGSquare" href="/manageWatchingNow") Manage shows you are watching now  
+            img.icon(src="../assets/images/watchingTV.png" alt="Person Watching TV")
+        a(class="buttonStylingYellowBGSquare" href="/manageRecommendations") Manage show recommendations    
+            img.icon(src="../assets/images/001-like.png" alt="Thumbs Up")
+        a(class="buttonStylingYellowBGSquare" href="/manageMustWatch") Manage your must watch shows                                  
+            img.icon(src="../assets/images/fireIcon.png" alt="Fire")
+        if user && user.nightMode === true
+            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        else
+            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  

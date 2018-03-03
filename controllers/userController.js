@@ -4,7 +4,7 @@ const promisify = require('es6-promisify');
 // const multer = require('multer');
 // const jimp = require('jimp');
 // const uuid = require('uuid');
-promisify.Promise = require("bluebird");
+// promisify.Promise = require("bluebird");
 
 
 exports.loginForm = (req, res) => {
@@ -62,7 +62,9 @@ exports.updateAccount = async (req, res) => {
         // Return new user, run validation steps, query is required to do it properly 
         { new: true, runValidators: true, context: 'query'}
     );
-    res.redirect('back');
+    await req.login(user);
+    req.flash('success', "Successfully Updated Account Settings");
+    res.redirect('/account');
 };
 
 exports.friends = (req, res) => {
@@ -70,16 +72,15 @@ exports.friends = (req, res) => {
 };
 
 exports.addFriend = async (req, res) => {
-    const emailToSearch = req.body.name;
+    const recipientEmail = req.body.email
     // Get friend you are searching for
     const friend = await User.find(
-        {email: emailToSearch},
+        {email: recipientEmail},
     );
     // If no friend notify user
     if(friend.length == 0){
-        res.send('No users match');
-        // quit if no user
-        return;
+        req.flash('Failure', "No People Found With That Email. Please Try Again");
+        return res.redirect('back'); // Quit
     } 
     // Save friend ID
     const friendId = friend[0]._id;
@@ -90,7 +91,8 @@ exports.addFriend = async (req, res) => {
         {_id: friendId},
         { $addToSet: { "friendsStorage.pending" : user }}
     );
-    res.send('Friend Request Sent');
+    req.flash('success', "Friend Request Sent");
+    res.redirect('back');
 };
 
 exports.acceptFriendRequest = async (req , res) =>{
@@ -132,7 +134,8 @@ exports.acceptFriendRequest = async (req , res) =>{
         {_id: userId},
         { $addToSet: { "friendsStorage.friends" : friendObj }}
     )
-    res.send('Added Friend');
+    req.flash('success', "Friend Request Accepted");
+    res.redirect('/friends');
 };
 
 exports.denyFriendRequest = async (req, res) => {
@@ -152,8 +155,77 @@ exports.denyFriendRequest = async (req, res) => {
        { $pull: { "friendsStorage.pending" : { email: friendEmail }}},
        { new: true }
     );
-    res.send('Request denied')
+    req.flash('success', "Denied Friend Request");
+    res.redirect('/friends');
 };
+
+exports.displayFriends = async (req, res) => {
+    // Current user
+    const userId = req.user._id;
+    // Current user's friends
+    const friends = req.user.friendsStorage.friends;
+    const emailsList =[];
+    const friendsEmails = friends.forEach((friend)=> {
+        emailsList.push(friend.email);
+    });
+    const friendsInfo = await User.find({email: emailsList })
+    res.render(`displayFriends`, {friendInformation: friendsInfo});
+};
+
+exports.displayFriend = async (req, res) => {
+    // Current user
+    const friendID = req.params.id;
+    // Current user's friends
+    const friendsInfo = await User.find({_id: friendID })
+    res.render(`displayFriend`, {friendInformation: friendsInfo[0]});
+};
+
+exports.removeFriend = async (req, res) => {
+    // Current user
+    const userID = req.user._id;
+    const userEmail = req.user.email;
+    // Friend to remove _id
+    const friendNoMore = req.params.id;
+    // Get friend info so we can query by name
+    const friendsInfo = await User.find({_id: friendNoMore })
+    const friendEmail = friendsInfo[0].email;
+   
+    const removeFromCurrentUser = await User.findOneAndUpdate(
+        { _id: userID },
+        { $pull: { "friendsStorage.friends" : { email: friendEmail }}},
+        { new: true }
+     );
+
+    const removeFromFriends = await User.findOneAndUpdate(
+        { email: friendEmail },
+        { $pull: { "friendsStorage.friends" : { email: userEmail }}},
+        { new: true }
+     );
+
+     req.flash("success", "Friend Removed");
+     res.redirect('/displayFriends')
+};
+
+exports.nightMode = async (req, res) => {
+    const user = await User.find(
+        { _id: req.user._id }    
+    )
+    const currentNightModeValue = user[0].nightMode;
+    const userID = req.user._id
+
+    if(currentNightModeValue === false){
+        await User.update(
+            { _id: userID },
+            { $set: { nightMode: true } }  
+        )
+    } else {
+        await User.update(
+            {_id: userID },
+            {$set: { nightMode: false } }    
+        )
+    }
+};
+
 // Keeping these as an option for this project. I might still incorporate this
 
 // Where file will be stored when uploaded and what type of files are allowed
@@ -178,7 +250,7 @@ exports.denyFriendRequest = async (req, res) => {
 //         next(); // skip to next middleware
 //     }
 //     const fileExtension = req.file.mimetype.split('/')[1];
-//     // pass info to req.body gathering saved to req.body
+//     // pass info to req.body show saved to req.body
 //     req.body.photo = `${uuid.v4()}.${fileExtension}`; 
 //     // resize
 //     const photo = await jimp.read(req.file.buffer);

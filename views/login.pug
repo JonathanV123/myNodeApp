@@ -1,7 +1,14 @@
 extends layout
 include mixins/loginForm
 include mixins/forgotPassword
-
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
     +loginForm()
     +forgotPasswordForm()

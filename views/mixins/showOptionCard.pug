@@ -1,0 +1,29 @@
+mixin showOptionCard(showSelection = {})
+    -const showName = showSelection.name || "No Show Name"
+    -const showOverview = showSelection.overview || "No Overview"
+    div(class="showBackdropContainer"  data-backdrop=`${showSelection.backdrop_path}`)
+        div.show(id= `${showSelection.id}` data-poster=`${showSelection.poster_path}`)
+        .showDescription
+            if showSelection.name === null || showSelection.name.length < 1
+                h2 Show Name Not Found
+            else 
+                h2= showSelection.name
+            if showSelection.overview === null || showSelection.overview.length < 1
+                h2 Show Overview Not Found
+            else 
+                p= showSelection.overview
+    div.showSelectionUserInput
+        form.saveShow(id=`${showSelection.id}` method="POST" action=`/saveShow/${showSelection.id}`)
+            - const showCategoryOptions = ['Watching Now','Must Watch','Recommendations']
+            - const showCategory = showSelection.showCategory || []
+            h3 Select A Collection To Add This Show To
+            ul.tagsCategory
+                each option in showCategoryOptions 
+                    .tagChoicesReview
+                        input(class="radioButton"  type="radio" id=choice value=option name="showCategory" checked=(showCategory.includes(option)) required)
+                        label(for=option) #{option}  
+            h3 Quick Show Description
+            textarea(class= "textArea" id="userComment" method="POST" name="comment" placeholder="Enter comments about the show. Funny, Scary, Happy Ect..") 
+            button(class= "buttonStylingYellowBG" type= "submit") Add to list
+        
+

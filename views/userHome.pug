@@ -1,18 +1,48 @@
 extend layout  
-include mixins/friendCard
 include mixins/friendRec
+block flashes
+    if locals.flashes
+        - const flashCategories = Object.keys(locals.flashes)
+        each category in flashCategories
+            each message in flashes[category]
+                .flashMessage(class=`flash_${category}`)
+                    p.flashText!= message
+                    button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
-    -const friends = user.friendsStorage.friends
-    .recOptions
-    h2= user.name
-        .recOptionsLinks
-            a(href=`/manageShows`) Manage Your Shows
-        if friends.length >=1
-            each friend in friends
+    -const friendInfo = friendInformation
+    .welcomeContainer
+        h2  Welcome #{user.name}
+        if user.friendsStorage.pending.length >= 1 
+            .navButtonContainer
+                a(class="navLinkButton" href="/friends") Friend Request: #{user.friendsStorage.pending.length}
+        .userHomeOptions
+            a(class="buttonStylingYellowBGSquare" href=`/addShow`) Add to your shows collection
+                img.icon(src="../assets/images/add.png" alt="TV Screen")
+            a(class="buttonStylingYellowBGSquare" href=`/manageShows`) Manage Your Shows
+                img.icon(src="../assets/images/tvScreen.png" alt="TV Screen")
+            if user.friendsStorage.friends.length < 1    
+                a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends
+                    img.icon(src="../assets/images/users.png" alt="Two People")
+            else
+            a(class="buttonStylingYellowBGSquare" href=`/displayFriends`) View Friends
+                    img.icon(src="../assets/images/groupFriends.png" alt="Group Of Friends")
+        .recOptions
+            .recControls
+                span Swipe left or right below to view what you friends are watching now
+                img.icon(src="../assets/images/swipeLeftRight.png" alt="Finger Swiping Left and Right")
+                span Or
+                img.icon(src="../assets/images/mouseClick.png" alt="Mouse Click")
+                span Click and Drag
+    .friendsContentContainer
+        if user && user.nightMode === true
+            img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
+        else
+            img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon")  
+        if friendInfo.length >= 1
+        each friend in friendInfo
                 .friendContainer
-                    +friendCard(friend)
-                        .friend
                     +friendRec(friend)
+
                         
    
 

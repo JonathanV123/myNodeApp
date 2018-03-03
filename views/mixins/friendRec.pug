@@ -1,12 +1,14 @@
-mixin friendRec(showRec = {})
-    -const watchingNow = showRec.shows.watchingNow
-    -const recommendations = showRec.shows.recommendations
-    each show in watchingNow
-        .friendWatchingNow  
-            p= show.name
-            p= show.tags
-    each show in recommendations
-        .friendRecommendations  
-            p= show.name
-            p= show.tags
-               
+mixin friendRec(friend = {})
+    -const watchingNow = friend.myShows.watchingNow
+    -const apostrophe = "'s"
+    span.categoryTab #{friend.name.concat(apostrophe)} Currently Watching
+    if watchingNow.length < 1
+        div.noShowContainer
+            span.noShowNotifcation #{friend.name.concat(apostrophe)} Not watching Any Shows
+    else 
+        div.carousel
+            each show in watchingNow
+                div.friendShowPoster(id = `${show.id}` data-poster=`${show.poster_path}` )
+                    p.posterTitleOverlay #{show.name}
+    a(class="navLinkButtonTrimmed" href=`/displayFriend/${friend._id}`) 
+        span.viewProfileTab Click Here To View #{friend.name.concat(apostrophe)} Must Watch Shows and Recommendations

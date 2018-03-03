@@ -1,15 +1,8 @@
 mixin showCard(show = {})
-    div(class= `show ${show.id}`)
-        h2.title
+    .showManagementContainer(id=`${show.id}`)
+        h2 #{show.name}
+        div.show(data-poster=`${show.poster_path}`)
         .removeForm
-            form.remove(id=`${show.id}` method="POST" action=`/api/removeShow/${show._id}/`)
-                button(type= "submit" name="removeShow") Delete
-                //- if user && show.author.equals(user._id)
-                //-     .edit
-                //-         a(href=`/show/${show._id}/edit`) Edit
-        h2= show.name
-        .showDescription
-            //- p= show.description.split(' ').slice(0, 25).join(' ')
-            h3 User #{show.name} Review is:
-            p= show.tags
-               
+            form.remove(data-identity=`${show.id}` data-category=`${show.showCategory}` method="POST" action=`/removeShow/${show.id}/${show.showCategory}`)
+                button(class="buttonStylingYellowBG" type= "submit" name="removeShow") Remove
+                
