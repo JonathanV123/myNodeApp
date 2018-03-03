@@ -44,15 +44,16 @@ exports.forgotPassword = async (req, res) => {
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
-        to: 'jonathanvox01@gmail.com',
-        from: 'test@example.com',
+        to: `${user.email}.com`,
+        from: 'watchy@example.com',
         subject: 'Password Reset',
         text: 'Texting what this text thing does',
         html: `<strong>Click the link or copy and paste it to your address bar to reset your password</strong> <p>${resetURL}</p>`,
     };
     // 4. Redirect to reset
     sgMail.send(msg)
-    res.render('login');
+    req.flash('success', "Password reset has been sent")
+    res.redirect('/login');
 };
 
 exports.reset = async (req, res) => {
