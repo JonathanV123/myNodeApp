@@ -11,8 +11,8 @@ mongoose.connection.on('error', (err) => {
 });
 
 // import all models
-require('./models/User');
+require('./models/user');
 
 const app = require('./app');
 app.set('port', process.env.PORT || 3000);
-const server = app.listen(app.get('port'), () => {});
+const server = app.listen(app.get('port'), () => {console.log(`starting on ${process.env.PORT}`)});
