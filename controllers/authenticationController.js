@@ -7,7 +7,7 @@ const sgMail = require('@sendgrid/mail');
 
 exports.login = passport.authenticate('local',{
     failureRedirect: '/login',
-    failureFlash: 'Account Does Not Exist',
+    failureFlash: 'Account does not exist, or account name and password were incorrect',
     successRedirect: '/userHome',
     // successFlash: 'You are now logged in'
 });
@@ -32,7 +32,7 @@ exports.forgotPassword = async (req, res) => {
     // 1. See if user exists
     const user = await User.findOne({ email: req.body.email });
     if(!user) {
-        console.log('User does not exist');
+        req.flash('error', 'User does not exist');
         return res.redirect('/login');
     }
     // 2. Reset tokens and expiry on their account
@@ -61,9 +61,8 @@ exports.reset = async (req, res) => {
         resetPasswordToken: req.params.token,
         resetPasswordTokenExpires: { $gt: Date.now() }
     });
-    console.log(user);
     if (!user){
-        console.log('Password has expired or No user found');
+        req.flash('error', "Password has expired, or no user found")
         return res.redirect('/login');
     }
     // if there is a user, show the reset password form
@@ -79,7 +78,6 @@ exports.confirmedPasswords = (req, res, next) => {
 };
 
 exports.update = async (req, res) => {
-    console.log('UPDATE RUNNING');
     const user = await User.findOne({  
         resetPasswordToken: req.params.token,
         resetPasswordTokenExpires: { $gt: Date.now() }

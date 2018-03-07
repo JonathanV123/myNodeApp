@@ -11325,12 +11325,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_slick_carousel__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_slick_carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_slick_carousel__);
-// import removeShow from './modules/removeShow';
-// import acceptFriendRequest from './modules/acceptFriendRequest';
-// import denyFriendRequest from './modules/denyFriendRequest';
-// import searchFriends from './modules/searchFriends';
-
-// import chooseThisShow from './modules/chooseThisShow';
 
 
 
@@ -11341,11 +11335,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// const removeForms = document.querySelectorAll('form.remove');
-// const addFriends = document.querySelectorAll('form.friends');
-// const acceptRequest = document.querySelectorAll('form.acceptFriend');
-// const denyRequest = document.querySelectorAll('form.denyRequest');
-// const saveShow = document.querySelectorAll('form.saveShow');
+
 const friendShowPoster = document.querySelectorAll('.friendShowPoster');
 const showPoster = document.querySelectorAll('.show');
 const searchBar = document.querySelector('.search');
@@ -11456,37 +11446,33 @@ function responsiveMenuClose() {
 }
 
 checkIfResponsive();
-
+// Add event listener to night mode button
 addEventListenerClick(nightModeSwitch, __WEBPACK_IMPORTED_MODULE_5__modules_darken__["a" /* default */]);
-addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_4__modules_exitComment__["a" /* default */]);
+// Show the user comment 
 addEventListenerClick(showPosterInCollection, __WEBPACK_IMPORTED_MODULE_3__modules_showOwnerComment__["a" /* default */]);
-// addEventListener(saveShow, chooseThisShow);
-// addEventListener(addFriends, searchFriends);
-// addEventListener(acceptRequest, acceptFriendRequest);
-// addEventListener(removeForms, removeShow);
-// addEventListener(denyRequest, denyFriendRequest);
+// Exit user comment button
+addEventListenerClick(exitCommentButton, __WEBPACK_IMPORTED_MODULE_4__modules_exitComment__["a" /* default */]);
+// Refactor Flag Start ********************************
+// Get background posters for /userHome posters
 Object(__WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */])(friendShowPoster);
+// Get background posters for selectShow poster (Choosing show to save)
+// and user collection page
 Object(__WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */])(showPoster);
+// Get background posters for friends collection posters
 Object(__WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */])(showPosterInCollection);
+// Refactor Flag End ********************************
 Object(__WEBPACK_IMPORTED_MODULE_2__modules_backDropBG__["a" /* default */])(backdrop);
+// Allow for searching for shows on the fly
 Object(__WEBPACK_IMPORTED_MODULE_1__modules_typeSearch__["a" /* default */])(searchBar);
 
 
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-    // chooseThisShow,
     darken: __WEBPACK_IMPORTED_MODULE_5__modules_darken__["a" /* default */],
     exitComment: __WEBPACK_IMPORTED_MODULE_4__modules_exitComment__["a" /* default */],
     showOwnerComment: __WEBPACK_IMPORTED_MODULE_3__modules_showOwnerComment__["a" /* default */],
     backdropBGImage: __WEBPACK_IMPORTED_MODULE_2__modules_backDropBG__["a" /* default */],
     typeSearch: __WEBPACK_IMPORTED_MODULE_1__modules_typeSearch__["a" /* default */],
     posterBGImage: __WEBPACK_IMPORTED_MODULE_0__modules_posterBG__["a" /* default */],
-    // removeShow,
-    // searchFriends,
-    // acceptFriendRequest,
-    // denyFriendRequest,
 });
 
 
@@ -13496,7 +13482,7 @@ function darken(e) {
         .post("/nightMode")
         .then(res => {
         }).catch(err => {
-            console.log("Night Mode Failed");
+            console.log(err);
         });
 }
 
@@ -16524,3 +16510,4 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=locals-app.bundle.js.map

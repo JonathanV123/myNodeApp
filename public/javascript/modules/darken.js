@@ -18,7 +18,7 @@ function darken(e) {
         .post("/nightMode")
         .then(res => {
         }).catch(err => {
-            console.log("Night Mode Failed");
+            console.log(err);
         });
 }
 

@@ -177,16 +177,6 @@ exports.watchingNow = async (req, res) => {
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Editing / Updating ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
-// const confirmOwner = (show, user) => {
-//     console.log(user);
-//     // Must use MongoDb .equals to compare unique ._id to string id
-//     if(!show.author.equals(user._id)){
-//         throw Error('You must be the owner of a gathering to edit it');
-//     }
-// };
-
-
-
 
 
 

@@ -23,8 +23,8 @@ block content
             each friend in friendInformation
                 .friendProfile
                     h2= friend.name   
-                    img.profilePic(alt="Profile Image")
-                    a(class="buttonStylingYellowBGSquare" href=`/displayFriend/${friend._id}`) View #{friend.name} Collection
+                    img.profilePic(src="../assets/images/tempProfilePic.png" alt="Profile Image") 
+                    a(class="buttonStylingYellowBGSquare" href=`/displayFriend/${friend._id}`) View #{friend.name.concat("'s")} Collection
                     .removeFriendForm
                         form.remove(method="POST" action=`/removeFriend/${friend._id}`)
                             button(class="buttonStylingYellowBG" type= "submit" name="removeFriend") Remove
