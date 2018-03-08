@@ -43,7 +43,7 @@ exports.forgotPassword = async (req, res) => {
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
-        to: `${user.email}.com`,
+        to: `${user.email}`,
         from: 'watchy@example.com',
         subject: 'Password Reset',
         text: 'Texting what this text thing does',
