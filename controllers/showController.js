@@ -23,9 +23,6 @@ exports.selectShow = async (req, res) => {
     var userModel = User;
     var options = {
         uri: `https://api.themoviedb.org/3/tv/${showID}?api_key=${process.env.MOVIEDB_KEY}&language=en-US`,
-        // qs: {
-        //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
-        // },
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -91,9 +88,6 @@ exports.addShow = (req, res) => {
 
 
 exports.removeShow = async (req, res) => {
-    // This is an ugly if else statement. Why isn't it possible to
-    // change queryName directly in a single findByIdAndUpdate?
-    // ask on stackoverflow
     const showID = parseInt(req.params.id);
     let queryName = req.params.category;
     if(queryName === "Watching Now"){
@@ -139,15 +133,6 @@ exports.getShows = async (req, res) => {
     const shows = await Shows.find();
     res.render('shows', { title: 'Shows', shows: shows});
 }
-
-// exports.editShow = async (req, res) => {
-//     // 1. Find the show given the ID
-//     const show = await Shows.findOne({ _id: req.params.id});
-//     // 2. Confirm they are show owner
-//     // confirmOwner(show, req.user); 
-//     // 3. Render edit form 
-//     res.render('editshow', {title: `Edit ${show.name}`, show: show})
-// }
 
 // Not a fan of these three routes. Should be one single route.
 exports.manageMustWatch = async (req, res) => {

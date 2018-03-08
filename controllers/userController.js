@@ -4,7 +4,6 @@ const promisify = require('es6-promisify');
 // const multer = require('multer');
 // const jimp = require('jimp');
 // const uuid = require('uuid');
-// promisify.Promise = require("bluebird");
 
 
 exports.loginForm = (req, res) => {

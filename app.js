@@ -27,9 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Exposes a bunch of methods for validating data (body params or query)
 app.use(expressValidator());
 
-// The flash middleware let's us use req.flash
-// app.use(flash());
-
 app.use(cookieParser()) // required before session.
 
 app.use(session({
@@ -70,7 +67,7 @@ app.use(errorHandlers.notFound);
 
 
 
-// Otherwise this was a really bad error we didn't expect! Shoot eh
+// Otherwise this was a really bad error we didn't expect!
 if (app.get('env') === 'development') {
   /* Development Error Handler - Prints stack trace */
   app.use(errorHandlers.developmentErrors);
