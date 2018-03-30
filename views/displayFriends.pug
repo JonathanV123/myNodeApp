@@ -9,7 +9,7 @@ block flashes
                     p.flashText!= message
                     button.exit_flash(onClick="this.parentElement.remove()") &times;
 block content
-    h2  Your Friends:
+    h2.h2Margin  Your Friends:
     .welcomeContainer
         if friendInformation.length < 1
             a(class="buttonStylingYellowBGSquare" href=`/friends`) Add Friends

@@ -197,7 +197,10 @@ body {
 h2 {
     font-family: 'Open Sans', sans-serif;
 }
-
+.h2Margin{
+    margin:15px;
+    padding:5px;
+}
 h3 {
     font-family: 'Open Sans', sans-serif;
 }
