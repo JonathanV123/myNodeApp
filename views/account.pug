@@ -12,11 +12,11 @@ block content
         img.nightMode.sunOut(src="../assets/images/dayNight.png" alt="Sun And Moon") 
     else
         img.nightMode(src="../assets/images/dayNight.png" alt="Sun And Moon") 
-    h2= title
+    h2.h2Margin= title
     form.form(action="/account" method="POST")
         label(for="name") Name
         input(type="text" name="name" value=user.name) 
-        label(for="email") Name
+        label(for="email") Email
         input(type="email" name="email" value=user.email) 
         input.button(class="buttonStylingYellowBG" type="submit" value="Update Account Information") 
 
